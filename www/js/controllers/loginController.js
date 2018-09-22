@@ -50,21 +50,53 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
               }
             });
           } else {
-            $mdDialog.show({
-              controller: 'DialogController',
-              templateUrl: 'confirm-dialog.html',
-              locals: {
-                displayOption: {
-                  title: "เข้าสู่ระบบสำเร็จ !",
-                  content: "คุณเข้าสู่ระบบสำเร็จ",
-                  ok: "ตกลง"
+            $scope.response = response.data.results[0];
+            console.log($scope.response);
+            if ($scope.response.member_type == 1) {
+              $mdDialog.show({
+                controller: 'DialogController',
+                templateUrl: 'confirm-dialog.html',
+                locals: {
+                  displayOption: {
+                    title: "เข้าสู่ระบบสำเร็จ !",
+                    content: "คุณเข้าสู่ระบบสำเร็จ",
+                    ok: "ตกลง"
+                  }
                 }
+              }).then(function(response) {
+                window.localStorage.memberUsername = $scope.login.username;
+                $state.go('logincus.booking');
+              });
+            } else if ($scope.response.member_type == 2) {
+              if ($scope.response.member_type_status == 1) {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "เข้าสู่ระบบไม่สำเร็จ !",
+                      content: "คุณเข้าสู่ระบบไม่สำเร็จ เพราะยังไม่ได้รับการอนุมัติจากผู้ดูแลระบบ",
+                      ok: "ตกลง"
+                    }
+                  }
+                });
+              } else if ($scope.response.member_type_status == 2) {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "เข้าสู่ระบบสำเร็จ !",
+                      content: "คุณเข้าสู่ระบบสำเร็จ",
+                      ok: "ตกลง"
+                    }
+                  }
+                }).then(function(response) {
+                  window.localStorage.memberUsername = $scope.login.username;
+                  $state.go('loginown.booking');
+                });
               }
-            }).then(function(response) {
-              window.localStorage.memberUsername = $scope.login.username;
-              $state.go('logincus.booking');
-              // $scope.navigateTo('logincus.booking');
-            });
+            }
           }
         }, function(error) {
           $mdDialog.show({

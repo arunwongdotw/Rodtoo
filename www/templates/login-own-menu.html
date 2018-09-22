@@ -1,0 +1,60 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-balanced  material-background-nav-bar">
+      <ion-nav-buttons side="left">
+        <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+  <md-sidenav md-component-id="left" on-swipe-left="closeSideNav()" on-drag-left="closeSideNav()">
+    <div class="material-background" id="toggle-menu-left-header">
+      <div class="menu-left-header">
+        <img class="user-img" src="http://1did.net/rodtoo/img/img_profile/{{memberDetail.member_username}}.jpg?random={{randomNumber}}">
+        <p>
+          <span class="title">{{memberDetail.member_username}}</span>
+          <br/>
+          <span class="sub-title">{{memberDetail.member_firstname}} {{memberDetail.member_lastname}}</span>
+        </p>
+      </div>
+    </div>
+    <ion-content id="toggle-menu-left-content">
+      <!--If device is android application will present below code.-->
+      <!--It will disable animation to better performance on android.-->
+      <!--list section-->
+      <div ng-if="isAndroid" class="menu-list">
+        <!-- <md-subheader class="md-warn">Themes</md-subheader> -->
+        <div class="row menu-item" ng-click="navigateTo('logincus.booking')">
+          <div class="col-33">
+            <i class="fas fa-smile"></i>
+          </div>
+          <div class="col-66">
+            <span>จองรถตู้</span>
+          </div>
+        </div>
+        <div class="row menu-item" ng-click="navigateTo('logincus.bookinglist')">
+          <div class="col-33">
+            <i class="fas fa-smile"></i>
+          </div>
+          <div class="col-66">
+            <span>รายการจองรถตู้</span>
+          </div>
+        </div>
+      </div>
+
+      <!--If device is not Android application will present below code.-->
+      <!--It will show animation when selecting row.-->
+      <md-list ng-if="!isAndroid">
+        <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
+        <md-list-item class="menu-list-item" ng-click="navigateTo('logincus.booking')">
+          <i class="fas fa-smile"></i>
+          <span>จองรถตู้</span>
+        </md-list-item>
+        <md-list-item class="menu-list-item" ng-click="navigateTo('logincus.bookinglist')">
+          <i class="fas fa-smile"></i>
+          <span>รายการจองรถตู้</span>
+        </md-list-item>
+      </md-list>
+    </ion-content>
+  </md-sidenav>
+</ion-side-menus>

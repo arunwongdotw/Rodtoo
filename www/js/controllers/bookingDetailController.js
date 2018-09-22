@@ -7,6 +7,7 @@ appControllers.controller('bookingDetailCtrl', function($scope, $timeout, $state
       getOriginDistrict($scope.bookingDetail.queue_origin_district_id);
       getDestinationProvince($scope.bookingDetail.queue_destination_province_id);
       getDestinationDistrict($scope.bookingDetail.queue_destination_district_id);
+      getQueueOwner($scope.bookingDetail.queue_member_id);
     }, function(error) {
       $mdDialog.show({
         controller: 'DialogController',
@@ -115,6 +116,27 @@ appControllers.controller('bookingDetailCtrl', function($scope, $timeout, $state
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
               content: "เกิดข้อผิดพลาด getDestinationDistrict ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+  }
+
+  function getQueueOwner(queue_member_id) {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getQueueOwner.php?memberid=' + queue_member_id)
+      .then(function(response) {
+        $scope.ownerDetail = response.data.results[0];
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด getQueueOwner ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }

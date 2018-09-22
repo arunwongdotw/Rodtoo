@@ -42,4 +42,55 @@ appControllers.controller('bookingListCtrl', function($scope, $timeout, $state, 
     myService.bookingIDInList.booking_id = booking_id;
     $state.go('logincus.payment');
   };
+
+  $scope.delBooking = function(booking_id) {
+    $mdDialog.show({
+      controller: 'DialogController',
+      templateUrl: 'confirm-dialog.html',
+      locals: {
+        displayOption: {
+          title: "ยกเลิกการจอง ?",
+          content: "คุณแน่ใจที่จะยกเลิกการจองครั้งนี้",
+          ok: "ตกลง",
+          cancel: "ยกเลิก"
+        }
+      }
+    }).then(function(response) {
+      $http({
+        url: myService.configAPI.webserviceURL + 'webservices/delBooking.php',
+        method: 'POST',
+        data: {
+          var_bookingid: booking_id,
+        }
+      }).then(function(response) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "ยกเลิกการจองสำเร็จ !",
+              content: "คุณยกเลิกการจองสำเร็จ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          location.reload();
+        });
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด delBooking ใน bookingListController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+    });
+  };
 });

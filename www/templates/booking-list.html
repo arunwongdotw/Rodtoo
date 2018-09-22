@@ -20,6 +20,9 @@
             <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getPayment(bookingList.booking_id)" ng-if="bookingList.booking_status == 1">
               <i class="fas fa-credit-card"></i> แจ้งชำระเงิน
             </a>
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important; margin-top: 10px;" ng-click="delBooking(bookingList.booking_id)" ng-if="bookingList.booking_status == 1">
+              <i class="fas fa-trash"></i> ยกเลิกการจอง
+            </a>
           </p>
         </div>
       </div>

@@ -22,8 +22,8 @@ window.globalVariable = {
         wordpressColor: "#0087BE"
     },// End custom color style variable
     startPage: {
-        url: "/logincus/bookinglist",//Url of start page.
-        state: "logincus.bookinglist"//State name of start page.
+        url: "/notlogin/login",//Url of start page.
+        state: "notlogin.login"//State name of start page.
     },
     message: {
         errorMessage: "Technical error please try again later." //Default error message.
@@ -356,6 +356,14 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 abstract: true,
                 templateUrl: "templates/login-cus-menu.html",
                 controller: 'loginCusMenuCtrl'
+            })
+            .state('loginown', {
+                url: "/loginown",
+                cache: false,
+                reload: true,
+                abstract: true,
+                templateUrl: "templates/login-own-menu.html",
+                controller: 'loginOwnMenuCtrl'
             })
             .state('notlogin.login', {
                 url: "/login",
