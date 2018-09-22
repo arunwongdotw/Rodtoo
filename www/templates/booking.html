@@ -1,0 +1,98 @@
+<ion-view hide-nav-bar="false">
+  <ion-nav-title>จองรถตู้</ion-nav-title>
+  <ion-content id="social-sign-up-content">
+    <md-select ng-model="originProvinceValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px; margin-top: 20px;">
+      <md-option value="selectOriginProvince">
+        เลือกจังหวัดต้นทาง *
+      </md-option>
+      <md-option value="{{originProvince.PROVINCE_ID}}" ng-repeat="originProvince in originProvinceArrayList" ng-click="getOriginDistrict(originProvince.PROVINCE_ID)">
+        {{originProvince.PROVINCE_NAME}}
+      </md-option>
+    </md-select>
+
+    <md-select ng-model="originDistrictValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
+      <md-option value="selectOriginDistrict">
+        เลือกอำเภอต้นทาง *
+      </md-option>
+      <md-option value="{{originDistrict.AMPHUR_ID}}" ng-repeat="originDistrict in originDistrictArrayList" ng-click="setOriginDistrict(originDistrict.AMPHUR_ID)">
+        {{originDistrict.AMPHUR_NAME}}
+      </md-option>
+    </md-select>
+
+    <md-select ng-model="destinationProvinceValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
+      <md-option value="selectDestinationProvince">
+        เลือกจังหวัดปลายทาง *
+      </md-option>
+      <md-option value="{{destinationProvince.PROVINCE_ID}}" ng-repeat="destinationProvince in destinationProvinceArrayList" ng-click="getDestinationDistrict(destinationProvince.PROVINCE_ID)">
+        {{destinationProvince.PROVINCE_NAME}}
+      </md-option>
+    </md-select>
+
+    <md-select ng-model="destinationDistrictValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
+      <md-option value="selectDestinationDistrict">
+        เลือกอำเภอปลายทาง *
+      </md-option>
+      <md-option value="{{destinationDistrict.AMPHUR_ID}}" ng-repeat="destinationDistrict in destinationDistrictArrayList" ng-click="getQueueList(destinationDistrict.AMPHUR_ID)">
+        {{destinationDistrict.AMPHUR_NAME}}
+      </md-option>
+    </md-select>
+
+    <md-select ng-model="queueValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
+      <md-option value="selectQueue">
+        เลือกคิวรถตู้ *
+      </md-option>
+      <md-option value="{{queue.queue_id}}" ng-repeat="queue in queueArrayList" ng-click="getPointList(queue.queue_id)">
+        {{queue.queue_name}}
+      </md-option>
+    </md-select>
+
+    <md-select ng-model="getInValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
+      <md-option value="selectGetIn">
+        เลือกจุดขึ้นรถตู้ *
+      </md-option>
+      <md-option value="1" ng-click="setGetIn(1)">
+        ขึ้นที่คิวรถตู้
+      </md-option>
+      <md-option value="2" ng-click="setGetIn(2)">
+        ขึ้นระหว่างทาง
+      </md-option>
+    </md-select>
+
+    <md-input-container md-no-float="" ng-if="getInValue == 2">
+      <div>
+        <input class="user-name" ng-model="booking.getinplace" placeholder="สถานที่ขึ้นรถตู้ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+
+    <md-select ng-model="stopValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
+      <md-option value="selectStop">
+        เลือกจุดลงรถตู้ *
+      </md-option>
+      <md-option value="{{point.point_id}}" ng-repeat="point in pointArrayList" ng-click="getBookingDetail(point.point_id)">
+        {{point.point_name}}
+      </md-option>
+    </md-select>
+
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" placeholder="วันขึ้นรถตู้ *" style="width: 300px;" ng-model="booking.date" ng-click="openDatePickerStart()">
+      </div>
+    </md-input-container>
+
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" placeholder="เวลาขึ้นรถตู้ *" style="width: 300px;" ng-model="booking.time" ng-click="openTimePickerStart()">
+      </div>
+    </md-input-container>
+
+    <div style="text-align: center; margin-top: 20px; margin-left: 20px; margin-right: 20px; border: 3px solid #3F51B5;" ng-if="bookingDetail != null">
+      <p style="margin-top: 15px; font-weight: bold; font-size: 16px; color: #666;">ค่าบริการรถตู้ : {{bookingDetail.point_price}} บาท</p>
+      <p style="font-weight: bold; font-size: 16px; color: #666;">ค่าธรรมเนียมการจอง : {{bookingDetail.fee}} บาท</p>
+      <p style="font-weight: bold; font-size: 16px; color: #666;">ยอดชำระทั้งหมด : {{bookingDetail.total_price}} บาท</p>
+    </div>
+
+    <div>
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnBooking()" ng-if="bookingDetail != null" style="margin-top: 20px; margin-bottom: 20px; margin-left: 0px;">ยืนยันการจองรถตู้</a>
+    </div>
+  </ion-content>
+</ion-view>

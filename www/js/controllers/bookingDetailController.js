@@ -1,0 +1,126 @@
+appControllers.controller('bookingDetailCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
+
+  $http.get(myService.configAPI.webserviceURL + 'webservices/getBooking.php?bookingid=' + myService.bookingIDInList.booking_id)
+    .then(function(response) {
+      $scope.bookingDetail = response.data.results[0];
+      getOriginProvince($scope.bookingDetail.queue_origin_province_id);
+      getOriginDistrict($scope.bookingDetail.queue_origin_district_id);
+      getDestinationProvince($scope.bookingDetail.queue_destination_province_id);
+      getDestinationDistrict($scope.bookingDetail.queue_destination_district_id);
+    }, function(error) {
+      $mdDialog.show({
+        controller: 'DialogController',
+        templateUrl: 'confirm-dialog.html',
+        locals: {
+          displayOption: {
+            title: "เกิดข้อผิดพลาด !",
+            content: "เกิดข้อผิดพลาด getBooking ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+            ok: "ตกลง"
+          }
+        }
+      }).then(function(response) {
+        ionic.Platform.exitApp();
+      });
+    });
+
+  $scope.navigateTo = function(stateName) {
+    $timeout(function() {
+      $mdSidenav('left').close();
+      if ($ionicHistory.currentStateName() != stateName) {
+        $ionicHistory.nextViewOptions({
+          disableAnimate: true,
+          disableBack: true
+        });
+        $state.go(stateName);
+      }
+    }, ($scope.isAndroid == false ? 300 : 0));
+  };
+
+  $scope.btnBack = function() {
+    $scope.navigateTo('logincus.bookinglist');
+  };
+
+  function getOriginProvince(origin_province_id) {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getOriginProvinceDetail.php?provinceid=' + origin_province_id)
+      .then(function(response) {
+        $scope.originProvince = response.data.results[0];
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด getOriginProvince ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+  }
+
+  function getOriginDistrict(origin_district_id) {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getOriginDistrictDetail.php?districtid=' + origin_district_id)
+      .then(function(response) {
+        $scope.originDistrict = response.data.results[0];
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด getOriginDistrict ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+  }
+
+  function getDestinationProvince(destination_province_id) {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getDestinationProvinceDetail.php?provinceid=' + destination_province_id)
+      .then(function(response) {
+        $scope.destinationProvince = response.data.results[0];
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด getDestinationProvince ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+  }
+
+  function getDestinationDistrict(destination_district_id) {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getDestinationDistrictDetail.php?districtid=' + destination_district_id)
+      .then(function(response) {
+        $scope.destinationDistrict = response.data.results[0];
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด getDestinationDistrict ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+  }
+});

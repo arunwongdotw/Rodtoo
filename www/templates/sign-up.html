@@ -1,0 +1,52 @@
+<ion-view hide-nav-bar="false">
+  <ion-nav-title>สมัครสมาชิก</ion-nav-title>
+  <ion-content id="social-sign-up-content">
+    <div class="app-icon">
+      <img src="img/app_icon.png" class="md-card-image" id="sign-up-image">
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUpPickImage()">อัพโหลดรูปสมาชิก</a>
+    </div>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="signup.username" placeholder="Username *" style="width: 284px;" minlength="6" maxlength="12">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" type="password" ng-model="signup.password" placeholder="Password *" style="width: 284px;" minlength="6" maxlength="12">
+
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" type="password" ng-model="signup.confirmpassword" placeholder="ยืนยัน Password *" style="width: 284px;" minlength="6" maxlength="12">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="signup.firstname" placeholder="ชื่อ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="signup.lastname" placeholder="นามสกุล *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-select ng-model="addressValue" aria-label="md-option" style="margin-left: 10px; padding: 0px 2px 26px;">
+      <md-option value="select">เลือกจังหวัดที่อยู่</md-option>
+      <md-option value="{{province.PROVINCE_ID}}" ng-repeat="province in provinceArrayList" ng-click="setAddressValue(province.PROVINCE_ID)">
+        {{province.PROVINCE_NAME}}
+      </md-option>
+    </md-select>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="signup.phone" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="signup.email" placeholder="อีเมล *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUp()">สมัครสมาชิก</a>
+  </ion-content>
+</ion-view>

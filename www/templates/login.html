@@ -1,0 +1,24 @@
+<ion-view hide-nav-bar="false">
+  <ion-nav-title>เข้าสู่ระบบ</ion-nav-title>
+  <ion-content id="social-login">
+    <form class="fakeLogin-form">
+      <div>
+        <img src="img/app_icon.png"/>
+      </div>
+      <div class="sub-header">Rodtoo Application</div>
+      <div id="fakeLogin">
+        <md-input-container md-no-float="">
+          <input class="user-name" ng-model="login.username" placeholder="Username" style="width: 284px;">
+        </md-input-container>
+        <hr />
+        <md-input-container md-no-float="">
+          <input class="user-password" ng-model="login.password" type="password" placeholder="Password" style="width: 284px;">
+        </md-input-container>
+      </div>
+      <div>
+        <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignIn()">เข้าสู่ระบบ</a>
+        <div class="footer">ยังไม่ได้สมัครสมาชิก? <a href="#/notlogin/signup">สมัครสมาชิก</a>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,25 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>หมายเลขการจองรถตู้ : {{bookingDetail.booking_id}}</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content id="online-course-content">
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_status == 1">สถานะการจองรถตู้ : ยังไม่แจ้งชำระเงิน</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_status == 2">สถานะการจองรถตู้ : แจ้งชำระเงิน</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_status == 3">สถานะการจองรถตู้ : ยืนยันการชำระเงิน</p>
+
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ยอดชำระทั้งหมด : {{bookingDetail.booking_price}} บาท</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">วันเวลาการจองรถตู้ : {{bookingDetail.booking_datetime}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ต้นทาง : {{originDistrict.AMPHUR_NAME}} {{originProvince.PROVINCE_NAME}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ปลายทาง : {{destinationDistrict.AMPHUR_NAME}} {{destinationProvince.PROVINCE_NAME}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">คิวรถตู้ : {{bookingDetail.queue_name}}</p>
+
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_get_in_type == 1">จุดขึ้นรถตู้ : ขึ้นที่คิวรถตู้</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_get_in_type == 2">จุดขึ้นรถตู้ : {{bookingDetail.booking_get_in_place}}</p>
+
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">จุดลงรถตู้ : {{bookingDetail.point_name}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">วันเวลาขึ้นรถตู้ : {{bookingDetail.booking_boarding_date}} {{bookingDetail.booking_boarding_time}}</p>
+  </ion-content>
+</ion-view>

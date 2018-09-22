@@ -1,0 +1,49 @@
+<ion-view hide-nav-bar="false">
+  <ion-nav-title>ชำระเงิน</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content id="social-sign-up-content" overflow-scroll="false">
+    <div style="text-align: center; margin-top: 20px; margin-left: 20px; margin-right: 20px; border: 3px solid #3F51B5;">
+      <p style="margin-top: 15px; font-weight: bold; font-size: 16px; color: #666;">หมายเลขการจอง : {{bookingDetail.booking_id}}</p>
+      <p style="font-weight: bold; font-size: 16px; color: #666;">ยอดรวมทั้งหมด : {{bookingDetail.booking_price}} บาท</p>
+      <p style="font-weight: bold; font-size: 16px; color: #666;">ชื่อบัญชี : {{bookingDetail.queue_bank_owner}}</p>
+      <p style="font-weight: bold; font-size: 16px; color: #666;">ธนาคาร : {{bookingDetail.queue_bank}}</p>
+      <p style="font-weight: bold; font-size: 16px; color: #666;">หมายเลขบัญชี : {{bookingDetail.queue_bank_no}}</p>
+      <!-- <img class="user-img" src="https://www.egov.go.th/upload/eservice-thumbnail/img_07ce457edfaa09ec5e9c040b52971370.png" style="width: 25%; margin-bottom: 10px; border-radius: 50%;"> -->
+    </div>
+
+    <md-input-container md-no-float="" style="margin-top: 20px;">
+      <div>
+        <input class="user-name" ng-model="payment.booking_id" placeholder="หมายเลขการจอง *" style="width: 284px;">
+      </div>
+    </md-input-container>
+
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="payment.price" placeholder="ยอดชำระ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+
+    <div class="app-icon">
+      <img src="img/btnPaymentPickImage.png" class="md-card-image" id="payment-image">
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnPaymentPickImage()" style="margin-top:20px;">อัพโหลดรูปสลิป</a>
+    </div>
+
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="payment.date" placeholder="วันที่ชำระเงิน *" style="width: 284px;" ng-click="openDatePickerStart()">
+      </div>
+    </md-input-container>
+
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="payment.time" placeholder="เวลาที่ชำระเงิน *" style="width: 284px;" ng-click="openTimePickerStart()">
+      </div>
+    </md-input-container>
+
+    <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnPayment()">ยืนยันการชำระเงิน</a>
+  </ion-content>
+</ion-view>
