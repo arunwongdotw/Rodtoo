@@ -51,7 +51,6 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
             });
           } else {
             $scope.response = response.data.results[0];
-            console.log($scope.response);
             if ($scope.response.member_type == 1) {
               $mdDialog.show({
                 controller: 'DialogController',
@@ -93,7 +92,7 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
                   }
                 }).then(function(response) {
                   window.localStorage.memberUsername = $scope.login.username;
-                  $state.go('loginown.booking');
+                  $state.go('loginown.ownbookinglist');
                 });
               }
             }

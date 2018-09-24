@@ -1,5 +1,4 @@
 appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
-  myService.memberDetailFromLogin.member_id = "1"; // for test
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getBookingList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
