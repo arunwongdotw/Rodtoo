@@ -65,7 +65,7 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
                 }
               }).then(function(response) {
                 window.localStorage.memberUsername = $scope.login.username;
-                $state.go('logincus.booking');
+                $state.go('logincus.cusbooking');
               });
             } else if ($scope.response.member_type == 2) {
               if ($scope.response.member_type_status == 1) {

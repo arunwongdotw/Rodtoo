@@ -169,7 +169,7 @@ appControllers.controller('paymentCtrl', function($scope, $timeout, $state, $ion
                     }
                   }
                 }).then(function(response) {
-                  $state.go('logincus.bookinglist');
+                  $state.go('logincus.cusbookinglist');
                 });
               }, function(error) {
                 $mdDialog.show({
@@ -213,7 +213,7 @@ appControllers.controller('paymentCtrl', function($scope, $timeout, $state, $ion
                         }
                       }
                     }).then(function(response) {
-                      $state.go('logincus.bookinglist');
+                      $state.go('logincus.cusbookinglist');
                     });
                   }, function(error) {
                     $mdDialog.show({

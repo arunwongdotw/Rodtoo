@@ -1,4 +1,4 @@
-appControllers.controller('bookingSuccessCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
+appControllers.controller('cusBookingSuccessCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getBooking.php?bookingid=' + myService.bookingDetail.bookingID)
     .then(function(response) {

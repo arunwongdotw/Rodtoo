@@ -387,47 +387,47 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                     }
                 }
             })
-            .state('logincus.booking', {
-                url: "/booking",
+            .state('logincus.cusbooking', {
+                url: "/cusbooking",
                 cache: false,
                 reload: true,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/booking.html",
-                        controller: 'bookingCtrl'
+                        templateUrl: "templates/cus-booking.html",
+                        controller: 'cusBookingCtrl'
                     }
                 }
             })
-            .state('logincus.bookingsuccess', {
-                url: "/bookingsuccess",
+            .state('logincus.cusbookingsuccess', {
+                url: "/cusbookingsuccess",
                 cache: false,
                 reload: true,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/booking-success.html",
-                        controller: 'bookingSuccessCtrl'
+                        templateUrl: "templates/cus-booking-success.html",
+                        controller: 'cusBookingSuccessCtrl'
                     }
                 }
             })
-            .state('logincus.bookinglist', {
-                url: "/bookinglist",
+            .state('logincus.cusbookinglist', {
+                url: "/cusbookinglist",
                 cache: false,
                 reload: true,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/booking-list.html",
-                        controller: 'bookingListCtrl'
+                        templateUrl: "templates/cus-booking-list.html",
+                        controller: 'cusBookingListCtrl'
                     }
                 }
             })
-            .state('logincus.bookingdetail', {
-                url: "/bookingdetail",
+            .state('logincus.cusbookingdetail', {
+                url: "/cusbookingdetail",
                 cache: false,
                 reload: true,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/booking-detail.html",
-                        controller: 'bookingDetailCtrl'
+                        templateUrl: "templates/cus-booking-detail.html",
+                        controller: 'cusBookingDetailCtrl'
                     }
                 }
             })

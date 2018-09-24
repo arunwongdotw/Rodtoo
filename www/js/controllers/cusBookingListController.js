@@ -1,4 +1,4 @@
-appControllers.controller('bookingListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
+appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
   myService.memberDetailFromLogin.member_id = "1"; // for test
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getBookingList.php?memberid=' + myService.memberDetailFromLogin.member_id)
@@ -35,7 +35,7 @@ appControllers.controller('bookingListCtrl', function($scope, $timeout, $state, 
 
   $scope.getInfomation = function(booking_id) {
     myService.bookingIDInList.booking_id = booking_id;
-    $state.go('logincus.bookingdetail');
+    $state.go('logincus.cusbookingdetail');
   };
 
   $scope.getPayment = function(booking_id) {

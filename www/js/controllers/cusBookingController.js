@@ -1,4 +1,4 @@
-appControllers.controller('bookingCtrl', function($scope, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, ionicDatePicker, ionicTimePicker) {
+appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, ionicDatePicker, ionicTimePicker) {
   $scope.booking = {};
   $scope.originProvinceValue = "selectOriginProvince";
   $scope.originDistrictValue = "selectOriginDistrict";
@@ -317,7 +317,7 @@ appControllers.controller('bookingCtrl', function($scope, $state, $stateParams, 
               }
             }).then(function(response) {
               myService.bookingDetail.bookingID = response.data.results;
-              $state.go('logincus.bookingsuccess');
+              $state.go('logincus.cusbookingsuccess');
             }, function(error) {
               $mdDialog.show({
                 controller: 'DialogController',
@@ -366,7 +366,7 @@ appControllers.controller('bookingCtrl', function($scope, $state, $stateParams, 
               }).then(function(response) {
                 console.log(response);
                 myService.bookingDetail.bookingID = response.data.results;
-                $state.go('logincus.bookingsuccess');
+                $state.go('logincus.cusbookingsuccess');
               }, function(error) {
                 $mdDialog.show({
                   controller: 'DialogController',
