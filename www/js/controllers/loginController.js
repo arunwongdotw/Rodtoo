@@ -91,6 +91,7 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
                     }
                   }
                 }).then(function(response) {
+                  myService.memberDetailFromLogin = $scope.response;
                   window.localStorage.memberUsername = $scope.login.username;
                   $state.go('loginown.ownbookinglist');
                 });

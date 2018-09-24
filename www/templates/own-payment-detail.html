@@ -1,0 +1,38 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>หมายเลขการจองรถตู้ : {{paymentDetail.booking_id}}</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content id="online-course-content">
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="paymentDetail.booking_status == 1">สถานะการจองรถตู้ : ยังไม่แจ้งชำระเงิน</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="paymentDetail.booking_status == 2">สถานะการจองรถตู้ : แจ้งชำระเงิน</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="paymentDetail.booking_status == 3">สถานะการจองรถตู้ : ยืนยันการชำระเงิน</p>
+
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ยอดแจ้งชำระเงิน : {{paymentDetail.payment_price}} บาท</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">วันเวลาแจ้งชำระเงิน : {{paymentDetail.payment_date}} {{paymentDetail.payment_time}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="paymentDetail.payment_img == '-'">หลักฐานการโอน : ไม่มี</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="paymentDetail.payment_img != '-'">หลักฐานการโอน :
+      <br><img src="http://1did.net/rodtoo/img/img_slip/{{paymentDetail.payment_img}}" style="width: 85%; margin-top: 20px; margin-left: 20px;" ng-click="openLink(paymentDetail.payment_img)"></img>
+    </p>
+
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ชื่อผู้จอง : {{paymentDetail.member_firstname}} {{paymentDetail.member_lastname}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">เบอร์โทรศัพท์ : {{paymentDetail.member_phone}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">วันเวลาการจองรถตู้ : {{paymentDetail.booking_datetime}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ต้นทาง : {{originDistrict.AMPHUR_NAME}} {{originProvince.PROVINCE_NAME}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ปลายทาง : {{destinationDistrict.AMPHUR_NAME}} {{destinationProvince.PROVINCE_NAME}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">คิวรถตู้ : {{paymentDetail.queue_name}}</p>
+    <!-- <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ผู้จัดการคิวรถตู้ : {{ownerDetail.member_firstname}} {{ownerDetail.member_lastname}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">เบอร์โทรศัพท์ : {{ownerDetail.member_phone}}</p> -->
+
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="paymentDetail.booking_get_in_type == 1">จุดขึ้นรถตู้ : ขึ้นที่คิวรถตู้</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="paymentDetail.booking_get_in_type == 2">จุดขึ้นรถตู้ : {{paymentDetail.booking_get_in_place}}</p>
+
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">จุดลงรถตู้ : {{paymentDetail.point_name}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">วันเวลาขึ้นรถตู้ : {{paymentDetail.booking_boarding_date}} {{paymentDetail.booking_boarding_time}}</p>
+    <div>
+      <center><a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnConfirmPayment(paymentDetail.booking_id)" style="margin-top: 20px; margin-bottom: 20px;">ยืนยันการชำระเงิน</a></center>
+    </div>
+  </ion-content>
+</ion-view>

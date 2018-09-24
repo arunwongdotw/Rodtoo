@@ -452,6 +452,28 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'ownBookingListCtrl'
                     }
                 }
+            })
+            .state('loginown.ownpaymentlist', {
+                url: "/ownpaymentlist",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-payment-list.html",
+                        controller: 'ownPaymentListCtrl'
+                    }
+                }
+            })
+            .state('loginown.ownpaymentdetail', {
+                url: "/ownpaymentdetail",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-payment-detail.html",
+                        controller: 'ownPaymentDetailCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

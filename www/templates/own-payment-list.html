@@ -1,0 +1,31 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>รายการแจ้งชำระเงิน</ion-nav-title>
+  <ion-content id="online-course-content">
+    <div class="course-list" style="margin-top: 0px;">
+      <div class="course-item" ng-repeat="ownPayment in ownPaymentArrayList">
+        <div class="title ionic-course-background" style="background-color: #3F51B5 !important">
+          หมายเลขการจองรถตู้ : {{ownPayment.booking_id}}
+        </div>
+        <div class="content">
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="ownPayment.booking_status == 1">สถานะการจองรถตู้ : <text style="color: red;">ยังไม่แจ้งชำระเงิน</text></p>
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="ownPayment.booking_status == 2">สถานะการจองรถตู้ : <text style="color: orange;">แจ้งชำระเงิน</text></p>
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="ownPayment.booking_status == 3">สถานะการจองรถตู้ : <text style="color: green;">ยืนยันการชำระเงิน</text></p>
+
+          <p style="padding: 0px 10px 0px 10px;">ยอดแจ้งชำระเงิน : {{ownPayment.payment_price}} บาท</p>
+          <p style="padding: 0px 10px 0px 10px;">วันเวลาแจ้งชำระเงิน : {{ownPayment.payment_date}} {{ownPayment.payment_time}}</p>
+          <p style="padding: 5px 10px 0px 10px;">
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getInfomation(ownPayment.booking_id)">
+              <i class="fas fa-info-circle"></i> รายละเอียดการแจ้งชำระเงิน
+            </a>
+            <!-- <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important; margin-top: 10px;" ng-click="getPayment(bookingList.booking_id)">
+              <i class="fas fa-credit-card"></i> ยืนยันการชำระเงิน
+            </a> -->
+            <!-- <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important; margin-top: 10px;" ng-click="delBooking(bookingList.booking_id)" ng-if="bookingList.booking_status == 1">
+              <i class="fas fa-trash"></i> ยกเลิกการจอง
+            </a> -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
