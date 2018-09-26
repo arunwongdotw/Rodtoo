@@ -7,7 +7,6 @@ appControllers.controller('ownPaymentDetailCtrl', function($scope, $timeout, $st
       getOriginDistrict($scope.paymentDetail.queue_origin_district_id);
       getDestinationProvince($scope.paymentDetail.queue_destination_province_id);
       getDestinationDistrict($scope.paymentDetail.queue_destination_district_id);
-      // getQueueOwner($scope.bookingDetail.queue_member_id);
     }, function(error) {
       $mdDialog.show({
         controller: 'DialogController',

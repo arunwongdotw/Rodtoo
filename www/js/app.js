@@ -474,6 +474,17 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'ownPaymentDetailCtrl'
                     }
                 }
+            })
+            .state('loginown.ownbookingdetail', {
+                url: "/ownbookingdetail",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-booking-detail.html",
+                        controller: 'ownBookingDetailCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

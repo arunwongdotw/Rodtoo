@@ -1,5 +1,4 @@
 appControllers.controller('ownPaymentListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
-  myService.memberDetailFromLogin.member_id = 5;
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnPaymentList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
