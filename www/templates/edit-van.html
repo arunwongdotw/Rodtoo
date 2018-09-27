@@ -1,0 +1,36 @@
+<ion-view hide-nav-bar="false">
+  <ion-nav-title>แก้ไขข้อมูลรถตู้</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content id="social-sign-up-content" overflow-scroll="false">
+    <md-input-container md-no-float="" style="margin-top: 20px;">
+      <div>
+        <input class="user-name" ng-model="van.firstname" placeholder="ชื่อจริง *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="van.lastname" placeholder="นามสกุล *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="van.phone" placeholder="เบอร์โทรศัพท์ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="van.queueno" placeholder="หมายเลขรถตู้ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="van.plateno" placeholder="ป้ายทะเบียนรถ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnEditVan()">แก้ไขข้อมูลรถตู้</a>
+  </ion-content>
+</ion-view>

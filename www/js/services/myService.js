@@ -8,4 +8,5 @@ angular.module('starter')
     this.memberDetailFromLogin = {}; // obj เก็บข้อมูล member จากการ login
     this.bookingDetail = {};
     this.bookingIDInList = {};
+    this.editVan = {};
   });

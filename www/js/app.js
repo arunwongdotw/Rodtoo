@@ -485,6 +485,39 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'ownBookingDetailCtrl'
                     }
                 }
+            })
+            .state('loginown.addvan', {
+                url: "/addvan",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/add-van.html",
+                        controller: 'addVanCtrl'
+                    }
+                }
+            })
+            .state('loginown.ownvanlist', {
+                url: "/ownvanlist",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-van-list.html",
+                        controller: 'ownVanListCtrl'
+                    }
+                }
+            })
+            .state('loginown.editvan', {
+                url: "/editvan",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/edit-van.html",
+                        controller: 'editVanCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",
