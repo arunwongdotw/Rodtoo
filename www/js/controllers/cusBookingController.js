@@ -37,7 +37,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getProvinceList ใน bookingController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getProvinceList ใน cusBookingController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -62,7 +62,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getOriginDistrict ใน bookingController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getOriginDistrict ใน cusBookingController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -88,7 +88,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getDestinationDistrict ใน bookingController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getDestinationDistrict ใน cusBookingController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -123,7 +123,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                 locals: {
                   displayOption: {
                     title: "เกิดข้อผิดพลาด !",
-                    content: "เกิดข้อผิดพลาด getQueueList ใน bookingController ระบบจะปิดอัตโนมัติ",
+                    content: "เกิดข้อผิดพลาด setOriginDistrict ใน cusBookingController ระบบจะปิดอัตโนมัติ",
                     ok: "ตกลง"
                   }
                 }
@@ -163,7 +163,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                 locals: {
                   displayOption: {
                     title: "เกิดข้อผิดพลาด !",
-                    content: "เกิดข้อผิดพลาด getQueueList ใน bookingController ระบบจะปิดอัตโนมัติ",
+                    content: "เกิดข้อผิดพลาด getQueueList ใน cusBookingController ระบบจะปิดอัตโนมัติ",
                     ok: "ตกลง"
                   }
                 }
@@ -190,7 +190,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getPointList ใน bookingController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getPointList ใน cusBookingController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -225,7 +225,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getBookingDetail ใน bookingController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getBookingDetail ใน cusBookingController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -285,8 +285,6 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
   $scope.btnBooking = function() {
     if (typeof $scope.booking.date != 'undefined') {
       if (typeof $scope.booking.time != 'undefined') {
-        console.log($scope.getInValue);
-        console.log($scope.booking.getinplace);
         if ($scope.getInValue == 1) {
           $mdDialog.show({
             controller: 'DialogController',
@@ -325,7 +323,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                 locals: {
                   displayOption: {
                     title: "เกิดข้อผิดพลาด !",
-                    content: "เกิดข้อผิดพลาด btnBooking ใน bookingController ระบบจะปิดอัตโนมัติ",
+                    content: "เกิดข้อผิดพลาด btnBooking ใน cusBookingController ระบบจะปิดอัตโนมัติ",
                     ok: "ตกลง"
                   }
                 }
@@ -374,7 +372,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                   locals: {
                     displayOption: {
                       title: "เกิดข้อผิดพลาด !",
-                      content: "เกิดข้อผิดพลาด btnBooking ใน bookingController ระบบจะปิดอัตโนมัติ",
+                      content: "เกิดข้อผิดพลาด btnBooking ใน cusBookingController ระบบจะปิดอัตโนมัติ",
                       ok: "ตกลง"
                     }
                   }

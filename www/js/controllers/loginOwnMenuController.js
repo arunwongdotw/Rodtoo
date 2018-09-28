@@ -14,7 +14,7 @@ appControllers.controller('loginOwnMenuCtrl', function($scope, $timeout, $mdUtil
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getMemberDetail.php ใน loginOwnMenuController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getMemberDetail ใน loginOwnMenuController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }

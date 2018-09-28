@@ -14,7 +14,7 @@ appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getMemberDetail.php ใน loginCusMenuController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getMemberDetail ใน loginCusMenuController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }

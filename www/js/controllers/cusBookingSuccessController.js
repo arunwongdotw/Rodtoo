@@ -10,7 +10,7 @@ appControllers.controller('cusBookingSuccessCtrl', function($scope, $timeout, $s
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getBooking ใน bookingSuccessController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getBooking ใน cusBookingSuccessController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }

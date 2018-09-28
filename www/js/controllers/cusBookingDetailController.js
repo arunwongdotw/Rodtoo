@@ -15,7 +15,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getBooking ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getBooking ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -52,7 +52,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getOriginProvince ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getOriginProvince ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -73,7 +73,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getOriginDistrict ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getOriginDistrict ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -94,7 +94,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getDestinationProvince ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getDestinationProvince ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -115,7 +115,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getDestinationDistrict ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getDestinationDistrict ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -136,7 +136,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getQueueOwner ใน bookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getQueueOwner ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }

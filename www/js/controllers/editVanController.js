@@ -89,7 +89,7 @@ appControllers.controller('editVanCtrl', function($scope, $timeout, $state, $sta
                         locals: {
                           displayOption: {
                             title: "เกิดข้อผิดพลาด !",
-                            content: "เกิดข้อผิดพลาด btnAddVan ใน editVanController ระบบจะปิดอัตโนมัติ",
+                            content: "เกิดข้อผิดพลาด btnEditVan ใน editVanController ระบบจะปิดอัตโนมัติ",
                             ok: "ตกลง"
                           }
                         }
@@ -130,7 +130,7 @@ appControllers.controller('editVanCtrl', function($scope, $timeout, $state, $sta
                   locals: {
                     displayOption: {
                       title: "เกิดข้อผิดพลาด !",
-                      content: "เกิดข้อผิดพลาด btnAddVan ใน editVanController ระบบจะปิดอัตโนมัติ",
+                      content: "เกิดข้อผิดพลาด btnEditVan ใน editVanController ระบบจะปิดอัตโนมัติ",
                       ok: "ตกลง"
                     }
                   }

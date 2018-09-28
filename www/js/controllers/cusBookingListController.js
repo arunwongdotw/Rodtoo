@@ -10,7 +10,7 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getBookingList ใน bookingListController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getBookingList ใน cusBookingListController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -82,7 +82,7 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด delBooking ใน bookingListController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด delBooking ใน cusBookingListController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }

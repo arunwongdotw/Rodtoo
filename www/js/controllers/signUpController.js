@@ -25,7 +25,7 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getProvinceList ใน bookingController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getProvinceList ใน signUpController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }

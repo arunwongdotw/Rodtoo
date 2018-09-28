@@ -2,7 +2,6 @@ appControllers.controller('ownBookingListCtrl', function($scope, $timeout, $stat
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnBookingList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
-      // console.log(response);
       $scope.ownBookingArrayList = response.data.results;
     }, function(error) {
       $mdDialog.show({
