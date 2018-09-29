@@ -40,7 +40,7 @@ appControllers.controller('paymentCtrl', function($scope, $timeout, $state, $ion
   };
 
   $scope.btnBack = function() {
-    $scope.navigateTo('logincus.bookinglist');
+    $scope.navigateTo('logincus.cusbookinglist');
   };
 
   function checkImageURI(imageURI) {

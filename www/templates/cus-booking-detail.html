@@ -15,13 +15,19 @@
     <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ต้นทาง : {{originDistrict.AMPHUR_NAME}} {{originProvince.PROVINCE_NAME}}</p>
     <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ปลายทาง : {{destinationDistrict.AMPHUR_NAME}} {{destinationProvince.PROVINCE_NAME}}</p>
     <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">คิวรถตู้ : {{bookingDetail.queue_name}}</p>
-    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ผู้จัดการคิวรถตู้ : {{ownerDetail.member_firstname}} {{ownerDetail.member_lastname}}</p>
-    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">เบอร์โทรศัพท์ : {{ownerDetail.member_phone}}</p>
 
     <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_get_in_type == 1">จุดขึ้นรถตู้ : ขึ้นที่คิวรถตู้</p>
     <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_get_in_type == 2">จุดขึ้นรถตู้ : {{bookingDetail.booking_get_in_place}}</p>
 
     <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">จุดลงรถตู้ : {{bookingDetail.point_name}}</p>
-    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">วันเวลาขึ้นรถตู้ : {{bookingDetail.booking_boarding_date}} {{bookingDetail.booking_boarding_time}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">วันเวลาขึ้นรถตู้ : {{bookingDetail.booking_boarding_date}} {{bookingDetail.booking_boarding_time}}</p></br>
+
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">ผู้จัดการคิวรถตู้ : {{ownerDetail.member_firstname}} {{ownerDetail.member_lastname}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">เบอร์โทรศัพท์ : {{ownerDetail.member_phone}}</p></br>
+
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_van_id != 0">เดินทางกับรถตู้หมายเลข : {{vanDetail.van_queue_no}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_van_id != 0">รถป้ายทะเบียน : {{vanDetail.van_plate_no}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_van_id != 0">ผู้ขับรถตู้ : {{vanDetail.van_own_firstname}} {{vanDetail.van_own_lastname}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_van_id != 0">เบอร์โทรศัพท์ : {{vanDetail.van_phone}}</p>
   </ion-content>
 </ion-view>

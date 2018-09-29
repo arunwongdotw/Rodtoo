@@ -1,4 +1,5 @@
 appControllers.controller('cusBookingSuccessCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
+  $scope.bookingID = myService.bookingDetail.bookingID;
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getBooking.php?bookingid=' + myService.bookingDetail.bookingID)
     .then(function(response) {
@@ -33,6 +34,11 @@ appControllers.controller('cusBookingSuccessCtrl', function($scope, $timeout, $s
   };
 
   $scope.btnBack = function() {
-    $scope.navigateTo('logincus.booking');
+    $scope.navigateTo('logincus.cusbooking');
+  };
+
+  $scope.btnPayment = function(booking_id) {
+    myService.bookingIDInList.booking_id = booking_id;
+    $state.go('logincus.payment');
   };
 });

@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionicframework.ionicmaterialdesign392344" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>IonicMaterialDesign</name>
+<widget id="com.smartonline.rodtoo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Rodtoo</name>
     <description>
-    An Ionic Framework and Cordova project.
+    Rodtoo booking application.
   </description>
     <author email="ionicmaterialdesign@gmail.com" href="http://ionicframework.com/">
-    Ionic Up Team
+    Smart Online
   </author>
     <content src="index.html" />
     <allow-navigation href="tel:*" />

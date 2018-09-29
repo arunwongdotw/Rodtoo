@@ -8,6 +8,9 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
       getDestinationProvince($scope.bookingDetail.queue_destination_province_id);
       getDestinationDistrict($scope.bookingDetail.queue_destination_district_id);
       getQueueOwner($scope.bookingDetail.queue_member_id);
+      if ($scope.bookingDetail.booking_van_id != 0) {
+        getVanDetail($scope.bookingDetail.booking_van_id);
+      }
     }, function(error) {
       $mdDialog.show({
         controller: 'DialogController',
@@ -38,7 +41,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
   };
 
   $scope.btnBack = function() {
-    $scope.navigateTo('logincus.bookinglist');
+    $scope.navigateTo('logincus.cusbookinglist');
   };
 
   function getOriginProvince(origin_province_id) {
@@ -137,6 +140,27 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
               content: "เกิดข้อผิดพลาด getQueueOwner ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+  }
+
+  function getVanDetail(van_id) {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getVanDetail.php?vanid=' + van_id)
+      .then(function(response) {
+        $scope.vanDetail = response.data.results[0];
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด getVanDetail ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }

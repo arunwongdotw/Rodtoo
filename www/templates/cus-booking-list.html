@@ -11,6 +11,9 @@
           <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="bookingList.booking_status == 2">สถานะการจองรถตู้ : <text style="color: orange;">แจ้งชำระเงิน</text></p>
           <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="bookingList.booking_status == 3">สถานะการจองรถตู้ : <text style="color: green;">ยืนยันการชำระเงิน</text></p>
 
+          <p style="padding: 0px 10px 0px 10px;" ng-if="bookingList.booking_status == 3 && bookingList.booking_van_id != 0">สถานะการเลือกรถตู้ : <text style="color: green;">เลือกรถตู้แล้ว</text></p>
+          <p style="padding: 0px 10px 0px 10px;" ng-if="bookingList.booking_status == 3 && bookingList.booking_van_id == 0">สถานะการเลือกรถตู้ : <text style="color: red;">ยังไม่มีการเลือกรถตู้</text></p>
+
           <p style="padding: 0px 10px 0px 10px;">ยอดชำระทั้งหมด : {{bookingList.booking_price}} บาท</p>
           <p style="padding: 0px 10px 0px 10px;">วันเวลาการจองรถตู้ : {{bookingList.booking_datetime}}</p>
           <p style="padding: 5px 10px 0px 10px;">

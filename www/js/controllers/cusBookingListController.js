@@ -1,4 +1,8 @@
-appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
+appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate) {
+
+  $scope.$on('$ionicView.enter', function(e) {
+    $ionicNavBarDelegate.showBar(true);
+  });
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getBookingList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
@@ -73,7 +77,7 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
             }
           }
         }).then(function(response) {
-          location.reload();
+          $state.reload();
         });
       }, function(error) {
         $mdDialog.show({
