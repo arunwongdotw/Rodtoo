@@ -9,6 +9,20 @@
 //  - Custom style
 //
 //Global variable use for setting color, start page, message, oAuth key.
+
+if ((window.localStorage.memberUsername == "") || (window.localStorage.memberUsername == null)) {
+  url = "/notlogin/login";
+  state = "notlogin.login";
+} else {
+  if (window.localStorage.memberType == "1") {
+    url = "/logincus/cusbooking";
+    state = "logincus.cusbooking";
+  } else if (window.localStorage.memberType == "2") {
+    url = "/loginown/ownbookinglist";
+    state = "loginown.ownbookinglist";
+  }
+}
+
 var db = null; //Use for SQLite database.
 window.globalVariable = {
     //custom color style variable
@@ -41,6 +55,56 @@ window.globalVariable = {
 
 angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'ngMessages', 'ngCordova', 'ionic-datepicker', 'ionic-timepicker'])
     .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet) {
+      $ionicPlatform.ready(function() {
+          if (window.Connection) {
+            if (navigator.connection.type == Connection.NONE) {
+              if (typeof window.localStorage.appLanguageID == 'undefined') {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "ไม่มีการเชื่อมต่ออินเทอร์เน็ต !",
+                      content: "โทรศัพท์ของคุณยังไม่ได้เชื่อมต่ออินเทอร์เน็ต กรุณาเชื่อมต่ออินเทอร์เน็ตก่อนใช้งาน",
+                      ok: "ตกลง"
+                    }
+                  }
+                }).then(function() {
+                  ionic.Platform.exitApp();
+                });
+              } else if (window.localStorage.appLanguageID == 1) {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "ไม่มีการเชื่อมต่ออินเทอร์เน็ต !",
+                      content: "โทรศัพท์ของคุณยังไม่ได้เชื่อมต่ออินเทอร์เน็ต กรุณาเชื่อมต่ออินเทอร์เน็ตก่อนใช้งาน",
+                      ok: "ตกลง"
+                    }
+                  }
+                }).then(function() {
+                  ionic.Platform.exitApp();
+                });
+              } else {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "No Internet Connection !",
+                      content: "Your device is not connected internet, please connect internet before.",
+                      ok: "ตกลง",
+                      cancel: "ยกเลิก"
+                    }
+                  }
+                }).then(function() {
+                  ionic.Platform.exitApp();
+                });
+              }
+            }
+          }
+        });
 
         //Create database table of contracts by using sqlite database.
         //Table schema :
