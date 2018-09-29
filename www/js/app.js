@@ -36,8 +36,8 @@ window.globalVariable = {
         wordpressColor: "#0087BE"
     },// End custom color style variable
     startPage: {
-        url: "/notlogin/login",//Url of start page.
-        state: "notlogin.login"//State name of start page.
+        url: url,//Url of start page.
+        state: state//State name of start page.
     },
     message: {
         errorMessage: "Technical error please try again later." //Default error message.
