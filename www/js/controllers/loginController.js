@@ -64,6 +64,7 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
                 }
               }).then(function(response) {
                 window.localStorage.memberUsername = $scope.login.username;
+                window.localStorage.memberType = $scope.response.member_type;
                 $state.go('logincus.cusbooking');
               });
             } else if ($scope.response.member_type == 2) {
@@ -93,6 +94,7 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
                 }).then(function(response) {
                   myService.memberDetailFromLogin = $scope.response;
                   window.localStorage.memberUsername = $scope.login.username;
+                  window.localStorage.memberType = $scope.response.member_type;
                   $state.go('loginown.ownbookinglist');
                 });
               }
