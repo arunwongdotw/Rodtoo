@@ -311,7 +311,8 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                 var_getinplace: "-",
                 var_pointid: $scope.stopValue,
                 var_date: $scope.booking.date,
-                var_time: $scope.booking.time
+                var_time: $scope.booking.time,
+                var_vanid: "0"
               }
             }).then(function(response) {
               myService.bookingDetail.bookingID = response.data.results;
@@ -359,10 +360,10 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                   var_getinplace: $scope.booking.getinplace,
                   var_pointid: $scope.stopValue,
                   var_date: $scope.booking.date,
-                  var_time: $scope.booking.time
+                  var_time: $scope.booking.time,
+                  var_vanid: "0"
                 }
               }).then(function(response) {
-                console.log(response);
                 myService.bookingDetail.bookingID = response.data.results;
                 $state.go('logincus.cusbookingsuccess');
               }, function(error) {

@@ -518,6 +518,17 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'editVanCtrl'
                     }
                 }
+            })
+            .state('loginown.ownvanselect', {
+                url: "/ownvanselect",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-van-select.html",
+                        controller: 'ownVanSelectCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

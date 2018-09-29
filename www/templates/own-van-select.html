@@ -1,0 +1,27 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>รายการข้อมูลรถตู้</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content id="online-course-content">
+    <div class="course-list" style="margin-top: 0px;">
+      <div class="course-item" ng-repeat="ownVan in ownVanArrayList">
+        <div class="title ionic-course-background" style="background-color: #3F51B5 !important">
+          หมายเลขรถตู้ : {{ownVan.van_queue_no}}
+        </div>
+        <div class="content">
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;">ชื่อจริง - นามสกุล : {{ownVan.van_own_firstname}} {{ownVan.van_own_lastname}}</p>
+          <p style="padding: 0px 10px 0px 10px;">เบอร์โทรศัพท์ : {{ownVan.van_phone}}</p>
+          <p style="padding: 0px 10px 0px 10px;">ป้ายทะเบียนรถ : {{ownVan.van_plate_no}}</p>
+          <p style="padding: 5px 10px 0px 10px;">
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="assignVan(ownVan.van_id)">
+              <i class="fas fa-check"></i> เลือกรถตู้คันนี้
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

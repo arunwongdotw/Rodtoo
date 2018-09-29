@@ -36,4 +36,9 @@ appControllers.controller('ownBookingListCtrl', function($scope, $timeout, $stat
     myService.bookingIDInList.booking_id = booking_id;
     $state.go('loginown.ownbookingdetail');
   };
+
+  $scope.assignVan = function(booking_id) {
+    myService.bookingIDInList.booking_id = booking_id;
+    $state.go('loginown.ownvanselect');
+  };
 });
