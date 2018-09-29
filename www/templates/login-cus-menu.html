@@ -26,7 +26,7 @@
         <!-- <md-subheader class="md-warn">Themes</md-subheader> -->
         <div class="row menu-item" ng-click="navigateTo('logincus.cusbooking')">
           <div class="col-33">
-            <i class="fas fa-smile"></i>
+            <i class="fas fa-list"></i>
           </div>
           <div class="col-66">
             <span>จองรถตู้</span>
@@ -34,10 +34,18 @@
         </div>
         <div class="row menu-item" ng-click="navigateTo('logincus.cusbookinglist')">
           <div class="col-33">
-            <i class="fas fa-smile"></i>
+            <i class="fas fa-list"></i>
           </div>
           <div class="col-66">
             <span>รายการจองรถตู้</span>
+          </div>
+        </div>
+        <div class="row menu-item" ng-click="btnLogout()">
+          <div class="col-33">
+            <i class="fas fa-sign-out-alt"></i>
+          </div>
+          <div class="col-66">
+            <span>ออกจากระบบ</span>
           </div>
         </div>
       </div>
@@ -47,12 +55,16 @@
       <md-list ng-if="!isAndroid">
         <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
         <md-list-item class="menu-list-item" ng-click="navigateTo('logincus.cusbooking')">
-          <i class="fas fa-smile"></i>
+          <i class="fas fa-list"></i>
           <span>จองรถตู้</span>
         </md-list-item>
         <md-list-item class="menu-list-item" ng-click="navigateTo('logincus.cusbookinglist')">
-          <i class="fas fa-smile"></i>
+          <i class="fas fa-list"></i>
           <span>รายการจองรถตู้</span>
+        </md-list-item>
+        <md-list-item class="menu-list-item" ng-click="btnLogout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>ออกจากระบบ</span>
         </md-list-item>
       </md-list>
     </ion-content>

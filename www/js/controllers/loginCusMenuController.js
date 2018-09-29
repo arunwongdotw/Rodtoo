@@ -7,20 +7,20 @@ appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil
     .then(function(response) {
       $scope.memberDetail = response.data.results[0];
       myService.memberDetailFromLogin = response.data.results[0];
-    }, function(error) {
-      $mdDialog.show({
-        controller: 'DialogController',
-        templateUrl: 'confirm-dialog.html',
-        locals: {
-          displayOption: {
-            title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getMemberDetail ใน loginCusMenuController ระบบจะปิดอัตโนมัติ",
-            ok: "ตกลง"
-          }
-        }
-      }).then(function(response) {
-        ionic.Platform.exitApp();
-      });
+    // }, function(error) {
+    //   $mdDialog.show({
+    //     controller: 'DialogController',
+    //     templateUrl: 'confirm-dialog.html',
+    //     locals: {
+    //       displayOption: {
+    //         title: "เกิดข้อผิดพลาด !",
+    //         content: "เกิดข้อผิดพลาด getMemberDetail ใน loginCusMenuController ระบบจะปิดอัตโนมัติ",
+    //         ok: "ตกลง"
+    //       }
+    //     }
+    //   }).then(function(response) {
+    //     ionic.Platform.exitApp();
+    //   });
     });
 
   function buildToggler(navID) {
@@ -48,6 +48,22 @@ appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil
   };
 
   $scope.btnLogout = function() {
+    $mdDialog.show({
+      controller: 'DialogController',
+      templateUrl: 'confirm-dialog.html',
+      locals: {
+        displayOption: {
+          title: "ออกจากระบบ ?",
+          content: "คุณต้องการที่จะออกจากระบบ",
+          ok: "ตกลง",
+          cancel: "ยกเลิก"
+        }
+      }
+    }).then(function(response) {
+      window.localStorage.memberUsername = "";
+      window.localStorage.memberType = "";
+      $state.go('notlogin.login');
+    });
   };
 
   $ionicPlatform.registerBackButtonAction(function() {
@@ -81,6 +97,7 @@ appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil
           });
         }
       } else {
+        console.log('test');
         $ionicHistory.goBack();
       }
     }

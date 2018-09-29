@@ -48,6 +48,14 @@
             <span>รายการข้อมูลรถตู้</span>
           </div>
         </div>
+        <div class="row menu-item" ng-click="btnLogout()">
+          <div class="col-33">
+            <i class="fas fa-sign-out-alt"></i>
+          </div>
+          <div class="col-66">
+            <span>ออกจากระบบ</span>
+          </div>
+        </div>
       </div>
 
       <!--If device is not Android application will present below code.-->
@@ -65,6 +73,10 @@
         <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownvanlist')">
           <i class="fas fa-list"></i>
           <span>รายการข้อมูลรถตู้</span>
+        </md-list-item>
+        <md-list-item class="menu-list-item" ng-click="btnLogout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>ออกจากระบบ</span>
         </md-list-item>
       </md-list>
     </ion-content>

@@ -30,20 +30,20 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
     .then(function(response) {
       $scope.originProvinceArrayList = response.data.results;
       $scope.destinationProvinceArrayList = response.data.results;
-    }, function(error) {
-      $mdDialog.show({
-        controller: 'DialogController',
-        templateUrl: 'confirm-dialog.html',
-        locals: {
-          displayOption: {
-            title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getProvinceList ใน cusBookingController ระบบจะปิดอัตโนมัติ",
-            ok: "ตกลง"
-          }
-        }
-      }).then(function(response) {
-        ionic.Platform.exitApp();
-      });
+    // }, function(error) {
+    //   $mdDialog.show({
+    //     controller: 'DialogController',
+    //     templateUrl: 'confirm-dialog.html',
+    //     locals: {
+    //       displayOption: {
+    //         title: "เกิดข้อผิดพลาด !",
+    //         content: "เกิดข้อผิดพลาด getProvinceList ใน cusBookingController ระบบจะปิดอัตโนมัติ",
+    //         ok: "ตกลง"
+    //       }
+    //     }
+    //   }).then(function(response) {
+    //     ionic.Platform.exitApp();
+    //   });
     });
 
   $scope.getOriginDistrict = function(province_id) {

@@ -48,6 +48,22 @@ appControllers.controller('loginOwnMenuCtrl', function($scope, $timeout, $mdUtil
   };
 
   $scope.btnLogout = function() {
+    $mdDialog.show({
+      controller: 'DialogController',
+      templateUrl: 'confirm-dialog.html',
+      locals: {
+        displayOption: {
+          title: "ออกจากระบบ ?",
+          content: "คุณต้องการที่จะออกจากระบบ",
+          ok: "ตกลง",
+          cancel: "ยกเลิก"
+        }
+      }
+    }).then(function(response) {
+      window.localStorage.memberUsername = "";
+      window.localStorage.memberType = "";
+      $state.go('notlogin.login');
+    });
   };
 
   //  $ionicPlatform.registerBackButtonAction(callback, priority, [actionId])
