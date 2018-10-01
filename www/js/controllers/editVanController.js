@@ -47,95 +47,108 @@ appControllers.controller('editVanCtrl', function($scope, $timeout, $state, $sta
         if (($scope.van.phone != null) && ($scope.van.phone != "")) {
           if (checkNumberRegEx.test($scope.van.phone)) {
             if (($scope.van.queueno != null) && ($scope.van.queueno != "")) {
-              $http({
-                url: myService.configAPI.webserviceURL + 'webservices/checkQueueNo.php',
-                method: 'POST',
-                data: {
-                  var_queueno: $scope.van.queueno
+              $mdDialog.show({
+                controller: 'DialogController',
+                templateUrl: 'confirm-dialog.html',
+                locals: {
+                  displayOption: {
+                    title: "แก้ไขข้อมูลรถตู้ ?",
+                    content: "คุณแน่ใจที่จะแก้ไขข้อมูลรถตู้",
+                    ok: "ตกลง",
+                    cancel: "ยกเลิก"
+                  }
                 }
               }).then(function(response) {
-                $scope.response = response.data.results;
-                if ($scope.response == 'checkQueueNo_notfound') {
-                  if (($scope.van.plateno != null) && ($scope.van.plateno != "")) {
-                    $http({
-                      url: myService.configAPI.webserviceURL + 'webservices/editVan.php',
-                      method: 'POST',
-                      data: {
-                        var_vanid: myService.editVan.van_id,
-                        var_firstname: $scope.van.firstname,
-                        var_lastname: $scope.van.lastname,
-                        var_phone: $scope.van.phone,
-                        var_queueno: $scope.van.queueno,
-                        var_plateno: $scope.van.plateno
-                      }
-                    }).then(function(response) {
+                $http({
+                  url: myService.configAPI.webserviceURL + 'webservices/checkQueueNo.php',
+                  method: 'POST',
+                  data: {
+                    var_queueno: $scope.van.queueno
+                  }
+                }).then(function(response) {
+                  $scope.response = response.data.results;
+                  if ($scope.response == 'checkQueueNo_notfound') {
+                    if (($scope.van.plateno != null) && ($scope.van.plateno != "")) {
+                      $http({
+                        url: myService.configAPI.webserviceURL + 'webservices/editVan.php',
+                        method: 'POST',
+                        data: {
+                          var_vanid: myService.editVan.van_id,
+                          var_firstname: $scope.van.firstname,
+                          var_lastname: $scope.van.lastname,
+                          var_phone: $scope.van.phone,
+                          var_queueno: $scope.van.queueno,
+                          var_plateno: $scope.van.plateno
+                        }
+                      }).then(function(response) {
+                        $mdDialog.show({
+                          controller: 'DialogController',
+                          templateUrl: 'confirm-dialog.html',
+                          locals: {
+                            displayOption: {
+                              title: "แก้ไขข้อมูลรถตู้สำเร็จ !",
+                              content: "คุณแก้ไขข้อมูลรถตู้สำเร็จ",
+                              ok: "ตกลง"
+                            }
+                          }
+                        }).then(function(response) {
+                          $state.go('loginown.ownvanlist');
+                        });
+                      }, function(error) {
+                        $mdDialog.show({
+                          controller: 'DialogController',
+                          templateUrl: 'confirm-dialog.html',
+                          locals: {
+                            displayOption: {
+                              title: "เกิดข้อผิดพลาด !",
+                              content: "เกิดข้อผิดพลาด btnEditVan ใน editVanController ระบบจะปิดอัตโนมัติ",
+                              ok: "ตกลง"
+                            }
+                          }
+                        }).then(function(response) {
+                          ionic.Platform.exitApp();
+                        });
+                      });
+                    } else {
                       $mdDialog.show({
                         controller: 'DialogController',
                         templateUrl: 'confirm-dialog.html',
                         locals: {
                           displayOption: {
-                            title: "แก้ไขข้อมูลรถตู้สำเร็จ !",
-                            content: "คุณแก้ไขข้อมูลรถตู้สำเร็จ",
+                            title: "ป้ายทะเบียนรถไม่ถูกต้อง !",
+                            content: "กรุณากรอกป้ายทะเบียนรถ",
                             ok: "ตกลง"
                           }
                         }
-                      }).then(function(response) {
-                        $state.go('loginown.ownvanlist');
                       });
-                    }, function(error) {
-                      $mdDialog.show({
-                        controller: 'DialogController',
-                        templateUrl: 'confirm-dialog.html',
-                        locals: {
-                          displayOption: {
-                            title: "เกิดข้อผิดพลาด !",
-                            content: "เกิดข้อผิดพลาด btnEditVan ใน editVanController ระบบจะปิดอัตโนมัติ",
-                            ok: "ตกลง"
-                          }
-                        }
-                      }).then(function(response) {
-                        ionic.Platform.exitApp();
-                      });
-                    });
-                  } else {
+                    }
+                  } else if ($scope.response == 'checkQueueNo_found') {
                     $mdDialog.show({
                       controller: 'DialogController',
                       templateUrl: 'confirm-dialog.html',
                       locals: {
                         displayOption: {
-                          title: "ป้ายทะเบียนรถไม่ถูกต้อง !",
-                          content: "กรุณากรอกป้ายทะเบียนรถ",
+                          title: "หมายเลขรถตู้ไม่ถูกต้อง !",
+                          content: "มีหมายเลขรถตู้นี้อยู่ในระบบแล้ว กรุณากรอกใหม่",
                           ok: "ตกลง"
                         }
                       }
                     });
                   }
-                } else if ($scope.response == 'checkQueueNo_found') {
+                }, function(error) {
                   $mdDialog.show({
                     controller: 'DialogController',
                     templateUrl: 'confirm-dialog.html',
                     locals: {
                       displayOption: {
-                        title: "หมายเลขรถตู้ไม่ถูกต้อง !",
-                        content: "มีหมายเลขรถตู้นี้อยู่ในระบบแล้ว กรุณากรอกใหม่",
+                        title: "เกิดข้อผิดพลาด !",
+                        content: "เกิดข้อผิดพลาด btnEditVan ใน editVanController ระบบจะปิดอัตโนมัติ",
                         ok: "ตกลง"
                       }
                     }
+                  }).then(function(response) {
+                    ionic.Platform.exitApp();
                   });
-                }
-              }, function(error) {
-                $mdDialog.show({
-                  controller: 'DialogController',
-                  templateUrl: 'confirm-dialog.html',
-                  locals: {
-                    displayOption: {
-                      title: "เกิดข้อผิดพลาด !",
-                      content: "เกิดข้อผิดพลาด btnEditVan ใน editVanController ระบบจะปิดอัตโนมัติ",
-                      ok: "ตกลง"
-                    }
-                  }
-                }).then(function(response) {
-                  ionic.Platform.exitApp();
                 });
               });
             } else {

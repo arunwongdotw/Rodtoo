@@ -37,8 +37,6 @@ appControllers.controller('ownVanSelectCtrl', function($scope, $timeout, $state,
   };
 
   $scope.assignVan = function(van_id) {
-    // console.log(myService.bookingIDInList.booking_id);
-    // console.log(van_id);
     $mdDialog.show({
       controller: 'DialogController',
       templateUrl: 'confirm-dialog.html',

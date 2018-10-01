@@ -134,101 +134,54 @@ appControllers.controller('paymentCtrl', function($scope, $timeout, $state, $ion
       if (($scope.payment.price != null) && ($scope.payment.price != "")) {
         if (typeof $scope.payment.date != 'undefined') {
           if (typeof $scope.payment.time != 'undefined') {
-            var img = document.getElementById('payment-image');
-            var imageURI = img.src;
-            var server = myService.configAPI.webserviceURL + 'webservices/uploadSlipImage.php?memberid=' + myService.memberDetailFromLogin.member_id + '&bookingid=' + $scope.payment.booking_id;
-            var trustHosts = true;
-            var options2 = {
-              fileKey: "myCameraImg",
-              fileName: imageURI.substr(imageURI.lastIndexOf('/') + 1),
-              mimeType: "image/jpeg",
-              chunkedMode: false
-            };
-            var chkImageURI = checkImageURI(imageURI);
-            if (chkImageURI == "found") {
-              $http({
-                url: myService.configAPI.webserviceURL + 'webservices/payment.php',
-                method: 'POST',
-                data: {
-                  var_bookingid: $scope.payment.booking_id,
-                  var_price: $scope.payment.price,
-                  var_img: "-",
-                  var_date: $scope.payment.date,
-                  var_time: $scope.payment.time,
-                  var_status: "2"
+            $mdDialog.show({
+              controller: 'DialogController',
+              templateUrl: 'confirm-dialog.html',
+              locals: {
+                displayOption: {
+                  title: "แจ้งชำระเงิน ?",
+                  content: "คุณแน่ใจที่จะแจ้งชำระเงิน",
+                  ok: "ตกลง",
+                  cancel: "ยกเลิก"
                 }
-              }).then(function(response) {
-                $mdDialog.show({
-                  controller: 'DialogController',
-                  templateUrl: 'confirm-dialog.html',
-                  locals: {
-                    displayOption: {
-                      title: "แจ้งชำระเงินสำเร็จ !",
-                      content: "คุณแจ้งชำระเงินสำเร็จ",
-                      ok: "ตกลง"
-                    }
+              }
+            }).then(function(response) {
+              var img = document.getElementById('payment-image');
+              var imageURI = img.src;
+              var server = myService.configAPI.webserviceURL + 'webservices/uploadSlipImage.php?memberid=' + myService.memberDetailFromLogin.member_id + '&bookingid=' + $scope.payment.booking_id;
+              var trustHosts = true;
+              var options2 = {
+                fileKey: "myCameraImg",
+                fileName: imageURI.substr(imageURI.lastIndexOf('/') + 1),
+                mimeType: "image/jpeg",
+                chunkedMode: false
+              };
+              var chkImageURI = checkImageURI(imageURI);
+              if (chkImageURI == "found") {
+                $http({
+                  url: myService.configAPI.webserviceURL + 'webservices/payment.php',
+                  method: 'POST',
+                  data: {
+                    var_bookingid: $scope.payment.booking_id,
+                    var_price: $scope.payment.price,
+                    var_img: "-",
+                    var_date: $scope.payment.date,
+                    var_time: $scope.payment.time,
+                    var_status: "2"
                   }
                 }).then(function(response) {
-                  $state.go('logincus.cusbookinglist');
-                });
-              }, function(error) {
-                $mdDialog.show({
-                  controller: 'DialogController',
-                  templateUrl: 'confirm-dialog.html',
-                  locals: {
-                    displayOption: {
-                      title: "เกิดข้อผิดพลาด !",
-                      content: "เกิดข้อผิดพลาด btnPayment ใน paymentController ระบบจะปิดอัตโนมัติ",
-                      ok: "ตกลง"
-                    }
-                  }
-                }).then(function(response) {
-                  ionic.Platform.exitApp();
-                });
-              });
-            } else if (chkImageURI == "notfound") {
-              $cordovaFileTransfer.upload(server, imageURI, options2)
-                .then(function(response) {
-                  $scope.imgname = response.response;
-                  $http({
-                    url: myService.configAPI.webserviceURL + 'webservices/payment.php',
-                    method: 'POST',
-                    data: {
-                      var_bookingid: $scope.payment.booking_id,
-                      var_price: $scope.payment.price,
-                      var_img: $scope.imgname,
-                      var_date: $scope.payment.date,
-                      var_time: $scope.payment.time,
-                      var_status: "2"
+                  $mdDialog.show({
+                    controller: 'DialogController',
+                    templateUrl: 'confirm-dialog.html',
+                    locals: {
+                      displayOption: {
+                        title: "แจ้งชำระเงินสำเร็จ !",
+                        content: "คุณแจ้งชำระเงินสำเร็จ",
+                        ok: "ตกลง"
+                      }
                     }
                   }).then(function(response) {
-                    $mdDialog.show({
-                      controller: 'DialogController',
-                      templateUrl: 'confirm-dialog.html',
-                      locals: {
-                        displayOption: {
-                          title: "แจ้งชำระเงินสำเร็จ !",
-                          content: "คุณแจ้งชำระเงินสำเร็จ",
-                          ok: "ตกลง"
-                        }
-                      }
-                    }).then(function(response) {
-                      $state.go('logincus.cusbookinglist');
-                    });
-                  }, function(error) {
-                    $mdDialog.show({
-                      controller: 'DialogController',
-                      templateUrl: 'confirm-dialog.html',
-                      locals: {
-                        displayOption: {
-                          title: "เกิดข้อผิดพลาด !",
-                          content: "เกิดข้อผิดพลาด btnPayment ใน paymentController ระบบจะปิดอัตโนมัติ",
-                          ok: "ตกลง"
-                        }
-                      }
-                    }).then(function(response) {
-                      ionic.Platform.exitApp();
-                    });
+                    $state.go('logincus.cusbookinglist');
                   });
                 }, function(error) {
                   $mdDialog.show({
@@ -245,7 +198,67 @@ appControllers.controller('paymentCtrl', function($scope, $timeout, $state, $ion
                     ionic.Platform.exitApp();
                   });
                 });
-            }
+              } else if (chkImageURI == "notfound") {
+                $cordovaFileTransfer.upload(server, imageURI, options2)
+                  .then(function(response) {
+                    $scope.imgname = response.response;
+                    $http({
+                      url: myService.configAPI.webserviceURL + 'webservices/payment.php',
+                      method: 'POST',
+                      data: {
+                        var_bookingid: $scope.payment.booking_id,
+                        var_price: $scope.payment.price,
+                        var_img: $scope.imgname,
+                        var_date: $scope.payment.date,
+                        var_time: $scope.payment.time,
+                        var_status: "2"
+                      }
+                    }).then(function(response) {
+                      $mdDialog.show({
+                        controller: 'DialogController',
+                        templateUrl: 'confirm-dialog.html',
+                        locals: {
+                          displayOption: {
+                            title: "แจ้งชำระเงินสำเร็จ !",
+                            content: "คุณแจ้งชำระเงินสำเร็จ",
+                            ok: "ตกลง"
+                          }
+                        }
+                      }).then(function(response) {
+                        $state.go('logincus.cusbookinglist');
+                      });
+                    }, function(error) {
+                      $mdDialog.show({
+                        controller: 'DialogController',
+                        templateUrl: 'confirm-dialog.html',
+                        locals: {
+                          displayOption: {
+                            title: "เกิดข้อผิดพลาด !",
+                            content: "เกิดข้อผิดพลาด btnPayment ใน paymentController ระบบจะปิดอัตโนมัติ",
+                            ok: "ตกลง"
+                          }
+                        }
+                      }).then(function(response) {
+                        ionic.Platform.exitApp();
+                      });
+                    });
+                  }, function(error) {
+                    $mdDialog.show({
+                      controller: 'DialogController',
+                      templateUrl: 'confirm-dialog.html',
+                      locals: {
+                        displayOption: {
+                          title: "เกิดข้อผิดพลาด !",
+                          content: "เกิดข้อผิดพลาด btnPayment ใน paymentController ระบบจะปิดอัตโนมัติ",
+                          ok: "ตกลง"
+                        }
+                      }
+                    }).then(function(response) {
+                      ionic.Platform.exitApp();
+                    });
+                  });
+              }
+            });
           } else {
             $mdDialog.show({
               controller: 'DialogController',

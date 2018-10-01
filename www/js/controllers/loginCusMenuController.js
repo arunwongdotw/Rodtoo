@@ -97,7 +97,6 @@ appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil
           });
         }
       } else {
-        console.log('test');
         $ionicHistory.goBack();
       }
     }
