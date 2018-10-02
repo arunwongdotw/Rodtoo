@@ -9,4 +9,5 @@ angular.module('starter')
     this.bookingDetail = {};
     this.bookingIDInList = {};
     this.editVan = {};
+    this.editPoint = {};
   });

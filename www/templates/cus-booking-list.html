@@ -1,6 +1,7 @@
 <ion-view id="online-course" hide-nav-bar="false">
   <ion-nav-title>รายการจองรถตู้</ion-nav-title>
   <ion-content id="online-course-content">
+    <div style="text-align: center; margin-top: 20px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingListArrayList == null">ไม่พบรายการจองรถตู้</div>
     <div class="course-list" style="margin-top: 0px;">
       <div class="course-item" ng-repeat="bookingList in bookingListArrayList">
         <div class="title ionic-course-background" style="background-color: #3F51B5 !important">

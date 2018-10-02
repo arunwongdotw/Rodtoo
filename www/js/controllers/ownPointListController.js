@@ -1,12 +1,12 @@
-appControllers.controller('ownVanListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate) {
+appControllers.controller('ownPointListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate) {
 
   $scope.$on('$ionicView.enter', function(e) {
     $ionicNavBarDelegate.showBar(true);
   });
 
-  $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnVanList.php?memberid=' + myService.memberDetailFromLogin.member_id)
+  $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnPointList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
-      $scope.ownVanArrayList = response.data.results;
+      $scope.ownPointArrayList = response.data.results;
     }, function(error) {
       $mdDialog.show({
         controller: 'DialogController',
@@ -14,7 +14,7 @@ appControllers.controller('ownVanListCtrl', function($scope, $timeout, $state, $
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getOwnVanList ใน ownVanListController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getOwnPointList ใน ownPointListController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -36,25 +36,25 @@ appControllers.controller('ownVanListCtrl', function($scope, $timeout, $state, $
     }, ($scope.isAndroid == false ? 300 : 0));
   };
 
-  $scope.btnAddVan = function() {
+  $scope.btnAddPoint = function() {
     $http({
-      url: myService.configAPI.webserviceURL + 'webservices/checkVan.php',
+      url: myService.configAPI.webserviceURL + 'webservices/checkPoint.php',
       method: 'POST',
       data: {
         var_memberid: $scope.memberDetail.member_id
       }
     }).then(function(response) {
       $scope.results = response.data.results;
-      if ($scope.results == 'checkVan_lassthan') {
-        $state.go('loginown.addvan');
-      } else if ($scope.results == 'checkVan_morethan') {
+      if ($scope.results == 'checkPoint_lassthan') {
+        $state.go('loginown.addpoint');
+      } else if ($scope.results == 'checkPoint_morethan') {
         $mdDialog.show({
           controller: 'DialogController',
           templateUrl: 'confirm-dialog.html',
           locals: {
             displayOption: {
-              title: "ข้อมูลรถตู้เกิน !",
-              content: "คุณไม่สามารถเพิ่มข้อมูลรถตู้ได้ เนื่องจากข้อมูลรถตู้เกินกว่าจำนวนที่กำหนด",
+              title: "จุดลงรถตู้เกิน !",
+              content: "คุณไม่สามารถเพิ่มจุดลงรถตู้ได้ เนื่องจากจุดลงรถตู้เกินกว่าที่กำหนด",
               ok: "ตกลง"
             }
           }
@@ -67,7 +67,7 @@ appControllers.controller('ownVanListCtrl', function($scope, $timeout, $state, $
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด btnAddVan ใน ownVanListController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด btnAddPoint ใน ownPointListController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -77,29 +77,29 @@ appControllers.controller('ownVanListCtrl', function($scope, $timeout, $state, $
     });
   };
 
-  $scope.editVan = function(van_id) {
-    myService.editVan.van_id = van_id;
-    $state.go('loginown.editvan');
+  $scope.editPoint = function(point_id) {
+    myService.editPoint.point_id = point_id;
+    $state.go('loginown.editpoint');
   };
 
-  $scope.delVan = function(van_id) {
+  $scope.delPoint = function(point_id) {
     $mdDialog.show({
       controller: 'DialogController',
       templateUrl: 'confirm-dialog.html',
       locals: {
         displayOption: {
-          title: "ลบข้อมูลรถตู้ ?",
-          content: "คุณแน่ใจที่จะลบข้อมูลรถตู้",
+          title: "ลบจุดลงรถตู้ ?",
+          content: "คุณแน่ใจที่จะลบจุดลงรถตู้",
           ok: "ตกลง",
           cancel: "ยกเลิก"
         }
       }
     }).then(function(response) {
       $http({
-        url: myService.configAPI.webserviceURL + 'webservices/delVan.php',
+        url: myService.configAPI.webserviceURL + 'webservices/delPoint.php',
         method: 'POST',
         data: {
-          var_vanid: van_id,
+          var_pointid: point_id,
         }
       }).then(function(response) {
         $mdDialog.show({
@@ -107,8 +107,8 @@ appControllers.controller('ownVanListCtrl', function($scope, $timeout, $state, $
           templateUrl: 'confirm-dialog.html',
           locals: {
             displayOption: {
-              title: "ยกเลิกการจองสำเร็จ !",
-              content: "คุณยกเลิกการจองสำเร็จ",
+              title: "ลบจุดลงรถตู้สำเร็จ !",
+              content: "คุณลบจุดลงรถตู้สำเร็จ",
               ok: "ตกลง"
             }
           }
@@ -122,7 +122,7 @@ appControllers.controller('ownVanListCtrl', function($scope, $timeout, $state, $
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด delVan ใน ownVanListController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด delPoint ใน ownPointListController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }

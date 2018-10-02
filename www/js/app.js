@@ -593,6 +593,39 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'ownVanSelectCtrl'
                     }
                 }
+            })
+            .state('loginown.ownpointlist', {
+                url: "/ownpointlist",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-point-list.html",
+                        controller: 'ownPointListCtrl'
+                    }
+                }
+            })
+            .state('loginown.addpoint', {
+                url: "/addpoint",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/add-point.html",
+                        controller: 'addPointCtrl'
+                    }
+                }
+            })
+            .state('loginown.editpoint', {
+                url: "/editpoint",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/edit-point.html",
+                        controller: 'editPointCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",
