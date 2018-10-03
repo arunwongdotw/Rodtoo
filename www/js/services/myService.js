@@ -10,4 +10,5 @@ angular.module('starter')
     this.bookingIDInList = {};
     this.editVan = {};
     this.editPoint = {};
+    this.editGetIn = {};
   });

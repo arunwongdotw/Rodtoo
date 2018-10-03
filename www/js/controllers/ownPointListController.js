@@ -45,7 +45,7 @@ appControllers.controller('ownPointListCtrl', function($scope, $timeout, $state,
       }
     }).then(function(response) {
       $scope.results = response.data.results;
-      if ($scope.results == 'checkPoint_lassthan') {
+      if ($scope.results == 'checkPoint_lessthan') {
         $state.go('loginown.addpoint');
       } else if ($scope.results == 'checkPoint_morethan') {
         $mdDialog.show({

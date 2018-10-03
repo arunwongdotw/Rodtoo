@@ -626,6 +626,39 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'editPointCtrl'
                     }
                 }
+            })
+            .state('loginown.owngetinlist', {
+                url: "/owngetinlist",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-get-in-list.html",
+                        controller: 'ownGetInListCtrl'
+                    }
+                }
+            })
+            .state('loginown.addgetin', {
+                url: "/addgetin",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/add-get-in.html",
+                        controller: 'addGetInCtrl'
+                    }
+                }
+            })
+            .state('loginown.editgetin', {
+                url: "/editgetin",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/edit-get-in.html",
+                        controller: 'editGetInCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

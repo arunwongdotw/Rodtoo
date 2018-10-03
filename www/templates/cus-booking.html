@@ -56,9 +56,12 @@
       <md-option value="2" ng-click="setGetIn(2)">
         ขึ้นระหว่างทาง
       </md-option>
+      <md-option value="3" ng-click="setGetIn(3)">
+        ขึ้นจุดอื่นๆ
+      </md-option>
     </md-select>
 
-    <md-input-container md-no-float="" ng-if="getInValue == 2">
+    <md-input-container md-no-float="" ng-if="getInValue == 3">
       <div>
         <input class="user-name" ng-model="booking.getinplace" placeholder="สถานที่ขึ้นรถตู้ *" style="width: 284px;">
       </div>

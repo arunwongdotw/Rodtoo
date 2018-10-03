@@ -274,7 +274,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
         }
       }
     },
-    inputTime: hour * 3600, //Optional
+    inputTime: (hour * 3600) + 3600, //Optional
     format: 24, //Optional
     step: 60, //Optional
     setLabel: 'Set' //Optional
@@ -287,7 +287,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
   $scope.btnBooking = function() {
     if (typeof $scope.booking.date != 'undefined') {
       if (typeof $scope.booking.time != 'undefined') {
-        if (hourSelect >= hour) {
+        if (hourSelect > hour) {
           if ($scope.getInValue == 1) {
             $mdDialog.show({
               controller: 'DialogController',
