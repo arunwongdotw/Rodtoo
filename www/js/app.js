@@ -659,6 +659,28 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'editGetInCtrl'
                     }
                 }
+            })
+            .state('loginown.ownprofile', {
+                url: "/ownprofile",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-profile.html",
+                        controller: 'ownProfileCtrl'
+                    }
+                }
+            })
+            .state('logincus.cusprofile', {
+                url: "/cusprofile",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/cus-profile.html",
+                        controller: 'cusProfileCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

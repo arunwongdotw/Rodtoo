@@ -2,17 +2,17 @@
   <ion-nav-title>โปรไฟล์</ion-nav-title>
   <ion-content id="social-sign-up-content" overflow-scroll="false">
     <div class="app-icon">
-      <img src="{{own.profileImg}}" class="md-card-image" id="sign-up-image">
+      <img src="{{cus.profileImg}}" class="md-card-image" id="sign-up-image">
       <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUpPickImage()">อัปเดตรูปโปรไฟล์</a>
     </div>
     <md-input-container md-no-float="">
       <div>
-        <input class="user-name" ng-model="own.firstname" placeholder="ชื่อ *" style="width: 284px;">
+        <input class="user-name" ng-model="cus.firstname" placeholder="ชื่อ *" style="width: 284px;">
       </div>
     </md-input-container>
     <md-input-container md-no-float="">
       <div>
-        <input class="user-name" ng-model="own.lastname" placeholder="นามสกุล *" style="width: 284px;">
+        <input class="user-name" ng-model="cus.lastname" placeholder="นามสกุล *" style="width: 284px;">
       </div>
     </md-input-container>
     <md-select ng-model="addressValue" aria-label="md-option" style="margin-left: 10px; padding: 0px 2px 26px;">
@@ -22,12 +22,12 @@
     </md-select>
     <md-input-container md-no-float="">
       <div>
-        <input class="user-name" ng-model="own.phone" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้ *" style="width: 284px;">
+        <input class="user-name" ng-model="cus.phone" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้ *" style="width: 284px;">
       </div>
     </md-input-container>
     <md-input-container md-no-float="">
       <div>
-        <input class="user-name" ng-model="own.email" placeholder="อีเมล *" style="width: 284px;">
+        <input class="user-name" ng-model="cus.email" placeholder="อีเมล *" style="width: 284px;">
       </div>
     </md-input-container>
     <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnUpdate()">อัปเดตโปรไฟล์</a>

@@ -3,6 +3,10 @@ appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil
   $scope.memberDetail = {}; // $scope.memberDetail คือ obj ข้อมูลของ member
   $scope.randomNumber = Math.random();
 
+  $scope.$on('$ionicView.enter', function() {
+    $scope.randomNumber = Math.random();
+  });
+
   $http.get(myService.configAPI.webserviceURL + 'webservices/getMemberDetail.php?memberUsername=' + window.localStorage.memberUsername)
     .then(function(response) {
       $scope.memberDetail = response.data.results[0];

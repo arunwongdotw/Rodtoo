@@ -1,14 +1,14 @@
-appControllers.controller('ownProfileCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $cordovaFileTransfer, $cordovaCamera) {
-  $scope.own = {};
+appControllers.controller('cusProfileCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $cordovaFileTransfer, $cordovaCamera) {
+  $scope.cus = {};
   $scope.randomNumber = Math.random();
-  $scope.own.profileImg = 'http://1did.net/rodtoo/img/img_profile/' + myService.memberDetailFromLogin.member_username + '.jpg?random=' + $scope.randomNumber;
-  $scope.own.firstname = myService.memberDetailFromLogin.member_firstname;
-  $scope.own.lastname = myService.memberDetailFromLogin.member_lastname;
+  $scope.cus.profileImg = 'http://1did.net/rodtoo/img/img_profile/' + myService.memberDetailFromLogin.member_username + '.jpg?random=' + $scope.randomNumber;
+  $scope.cus.firstname = myService.memberDetailFromLogin.member_firstname;
+  $scope.cus.lastname = myService.memberDetailFromLogin.member_lastname;
   $scope.addressValue = myService.memberDetailFromLogin.member_province_id;
-  $scope.own.phone = myService.memberDetailFromLogin.member_phone;
-  $scope.own.email = myService.memberDetailFromLogin.member_email;
-  $scope.own.username = myService.memberDetailFromLogin.member_username;
-  $scope.own.memberid = myService.memberDetailFromLogin.member_id;
+  $scope.cus.phone = myService.memberDetailFromLogin.member_phone;
+  $scope.cus.email = myService.memberDetailFromLogin.member_email;
+  $scope.cus.username = myService.memberDetailFromLogin.member_username;
+  $scope.cus.memberid = myService.memberDetailFromLogin.member_id;
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getProvinceList.php')
     .then(function(response) {
@@ -20,7 +20,7 @@ appControllers.controller('ownProfileCtrl', function($scope, $timeout, $state, $
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getProvinceList ใน ownProfileController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getProvinceList ใน cusProfileController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -41,16 +41,6 @@ appControllers.controller('ownProfileCtrl', function($scope, $timeout, $state, $
       }
     }, ($scope.isAndroid == false ? 300 : 0));
   };
-
-  function checkImageURI(imageURI) {
-    var str = imageURI;
-    var res = str.match(/1did/g);
-    if (res) {
-      return "found";
-    } else {
-      return "notfound";
-    }
-  }
 
   $scope.setAddressValue = function(province_id) {
     $scope.addressValue = province_id;
@@ -75,13 +65,23 @@ appControllers.controller('ownProfileCtrl', function($scope, $timeout, $state, $
     });
   };
 
+  function checkImageURI(imageURI) {
+    var str = imageURI;
+    var res = str.match(/1did/g);
+    if (res) {
+      return "found";
+    } else {
+      return "notfound";
+    }
+  }
+
   $scope.btnUpdate = function() {
     var checkNumberRegEx = /^[0-9]+$/;
-    if (($scope.own.firstname != null) && ($scope.own.firstname != "")) {
-      if (($scope.own.lastname != null) && ($scope.own.lastname != "")) {
-        if (($scope.own.phone != null) && ($scope.own.phone != "")) {
-          if (checkNumberRegEx.test($scope.own.phone)) {
-            if (($scope.own.email != null) && ($scope.own.email != "")) {
+    if (($scope.cus.firstname != null) && ($scope.cus.firstname != "")) {
+      if (($scope.cus.lastname != null) && ($scope.cus.lastname != "")) {
+        if (($scope.cus.phone != null) && ($scope.cus.phone != "")) {
+          if (checkNumberRegEx.test($scope.cus.phone)) {
+            if (($scope.cus.email != null) && ($scope.cus.email != "")) {
               $mdDialog.show({
                 controller: 'DialogController',
                 templateUrl: 'confirm-dialog.html',
@@ -96,7 +96,7 @@ appControllers.controller('ownProfileCtrl', function($scope, $timeout, $state, $
               }).then(function(response) {
                 var img = document.getElementById('sign-up-image');
                 var imageURI = img.src;
-                var server = myService.configAPI.webserviceURL + 'webservices/uploadSignUpImage.php?username=' + $scope.own.username;
+                var server = myService.configAPI.webserviceURL + 'webservices/uploadSignUpImage.php?username=' + $scope.cus.username;
                 var trustHosts = true;
                 var options2 = {
                   fileKey: "myCameraImg",
@@ -112,12 +112,12 @@ appControllers.controller('ownProfileCtrl', function($scope, $timeout, $state, $
                   url: myService.configAPI.webserviceURL + 'webservices/updateProfile.php',
                   method: 'POST',
                   data: {
-                    var_memberid: $scope.own.memberid,
-                    var_firstname: $scope.own.firstname,
-                    var_lastname: $scope.own.lastname,
+                    var_memberid: $scope.cus.memberid,
+                    var_firstname: $scope.cus.firstname,
+                    var_lastname: $scope.cus.lastname,
                     var_provinceid: $scope.addressValue,
-                    var_phone: $scope.own.phone,
-                    var_email: $scope.own.email
+                    var_phone: $scope.cus.phone,
+                    var_email: $scope.cus.email
                   }
                 }).then(function(response) {
                   myService.memberDetailFromLogin = response.data.results[0];
@@ -132,7 +132,7 @@ appControllers.controller('ownProfileCtrl', function($scope, $timeout, $state, $
                       }
                     }
                   }).then(function(response) {
-                    $state.go('loginown.ownbookinglist');
+                    $state.go('logincus.cusbooking');
                   });
                 }, function(error) {
                   $mdDialog.show({
@@ -141,7 +141,7 @@ appControllers.controller('ownProfileCtrl', function($scope, $timeout, $state, $
                     locals: {
                       displayOption: {
                         title: "เกิดข้อผิดพลาด !",
-                        content: "เกิดข้อผิดพลาด btnUpdate ใน ownProfileController ระบบจะปิดอัตโนมัติ",
+                        content: "เกิดข้อผิดพลาด btnUpdate ใน cusProfileController ระบบจะปิดอัตโนมัติ",
                         ok: "ตกลง"
                       }
                     }
