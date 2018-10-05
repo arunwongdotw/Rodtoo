@@ -1,4 +1,4 @@
-appControllers.controller('editPointCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $cordovaFileTransfer, $cordovaCamera) {
+appControllers.controller('editPointCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog) {
   $scope.point = {};
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getEditPoint.php?pointid=' + myService.editPoint.point_id)

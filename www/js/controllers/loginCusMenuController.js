@@ -1,4 +1,4 @@
-appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect, $http, myService, $ionicNavBarDelegate) {
+appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect, $http, myService) {
   $scope.toggleLeft = buildToggler('left');
   $scope.memberDetail = {}; // $scope.memberDetail คือ obj ข้อมูลของ member
   $scope.randomNumber = Math.random();

@@ -1,4 +1,4 @@
-appControllers.controller('editVanCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $cordovaFileTransfer, $cordovaCamera) {
+appControllers.controller('editVanCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog) {
   $scope.van = {};
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getEditVan.php?vanid=' + myService.editVan.van_id)

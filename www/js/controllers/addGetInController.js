@@ -1,4 +1,4 @@
-appControllers.controller('addGetInCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $cordovaFileTransfer, $cordovaCamera) {
+appControllers.controller('addGetInCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog) {
   $scope.getin = {};
 
   $scope.navigateTo = function(stateName) {

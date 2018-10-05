@@ -1,4 +1,4 @@
-appControllers.controller('editGetInCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $cordovaFileTransfer, $cordovaCamera) {
+appControllers.controller('editGetInCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog) {
   $scope.getin = {};
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getEditGetIn.php?getinid=' + myService.editGetIn.getin_id)

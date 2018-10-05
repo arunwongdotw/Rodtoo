@@ -1,4 +1,4 @@
-appControllers.controller('addVanCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $cordovaFileTransfer, $cordovaCamera) {
+appControllers.controller('addVanCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog) {
   $scope.van = {};
 
   $scope.navigateTo = function(stateName) {

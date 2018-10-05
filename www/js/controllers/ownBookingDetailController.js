@@ -1,4 +1,4 @@
-appControllers.controller('ownBookingDetailCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $cordovaInAppBrowser) {
+appControllers.controller('ownBookingDetailCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnBookingDetail.php?bookingid=' + myService.bookingIDInList.booking_id)
     .then(function(response) {

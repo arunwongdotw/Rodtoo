@@ -1,4 +1,4 @@
-appControllers.controller('addPointCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $cordovaFileTransfer, $cordovaCamera) {
+appControllers.controller('addPointCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog) {
   $scope.point = {};
 
   $scope.navigateTo = function(stateName) {
