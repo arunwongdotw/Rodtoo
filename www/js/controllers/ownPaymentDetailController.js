@@ -7,6 +7,9 @@ appControllers.controller('ownPaymentDetailCtrl', function($scope, $timeout, $st
       getOriginDistrict($scope.paymentDetail.queue_origin_district_id);
       getDestinationProvince($scope.paymentDetail.queue_destination_province_id);
       getDestinationDistrict($scope.paymentDetail.queue_destination_district_id);
+      if ($scope.paymentDetail.booking_getin_id != "-") {
+        getGetInDetail($scope.paymentDetail.booking_getin_id);
+      }
     }, function(error) {
       $mdDialog.show({
         controller: 'DialogController',
@@ -204,4 +207,25 @@ appControllers.controller('ownPaymentDetailCtrl', function($scope, $timeout, $st
       });
     });
   };
+
+  function getGetInDetail(booking_getin_id) {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getGetInDetail.php?getinid=' + booking_getin_id)
+      .then(function(response) {
+        $scope.getInDetail = response.data.results[0];
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด getGetInDetail ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+  }
 });

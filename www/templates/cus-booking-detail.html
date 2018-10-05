@@ -17,7 +17,8 @@
     <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">คิวรถตู้ : {{bookingDetail.queue_name}}</p>
 
     <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_get_in_type == 1">จุดขึ้นรถตู้ : ขึ้นที่คิวรถตู้</p>
-    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_get_in_type == 2">จุดขึ้นรถตู้ : {{bookingDetail.booking_get_in_place}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_get_in_type == 2">จุดขึ้นรถตู้ : {{getInDetail.getin_name}}</p>
+    <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.booking_get_in_type == 3">จุดขึ้นรถตู้ : {{bookingDetail.booking_get_in_place}}</p>
 
     <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">จุดลงรถตู้ : {{bookingDetail.point_name}}</p>
     <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 16px; color: #666;">วันเวลาขึ้นรถตู้ : {{bookingDetail.booking_boarding_date}} {{bookingDetail.booking_boarding_time}}</p></br>

@@ -11,6 +11,9 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
       if ($scope.bookingDetail.booking_van_id != 0) {
         getVanDetail($scope.bookingDetail.booking_van_id);
       }
+      if ($scope.bookingDetail.booking_getin_id != "-") {
+        getGetInDetail($scope.bookingDetail.booking_getin_id);
+      }
     }, function(error) {
       $mdDialog.show({
         controller: 'DialogController',
@@ -161,6 +164,27 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
               content: "เกิดข้อผิดพลาด getVanDetail ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+  }
+
+  function getGetInDetail(booking_getin_id) {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getGetInDetail.php?getinid=' + booking_getin_id)
+      .then(function(response) {
+        $scope.getInDetail = response.data.results[0];
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด getGetInDetail ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }

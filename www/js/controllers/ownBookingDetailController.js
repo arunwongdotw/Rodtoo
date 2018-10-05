@@ -1,5 +1,5 @@
 appControllers.controller('ownBookingDetailCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $cordovaInAppBrowser) {
-  
+
   $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnBookingDetail.php?bookingid=' + myService.bookingIDInList.booking_id)
     .then(function(response) {
       $scope.bookingDetail = response.data.results[0];
@@ -9,6 +9,9 @@ appControllers.controller('ownBookingDetailCtrl', function($scope, $timeout, $st
       getDestinationDistrict($scope.bookingDetail.queue_destination_district_id);
       if ($scope.bookingDetail.booking_van_id != 0) {
         getVanDetail($scope.bookingDetail.booking_van_id);
+      }
+      if ($scope.bookingDetail.booking_getin_id != "-") {
+        getGetInDetail($scope.bookingDetail.booking_getin_id);
       }
     }, function(error) {
       $mdDialog.show({
@@ -139,6 +142,27 @@ appControllers.controller('ownBookingDetailCtrl', function($scope, $timeout, $st
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
               content: "เกิดข้อผิดพลาด getVanDetail ใน ownBookingDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+  }
+
+  function getGetInDetail(booking_getin_id) {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getGetInDetail.php?getinid=' + booking_getin_id)
+      .then(function(response) {
+        $scope.getInDetail = response.data.results[0];
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด getGetInDetail ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
