@@ -3,7 +3,7 @@
   <ion-content id="social-sign-up-content" overflow-scroll="false">
     <div class="app-icon">
       <img src="img/app_icon.png" class="md-card-image" id="sign-up-image">
-      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUpPickImage()">อัปโหลดรูปสมาชิก</a>
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUpPickImage()" style="width: 200px;">อัปโหลดรูปสมาชิก</a>
     </div>
     <md-select ng-model="memberTypeValue" aria-label="md-option" style="margin-left: 10px; padding: 0px 2px 26px;">
       <md-option value="selectType">เลือกประเภทสมาชิก</md-option>
@@ -54,7 +54,7 @@
       </md-input-container>
       <div class="app-icon" ng-if="memberTypeValue == 2">
         <img src="img/btnEvidencePickImage.png" class="md-card-image" id="evidence-image">
-        <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnEvidencePickImage()">อัปโหลดหลักฐาน</a>
+        <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnEvidencePickImage()" style="width: 200px;">อัปโหลดหลักฐาน</a>
       </div>
       <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUp()">สมัครสมาชิก</a>
     </div>

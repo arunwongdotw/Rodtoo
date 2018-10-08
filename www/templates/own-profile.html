@@ -3,7 +3,7 @@
   <ion-content id="social-sign-up-content" overflow-scroll="false">
     <div class="app-icon">
       <img src="{{own.profileImg}}" class="md-card-image" id="sign-up-image">
-      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUpPickImage()">อัปเดตรูปโปรไฟล์</a>
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUpPickImage()" style="width: 200px;">อัปเดตรูปโปรไฟล์</a>
     </div>
     <md-input-container md-no-float="">
       <div>
@@ -30,6 +30,8 @@
         <input class="user-name" ng-model="own.email" placeholder="อีเมล *" style="width: 284px;">
       </div>
     </md-input-container>
-    <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnUpdate()">อัปเดตโปรไฟล์</a>
+    <div>
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnUpdate()">อัปเดตโปรไฟล์</a>
+    </div>
   </ion-content>
 </ion-view>

@@ -9,12 +9,12 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
   $scope.getInValue = "selectGetIn";
   $scope.getInPlaceValue = "selectGetInPlace";
 
-  var hourSelect;
+  var selectHour;
   var fullDate = new Date();
   var day = fullDate.getDate();
   var month = fullDate.getMonth();
   var year = fullDate.getFullYear();
-  var hour = fullDate.getHours();
+  var curHour = fullDate.getHours();
   var fullDateWithoutTime = new Date().toISOString().slice(0, 10).replace('T', ' ');
 
   $scope.navigateTo = function(stateName) {
@@ -114,6 +114,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
     $scope.originDistrictValue = district_id;
     $scope.queueValue = "selectQueue";
     $scope.getInValue = "selectGetIn";
+    $scope.stopValue = "selectStop";
     delete $scope.booking.date;
     delete $scope.booking.time;
     if ($scope.originProvinceValue != "selectOriginProvince") {
@@ -207,6 +208,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
     $scope.destinationDistrictValue = district_id;
     $scope.queueValue = "selectQueue";
     $scope.getInValue = "selectGetIn";
+    $scope.stopValue = "selectStop";
     $scope.pointArrayList = "";
     $scope.bookingDetail = null;
     delete $scope.booking.date;
@@ -342,7 +344,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
   var ipObj2 = {
     callback: function(val) { //Mandatory
       var selectedTime = new Date(val * 1000);
-      hourSelect = selectedTime.getUTCHours();
+      selectHour = selectedTime.getUTCHours();
       if (selectedTime.getUTCHours() < 10) {
         if (selectedTime.getUTCMinutes() < 10) {
           $scope.booking.time = '0' + selectedTime.getUTCHours() + ':0' + selectedTime.getUTCMinutes();
@@ -357,7 +359,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
         }
       }
     },
-    inputTime: (hour * 3600) + 3600, //Optional
+    inputTime: (curHour * 3600) + 3600, //Optional
     format: 24, //Optional
     step: 60, //Optional
     setLabel: 'Set' //Optional
@@ -367,70 +369,27 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
     ionicTimePicker.openTimePicker(ipObj2);
   };
 
+  function checkDateTime(callback) {
+    if (selectHour > curHour) {
+      $scope.checkDateTime = true;
+      callback();
+    } else {
+      if ($scope.booking.date > fullDateWithoutTime) {
+        $scope.checkDateTime = true;
+        callback();
+      } else {
+        $scope.checkDateTime = false;
+        callback();
+      }
+    }
+  }
+
   $scope.btnBooking = function() {
-    console.log($scope.originProvinceValue);
-    console.log($scope.originDistrictValue);
-    console.log($scope.destinationProvinceValue);
-    console.log($scope.destinationDistrictValue);
-    console.log($scope.queueValue);
-    console.log($scope.getInValue);
-    console.log($scope.getInPlaceValue);
-    console.log($scope.booking.date);
-    console.log($scope.booking.time);
     if (typeof $scope.booking.date != 'undefined') {
       if (typeof $scope.booking.time != 'undefined') {
-        if ((hourSelect > hour) && ($scope.booking.date >= fullDateWithoutTime)) {
-          if ($scope.getInValue == 1) {
-            $mdDialog.show({
-              controller: 'DialogController',
-              templateUrl: 'confirm-dialog.html',
-              locals: {
-                displayOption: {
-                  title: "จอง ?",
-                  content: "คุณแน่ใจที่จะจอง",
-                  ok: "ตกลง",
-                  cancel: "ยกเลิก"
-                }
-              }
-            }).then(function(response) {
-              $http({
-                url: myService.configAPI.webserviceURL + 'webservices/booking.php',
-                method: 'POST',
-                data: {
-                  var_status: 1,
-                  var_fee: $scope.bookingDetail.fee,
-                  var_total: $scope.bookingDetail.total_price,
-                  var_memberid: myService.memberDetailFromLogin.member_id,
-                  var_queueid: $scope.queueValue,
-                  var_getintype: $scope.getInValue,
-                  var_getinplace: "-",
-                  var_getinid: "-",
-                  var_pointid: $scope.stopValue,
-                  var_date: $scope.booking.date,
-                  var_time: $scope.booking.time,
-                  var_vanid: "0"
-                }
-              }).then(function(response) {
-                myService.bookingDetail.bookingID = response.data.results;
-                $state.go('logincus.cusbookingsuccess');
-              }, function(error) {
-                $mdDialog.show({
-                  controller: 'DialogController',
-                  templateUrl: 'confirm-dialog.html',
-                  locals: {
-                    displayOption: {
-                      title: "เกิดข้อผิดพลาด !",
-                      content: "เกิดข้อผิดพลาด btnBooking ใน cusBookingController ระบบจะปิดอัตโนมัติ",
-                      ok: "ตกลง"
-                    }
-                  }
-                }).then(function(response) {
-                  ionic.Platform.exitApp();
-                });
-              });
-            });
-          } else if ($scope.getInValue == 2) {
-            if ($scope.getInPlaceValue != "selectGetInPlace") {
+        checkDateTime(function(status) {
+          if ($scope.checkDateTime == true) {
+            if ($scope.getInValue == 1) {
               $mdDialog.show({
                 controller: 'DialogController',
                 templateUrl: 'confirm-dialog.html',
@@ -454,69 +413,6 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                     var_queueid: $scope.queueValue,
                     var_getintype: $scope.getInValue,
                     var_getinplace: "-",
-                    var_getinid: $scope.getInPlaceValue,
-                    var_pointid: $scope.stopValue,
-                    var_date: $scope.booking.date,
-                    var_time: $scope.booking.time,
-                    var_vanid: "0"
-                  }
-                }).then(function(response) {
-                  myService.bookingDetail.bookingID = response.data.results;
-                  $state.go('logincus.cusbookingsuccess');
-                }, function(error) {
-                  $mdDialog.show({
-                    controller: 'DialogController',
-                    templateUrl: 'confirm-dialog.html',
-                    locals: {
-                      displayOption: {
-                        title: "เกิดข้อผิดพลาด !",
-                        content: "เกิดข้อผิดพลาด btnBooking ใน cusBookingController ระบบจะปิดอัตโนมัติ",
-                        ok: "ตกลง"
-                      }
-                    }
-                  }).then(function(response) {
-                    ionic.Platform.exitApp();
-                  });
-                });
-              });
-            } else {
-              $mdDialog.show({
-                controller: 'DialogController',
-                templateUrl: 'confirm-dialog.html',
-                locals: {
-                  displayOption: {
-                    title: "สถานที่ขึ้นรถตู้ไม่ถูกต้อง !",
-                    content: "กรุณาเลือกสถานที่ขึ้นรถตู้",
-                    ok: "ตกลง"
-                  }
-                }
-              });
-            }
-          } else if ($scope.getInValue == 3) {
-            if (($scope.booking.getinplace != null) && ($scope.booking.getinplace != "")) {
-              $mdDialog.show({
-                controller: 'DialogController',
-                templateUrl: 'confirm-dialog.html',
-                locals: {
-                  displayOption: {
-                    title: "จอง ?",
-                    content: "คุณแน่ใจที่จะจอง",
-                    ok: "ตกลง",
-                    cancel: "ยกเลิก"
-                  }
-                }
-              }).then(function(response) {
-                $http({
-                  url: myService.configAPI.webserviceURL + 'webservices/booking.php',
-                  method: 'POST',
-                  data: {
-                    var_status: 1,
-                    var_fee: $scope.bookingDetail.fee,
-                    var_total: $scope.bookingDetail.total_price,
-                    var_memberid: myService.memberDetailFromLogin.member_id,
-                    var_queueid: $scope.queueValue,
-                    var_getintype: $scope.getInValue,
-                    var_getinplace: $scope.booking.getinplace,
                     var_getinid: "-",
                     var_pointid: $scope.stopValue,
                     var_date: $scope.booking.date,
@@ -542,14 +438,140 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                   });
                 });
               });
+            } else if ($scope.getInValue == 2) {
+              if ($scope.getInPlaceValue != "selectGetInPlace") {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "จอง ?",
+                      content: "คุณแน่ใจที่จะจอง",
+                      ok: "ตกลง",
+                      cancel: "ยกเลิก"
+                    }
+                  }
+                }).then(function(response) {
+                  $http({
+                    url: myService.configAPI.webserviceURL + 'webservices/booking.php',
+                    method: 'POST',
+                    data: {
+                      var_status: 1,
+                      var_fee: $scope.bookingDetail.fee,
+                      var_total: $scope.bookingDetail.total_price,
+                      var_memberid: myService.memberDetailFromLogin.member_id,
+                      var_queueid: $scope.queueValue,
+                      var_getintype: $scope.getInValue,
+                      var_getinplace: "-",
+                      var_getinid: $scope.getInPlaceValue,
+                      var_pointid: $scope.stopValue,
+                      var_date: $scope.booking.date,
+                      var_time: $scope.booking.time,
+                      var_vanid: "0"
+                    }
+                  }).then(function(response) {
+                    myService.bookingDetail.bookingID = response.data.results;
+                    $state.go('logincus.cusbookingsuccess');
+                  }, function(error) {
+                    $mdDialog.show({
+                      controller: 'DialogController',
+                      templateUrl: 'confirm-dialog.html',
+                      locals: {
+                        displayOption: {
+                          title: "เกิดข้อผิดพลาด !",
+                          content: "เกิดข้อผิดพลาด btnBooking ใน cusBookingController ระบบจะปิดอัตโนมัติ",
+                          ok: "ตกลง"
+                        }
+                      }
+                    }).then(function(response) {
+                      ionic.Platform.exitApp();
+                    });
+                  });
+                });
+              } else {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "สถานที่ขึ้นรถตู้ไม่ถูกต้อง !",
+                      content: "กรุณาเลือกสถานที่ขึ้นรถตู้",
+                      ok: "ตกลง"
+                    }
+                  }
+                });
+              }
+            } else if ($scope.getInValue == 3) {
+              if (($scope.booking.getinplace != null) && ($scope.booking.getinplace != "")) {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "จอง ?",
+                      content: "คุณแน่ใจที่จะจอง",
+                      ok: "ตกลง",
+                      cancel: "ยกเลิก"
+                    }
+                  }
+                }).then(function(response) {
+                  $http({
+                    url: myService.configAPI.webserviceURL + 'webservices/booking.php',
+                    method: 'POST',
+                    data: {
+                      var_status: 1,
+                      var_fee: $scope.bookingDetail.fee,
+                      var_total: $scope.bookingDetail.total_price,
+                      var_memberid: myService.memberDetailFromLogin.member_id,
+                      var_queueid: $scope.queueValue,
+                      var_getintype: $scope.getInValue,
+                      var_getinplace: $scope.booking.getinplace,
+                      var_getinid: "-",
+                      var_pointid: $scope.stopValue,
+                      var_date: $scope.booking.date,
+                      var_time: $scope.booking.time,
+                      var_vanid: "0"
+                    }
+                  }).then(function(response) {
+                    myService.bookingDetail.bookingID = response.data.results;
+                    $state.go('logincus.cusbookingsuccess');
+                  }, function(error) {
+                    $mdDialog.show({
+                      controller: 'DialogController',
+                      templateUrl: 'confirm-dialog.html',
+                      locals: {
+                        displayOption: {
+                          title: "เกิดข้อผิดพลาด !",
+                          content: "เกิดข้อผิดพลาด btnBooking ใน cusBookingController ระบบจะปิดอัตโนมัติ",
+                          ok: "ตกลง"
+                        }
+                      }
+                    }).then(function(response) {
+                      ionic.Platform.exitApp();
+                    });
+                  });
+                });
+              } else {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "สถานที่ขึ้นรถไม่ถูกต้อง !",
+                      content: "กรุณากรอกสถานที่ขึ้นรถ",
+                      ok: "ตกลง"
+                    }
+                  }
+                });
+              }
             } else {
               $mdDialog.show({
                 controller: 'DialogController',
                 templateUrl: 'confirm-dialog.html',
                 locals: {
                   displayOption: {
-                    title: "สถานที่ขึ้นรถไม่ถูกต้อง !",
-                    content: "กรุณากรอกสถานที่ขึ้นรถ",
+                    title: "จุดขึ้นรถตู้ไม่ถูกต้อง !",
+                    content: "กรุณาเลือกจุดขึ้นรถตู้",
                     ok: "ตกลง"
                   }
                 }
@@ -561,26 +583,14 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
               templateUrl: 'confirm-dialog.html',
               locals: {
                 displayOption: {
-                  title: "จุดขึ้นรถตู้ไม่ถูกต้อง !",
-                  content: "กรุณาเลือกจุดขึ้นรถตู้",
+                  title: "เวลาขึ้นรถตู้ไม่ถูกต้อง !",
+                  content: "กรุณาเลือกเวลาขึ้นรถตู้ให้มากกว่าเวลาในปัจจุบัน",
                   ok: "ตกลง"
                 }
               }
             });
           }
-        } else {
-          $mdDialog.show({
-            controller: 'DialogController',
-            templateUrl: 'confirm-dialog.html',
-            locals: {
-              displayOption: {
-                title: "เวลาเดินทางไม่ถูกต้อง !",
-                content: "กรุณาเลือกเวลาเดินทางให้มากกว่าเวลาปัจจุบัน",
-                ok: "ตกลง"
-              }
-            }
-          });
-        }
+        });
       } else {
         $mdDialog.show({
           controller: 'DialogController',

@@ -681,6 +681,17 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'cusProfileCtrl'
                     }
                 }
+            })
+            .state('loginown.queue', {
+                url: "/queue",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/queue.html",
+                        controller: 'queueCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

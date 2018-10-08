@@ -3,6 +3,7 @@ appControllers.controller('ownPaymentDetailCtrl', function($scope, $timeout, $st
   $http.get(myService.configAPI.webserviceURL + 'webservices/getPaymentDetail.php?bookingid=' + myService.bookingIDInList.booking_id)
     .then(function(response) {
       $scope.paymentDetail = response.data.results[0];
+      console.log($scope.paymentDetail);
       getOriginProvince($scope.paymentDetail.queue_origin_province_id);
       getOriginDistrict($scope.paymentDetail.queue_origin_district_id);
       getDestinationProvince($scope.paymentDetail.queue_destination_province_id);
