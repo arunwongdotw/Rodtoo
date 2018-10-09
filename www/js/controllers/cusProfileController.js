@@ -13,20 +13,20 @@ appControllers.controller('cusProfileCtrl', function($scope, $timeout, $state, $
   $http.get(myService.configAPI.webserviceURL + 'webservices/getProvinceList.php')
     .then(function(response) {
       $scope.provinceArrayList = response.data.results;
-      }, function(error) {
-        $mdDialog.show({
-          controller: 'DialogController',
-          templateUrl: 'confirm-dialog.html',
-          locals: {
-            displayOption: {
-              title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getProvinceList ใน cusProfileController ระบบจะปิดอัตโนมัติ",
-              ok: "ตกลง"
-            }
+    }, function(error) {
+      $mdDialog.show({
+        controller: 'DialogController',
+        templateUrl: 'confirm-dialog.html',
+        locals: {
+          displayOption: {
+            title: "เกิดข้อผิดพลาด !",
+            content: "เกิดข้อผิดพลาด getProvinceList ใน cusProfileController ระบบจะปิดอัตโนมัติ",
+            ok: "ตกลง"
           }
-        }).then(function(response) {
-          ionic.Platform.exitApp();
-        });
+        }
+      }).then(function(response) {
+        ionic.Platform.exitApp();
+      });
     });
 
   $scope.navigateTo = function(stateName) {

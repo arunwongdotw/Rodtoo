@@ -11,20 +11,6 @@ appControllers.controller('loginOwnMenuCtrl', function($scope, $timeout, $mdUtil
     .then(function(response) {
       $scope.memberDetail = response.data.results[0];
       myService.memberDetailFromLogin = response.data.results[0];
-    // }, function(error) {
-    //   $mdDialog.show({
-    //     controller: 'DialogController',
-    //     templateUrl: 'confirm-dialog.html',
-    //     locals: {
-    //       displayOption: {
-    //         title: "เกิดข้อผิดพลาด !",
-    //         content: "เกิดข้อผิดพลาด getMemberDetail ใน loginOwnMenuController ระบบจะปิดอัตโนมัติ",
-    //         ok: "ตกลง"
-    //       }
-    //     }
-    //   }).then(function(response) {
-    //     ionic.Platform.exitApp();
-    //   });
     });
 
   function buildToggler(navID) {

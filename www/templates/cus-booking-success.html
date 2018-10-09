@@ -6,15 +6,14 @@
     </a>
   </ion-nav-buttons>
   <ion-content id="social-sign-up-content">
-    <div style="text-align: center; margin-top: 20px; margin-left: 20px; margin-right: 20px; border: 3px solid #3F51B5;">
-      <p style="margin-top: 15px; font-weight: bold; font-size: 16px; color: #666;">หมายเลขการจอง : {{bookingDetail.booking_id}}</p>
-      <p style="font-weight: bold; font-size: 16px; color: #666;">ยอดรวมทั้งหมด : {{bookingDetail.booking_price}} บาท</p>
-      <p style="font-weight: bold; font-size: 16px; color: #666;">ชื่อบัญชี : {{bookingDetail.queue_bank_owner}}</p>
-      <p style="font-weight: bold; font-size: 16px; color: #666;">ธนาคาร : {{bookingDetail.queue_bank}}</p>
-      <p style="font-weight: bold; font-size: 16px; color: #666;">หมายเลขบัญชี : {{bookingDetail.queue_bank_no}}</p>
-      <!-- <img class="user-img" src="https://www.egov.go.th/upload/eservice-thumbnail/img_07ce457edfaa09ec5e9c040b52971370.png" style="width: 25%; margin-bottom: 10px; border-radius: 50%;"> -->
+    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">สถานะการจองรถตู้</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">หมายเลขการจอง : {{bookingDetail.booking_id}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ยอดรวมทั้งหมด : {{bookingDetail.booking_price}} บาท</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ชื่อบัญชี : {{bookingDetail.queue_bank_owner}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ธนาคาร : {{bookingDetail.queue_bank}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">หมายเลขบัญชี : {{bookingDetail.queue_bank_no}}</p>
     </div>
-
     <div>
       <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnPayment(bookingID)" style="margin-top: 20px; margin-left: 0px;">ไปยังหน้าแจ้งชำระเงิน</a>
     </div>

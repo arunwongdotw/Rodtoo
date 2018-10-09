@@ -70,7 +70,7 @@ appControllers.controller('ownVanSelectCtrl', function($scope, $timeout, $state,
         }).then(function(response) {
           $state.go('loginown.ownbookinglist');
         });
-      }, function(error){
+      }, function(error) {
         $mdDialog.show({
           controller: 'DialogController',
           templateUrl: 'confirm-dialog.html',

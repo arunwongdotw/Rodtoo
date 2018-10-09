@@ -64,20 +64,6 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
     $cordovaCamera.getPicture(options).then(function(imageURI) {
       var image = document.getElementById('sign-up-image');
       image.src = imageURI;
-    // }, function(error) {
-    //   $mdDialog.show({
-    //     controller: 'DialogController',
-    //     templateUrl: 'confirm-dialog.html',
-    //     locals: {
-    //       displayOption: {
-    //         title: "เกิดข้อผิดพลาด !",
-    //         content: "เกิดข้อผิดพลาด btnSignUpPickImage ใน signUpController ระบบจะปิดอัตโนมัติ",
-    //         ok: "ตกลง"
-    //       }
-    //     }
-    //   }).then(function(response) {
-    //     ionic.Platform.exitApp();
-    //   });
     });
   };
 
@@ -97,20 +83,6 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
     $cordovaCamera.getPicture(options3).then(function(imageURI) {
       var image = document.getElementById('evidence-image');
       image.src = imageURI;
-    // }, function(error) {
-    //   $mdDialog.show({
-    //     controller: 'DialogController',
-    //     templateUrl: 'confirm-dialog.html',
-    //     locals: {
-    //       displayOption: {
-    //         title: "เกิดข้อผิดพลาด !",
-    //         content: "เกิดข้อผิดพลาด btnEvidencePickImage ใน signUpController ระบบจะปิดอัตโนมัติ",
-    //         ok: "ตกลง"
-    //       }
-    //     }
-    //   }).then(function(response) {
-    //     ionic.Platform.exitApp();
-    //   });
     });
   };
 

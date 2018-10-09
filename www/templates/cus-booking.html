@@ -9,7 +9,6 @@
         {{originProvince.PROVINCE_NAME}}
       </md-option>
     </md-select>
-
     <md-select ng-model="originDistrictValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px; width: 300%;">
       <md-option value="selectOriginDistrict" ng-click="setOriginDistrictValue('selectOriginDistrict')">
         เลือกอำเภอต้นทาง *
@@ -18,7 +17,6 @@
         {{originDistrict.AMPHUR_NAME}}
       </md-option>
     </md-select>
-
     <md-select ng-model="destinationProvinceValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
       <md-option value="selectDestinationProvince" ng-click="setDestinationProvinceValue('selectDestinationProvince')">
         เลือกจังหวัดปลายทาง *
@@ -27,7 +25,6 @@
         {{destinationProvince.PROVINCE_NAME}}
       </md-option>
     </md-select>
-
     <md-select ng-model="destinationDistrictValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
       <md-option value="selectDestinationDistrict" ng-click="setDestinationDistrictValue('selectDestinationDistrict')">
         เลือกอำเภอปลายทาง *
@@ -36,7 +33,6 @@
         {{destinationDistrict.AMPHUR_NAME}}
       </md-option>
     </md-select>
-
     <md-select ng-model="queueValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;"
       ng-if="originProvinceValue != 'selectOriginProvince' && originDistrictValue != 'selectOriginDistrict' && destinationProvinceValue != 'selectDestinationProvince' && destinationDistrictValue != 'selectDestinationDistrict'">
       <md-option value="selectQueue" ng-click="setQueueValue('selectQueue')">
@@ -46,7 +42,6 @@
         {{queue.queue_name}}
       </md-option>
     </md-select>
-
     <md-select ng-model="getInValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;" ng-if="queueValue != 'selectQueue'">
       <md-option value="selectGetIn" ng-click="setGetInValue('selectGetIn')">
         เลือกจุดขึ้นรถตู้ *
@@ -61,7 +56,6 @@
         ขึ้นจุดอื่นๆ
       </md-option>
     </md-select>
-
     <md-select ng-model="getInPlaceValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;" ng-if="getInValue == 2">
       <md-option value="selectGetInPlace" ng-click="setGetInPlaceValue('selectGetInPlace')">
         เลือกสถานที่ขึ้นรถตู้ *
@@ -70,13 +64,11 @@
         {{getIn.getin_name}}
       </md-option>
     </md-select>
-
     <md-input-container md-no-float="" ng-if="getInValue == 3">
       <div>
         <input class="user-name" ng-model="booking.getinplace" placeholder="สถานที่ขึ้นรถตู้ *" style="width: 284px;">
       </div>
     </md-input-container>
-
     <md-select ng-model="stopValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;" ng-if="queueValue != 'selectQueue'">
       <md-option value="selectStop" ng-click="setStopValue('selectStop')">
         เลือกจุดลงรถตู้ *
@@ -85,31 +77,23 @@
         {{point.point_name}}
       </md-option>
     </md-select>
-
     <md-input-container md-no-float="" ng-if="queueValue != 'selectQueue'">
       <div>
         <input class="user-name" placeholder="วันขึ้นรถตู้ *" style="width: 300px;" ng-model="booking.date" ng-click="openDatePickerStart()">
       </div>
     </md-input-container>
-
     <md-input-container md-no-float="" ng-if="queueValue != 'selectQueue'">
       <div>
         <input class="user-name" placeholder="เวลาขึ้นรถตู้ *" style="width: 300px;" ng-model="booking.time" ng-click="openTimePickerStart()">
       </div>
     </md-input-container>
-
     <div style="text-align: center; margin-top: 20px; margin-left: 20px; margin-right: 20px; border: 3px solid #3F51B5;" ng-if="stopValue != 'selectStop'">
       <p style="margin-top: 15px; font-weight: bold; font-size: 16px; color: #666;">ค่าบริการรถตู้ : {{bookingDetail.point_price}} บาท</p>
       <p style="font-weight: bold; font-size: 16px; color: #666;">ค่าธรรมเนียมการจอง : {{bookingDetail.fee}} บาท</p>
       <p style="font-weight: bold; font-size: 16px; color: #666;">ยอดชำระทั้งหมด : {{bookingDetail.total_price}} บาท</p>
     </div>
-
     <div>
       <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnBooking()" ng-if="stopValue != 'selectStop'">ยืนยันการจองรถตู้</a>
     </div>
-
-    <!-- <div>
-      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnBooking()" style="margin-top: 20px; margin-bottom: 20px; margin-left: 0px;">ยืนยันการจองรถตู้</a>
-    </div> -->
   </ion-content>
 </ion-view>

@@ -11,8 +11,7 @@
           <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="ownPayment.booking_status == 1">สถานะการจองรถตู้ : <text style="color: red;">ยังไม่แจ้งชำระเงิน</text></p>
           <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="ownPayment.booking_status == 2">สถานะการจองรถตู้ : <text style="color: orange;">แจ้งชำระเงิน</text></p>
           <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="ownPayment.booking_status == 3">สถานะการจองรถตู้ : <text style="color: green;">ยืนยันการชำระเงิน</text></p>
-
-          <p style="padding: 0px 10px 0px 10px;">วันเวลาแจ้งชำระเงิน : {{ownPayment.payment_date}} {{ownPayment.payment_time}}</p>
+          <p style="padding: 0px 10px 0px 10px;">วันเวลาแจ้งชำระเงิน : {{ownPayment.payment_datetime}}</p>
           <p style="padding: 5px 10px 0px 10px;">
             <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getInfomation(ownPayment.booking_id)">
               <i class="fas fa-info-circle"></i> รายละเอียดการแจ้งชำระเงิน

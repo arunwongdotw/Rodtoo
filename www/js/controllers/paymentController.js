@@ -69,20 +69,6 @@ appControllers.controller('paymentCtrl', function($scope, $timeout, $state, $ion
     $cordovaCamera.getPicture(options).then(function(imageURI) {
       var image = document.getElementById('payment-image');
       image.src = imageURI;
-    // }, function(error) {
-    //   $mdDialog.show({
-    //     controller: 'DialogController',
-    //     templateUrl: 'confirm-dialog.html',
-    //     locals: {
-    //       displayOption: {
-    //         title: "เกิดข้อผิดพลาด !",
-    //         content: "เกิดข้อผิดพลาด btnPaymentPickImage ใน paymentController ระบบจะปิดอัตโนมัติ",
-    //         ok: "ตกลง"
-    //       }
-    //     }
-    //   }).then(function(response) {
-    //     ionic.Platform.exitApp();
-    //   });
     });
   };
 
