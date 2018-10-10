@@ -24,20 +24,20 @@
       <!--list section-->
       <div ng-if="isAndroid" class="menu-list">
         <!-- <md-subheader class="md-warn">Themes</md-subheader> -->
-        <div class="row menu-item" ng-click="navigateTo('loginown.queue')">
-          <div class="col-33">
-            <i class="fas fa-list"></i>
-          </div>
-          <div class="col-66">
-            <span>คิวรถตู้</span>
-          </div>
-        </div>
         <div class="row menu-item" ng-click="navigateTo('loginown.ownprofile')">
           <div class="col-33">
             <i class="fas fa-list"></i>
           </div>
           <div class="col-66">
             <span>โปรไฟล์</span>
+          </div>
+        </div>
+        <div class="row menu-item" ng-click="navigateTo('loginown.queue')">
+          <div class="col-33">
+            <i class="fas fa-list"></i>
+          </div>
+          <div class="col-66">
+            <span>คิวรถตู้</span>
           </div>
         </div>
         <div class="row menu-item" ng-click="navigateTo('loginown.ownbookinglist')">
@@ -94,13 +94,13 @@
       <!--It will show animation when selecting row.-->
       <md-list ng-if="!isAndroid">
         <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
-        <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.queue')">
-          <i class="fas fa-list"></i>
-          <span>คิวรถตู้</span>
-        </md-list-item>
         <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownprofile')">
           <i class="fas fa-list"></i>
           <span>โปรไฟล์</span>
+        </md-list-item>
+        <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.queue')">
+          <i class="fas fa-list"></i>
+          <span>คิวรถตู้</span>
         </md-list-item>
         <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownbookinglist')">
           <i class="fas fa-list"></i>
