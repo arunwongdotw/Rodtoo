@@ -8,24 +8,15 @@
           หมายเลขรถตู้ : {{ownVan.van_queue_no}}
         </div>
         <div class="content">
-          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;">ชื่อจริง - นามสกุล : {{ownVan.van_own_firstname}} {{ownVan.van_own_lastname}}</p>
-          <p style="padding: 0px 10px 0px 10px;">เบอร์โทรศัพท์ : {{ownVan.van_phone}}</p>
-          <p style="padding: 0px 10px 0px 10px;">ป้ายทะเบียนรถ : {{ownVan.van_plate_no}}</p>
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="ownVan.van_status == 1">สถานะรถตู้ : <text style="color: red;">ยังไม่ได้รับการยืนยัน</text></p>
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="ownVan.van_status == 2">สถานะรถตู้ : <text style="color: green;">ได้รับการยืนยัน</text></p>
           <p style="padding: 5px 10px 0px 10px;">
-            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="editVan(ownVan.van_id)">
-              <i class="fas fa-edit"></i> แก้ไขข้อมูลรถตู้
-            </a>
-            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="delVan(ownVan.van_id)">
-              <i class="fas fa-trash"></i> ลบข้อมูลรถตู้
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getInfomation(ownVan.van_id)">
+              <i class="fas fa-info-circle"></i> รายละเอียดรถตู้
             </a>
           </p>
         </div>
       </div>
     </div>
   </ion-content>
-  <div class="footer-fab-bar">
-    <a class="md-button md-accent md-fab fab-footer" aria-label="Add" ng-click="btnAddVan()" style="background-color: #3F51B5 !important">
-      <i class="icon ion-plus"></i>
-    </a>
-  </div>
 </ion-view>

@@ -1,8 +1,8 @@
 appControllers.controller('ownVanListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate) {
 
-  $scope.$on('$ionicView.enter', function(e) {
-    $ionicNavBarDelegate.showBar(true);
-  });
+  // $scope.$on('$ionicView.enter', function(e) {
+  //   $ionicNavBarDelegate.showBar(true);
+  // });
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnVanList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
@@ -36,100 +36,105 @@ appControllers.controller('ownVanListCtrl', function($scope, $timeout, $state, $
     }, ($scope.isAndroid == false ? 300 : 0));
   };
 
-  $scope.btnAddVan = function() {
-    $http({
-      url: myService.configAPI.webserviceURL + 'webservices/checkVan.php',
-      method: 'POST',
-      data: {
-        var_memberid: $scope.memberDetail.member_id
-      }
-    }).then(function(response) {
-      $scope.results = response.data.results;
-      if ($scope.results == 'checkVan_lessthan') {
-        $state.go('loginown.addvan');
-      } else if ($scope.results == 'checkVan_morethan') {
-        $mdDialog.show({
-          controller: 'DialogController',
-          templateUrl: 'confirm-dialog.html',
-          locals: {
-            displayOption: {
-              title: "ข้อมูลรถตู้เกิน !",
-              content: "คุณไม่สามารถเพิ่มข้อมูลรถตู้ได้ เนื่องจากข้อมูลรถตู้เกินกว่าจำนวนที่กำหนด",
-              ok: "ตกลง"
-            }
-          }
-        });
-      }
-    }, function(error) {
-      $mdDialog.show({
-        controller: 'DialogController',
-        templateUrl: 'confirm-dialog.html',
-        locals: {
-          displayOption: {
-            title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด btnAddVan ใน ownVanListController ระบบจะปิดอัตโนมัติ",
-            ok: "ตกลง"
-          }
-        }
-      }).then(function(response) {
-        ionic.Platform.exitApp();
-      });
-    });
+  $scope.getInfomation = function(van_id) {
+    myService.vanIDInList.van_id = van_id;
+    $state.go('loginown.ownvandetail');
   };
 
-  $scope.editVan = function(van_id) {
-    myService.editVan.van_id = van_id;
-    $state.go('loginown.editvan');
-  };
+  // $scope.btnAddVan = function() {
+  //   $http({
+  //     url: myService.configAPI.webserviceURL + 'webservices/checkVan.php',
+  //     method: 'POST',
+  //     data: {
+  //       var_memberid: $scope.memberDetail.member_id
+  //     }
+  //   }).then(function(response) {
+  //     $scope.results = response.data.results;
+  //     if ($scope.results == 'checkVan_lessthan') {
+  //       $state.go('loginown.addvan');
+  //     } else if ($scope.results == 'checkVan_morethan') {
+  //       $mdDialog.show({
+  //         controller: 'DialogController',
+  //         templateUrl: 'confirm-dialog.html',
+  //         locals: {
+  //           displayOption: {
+  //             title: "ข้อมูลรถตู้เกิน !",
+  //             content: "คุณไม่สามารถเพิ่มข้อมูลรถตู้ได้ เนื่องจากข้อมูลรถตู้เกินกว่าจำนวนที่กำหนด",
+  //             ok: "ตกลง"
+  //           }
+  //         }
+  //       });
+  //     }
+  //   }, function(error) {
+  //     $mdDialog.show({
+  //       controller: 'DialogController',
+  //       templateUrl: 'confirm-dialog.html',
+  //       locals: {
+  //         displayOption: {
+  //           title: "เกิดข้อผิดพลาด !",
+  //           content: "เกิดข้อผิดพลาด btnAddVan ใน ownVanListController ระบบจะปิดอัตโนมัติ",
+  //           ok: "ตกลง"
+  //         }
+  //       }
+  //     }).then(function(response) {
+  //       ionic.Platform.exitApp();
+  //     });
+  //   });
+  // };
 
-  $scope.delVan = function(van_id) {
-    $mdDialog.show({
-      controller: 'DialogController',
-      templateUrl: 'confirm-dialog.html',
-      locals: {
-        displayOption: {
-          title: "ลบข้อมูลรถตู้ ?",
-          content: "คุณแน่ใจที่จะลบข้อมูลรถตู้",
-          ok: "ตกลง",
-          cancel: "ยกเลิก"
-        }
-      }
-    }).then(function(response) {
-      $http({
-        url: myService.configAPI.webserviceURL + 'webservices/delVan.php',
-        method: 'POST',
-        data: {
-          var_vanid: van_id,
-        }
-      }).then(function(response) {
-        $mdDialog.show({
-          controller: 'DialogController',
-          templateUrl: 'confirm-dialog.html',
-          locals: {
-            displayOption: {
-              title: "ยกเลิกการจองสำเร็จ !",
-              content: "คุณยกเลิกการจองสำเร็จ",
-              ok: "ตกลง"
-            }
-          }
-        }).then(function(response) {
-          $state.reload();
-        });
-      }, function(error) {
-        $mdDialog.show({
-          controller: 'DialogController',
-          templateUrl: 'confirm-dialog.html',
-          locals: {
-            displayOption: {
-              title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด delVan ใน ownVanListController ระบบจะปิดอัตโนมัติ",
-              ok: "ตกลง"
-            }
-          }
-        }).then(function(response) {
-          ionic.Platform.exitApp();
-        });
-      });
-    });
-  };
+  // $scope.editVan = function(van_id) {
+  //   myService.editVan.van_id = van_id;
+  //   $state.go('loginown.editvan');
+  // };
+
+  // $scope.delVan = function(van_id) {
+  //   $mdDialog.show({
+  //     controller: 'DialogController',
+  //     templateUrl: 'confirm-dialog.html',
+  //     locals: {
+  //       displayOption: {
+  //         title: "ลบข้อมูลรถตู้ ?",
+  //         content: "คุณแน่ใจที่จะลบข้อมูลรถตู้",
+  //         ok: "ตกลง",
+  //         cancel: "ยกเลิก"
+  //       }
+  //     }
+  //   }).then(function(response) {
+  //     $http({
+  //       url: myService.configAPI.webserviceURL + 'webservices/delVan.php',
+  //       method: 'POST',
+  //       data: {
+  //         var_vanid: van_id,
+  //       }
+  //     }).then(function(response) {
+  //       $mdDialog.show({
+  //         controller: 'DialogController',
+  //         templateUrl: 'confirm-dialog.html',
+  //         locals: {
+  //           displayOption: {
+  //             title: "ยกเลิกการจองสำเร็จ !",
+  //             content: "คุณยกเลิกการจองสำเร็จ",
+  //             ok: "ตกลง"
+  //           }
+  //         }
+  //       }).then(function(response) {
+  //         $state.reload();
+  //       });
+  //     }, function(error) {
+  //       $mdDialog.show({
+  //         controller: 'DialogController',
+  //         templateUrl: 'confirm-dialog.html',
+  //         locals: {
+  //           displayOption: {
+  //             title: "เกิดข้อผิดพลาด !",
+  //             content: "เกิดข้อผิดพลาด delVan ใน ownVanListController ระบบจะปิดอัตโนมัติ",
+  //             ok: "ตกลง"
+  //           }
+  //         }
+  //       }).then(function(response) {
+  //         ionic.Platform.exitApp();
+  //       });
+  //     });
+  //   });
+  // };
 });

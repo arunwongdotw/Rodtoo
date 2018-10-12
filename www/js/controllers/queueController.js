@@ -181,7 +181,7 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
                     }).then(function(response) {
                       if ($scope.nullResponse == true) {
                         $http({
-                          url: myService.configAPI.webserviceURL + 'webservices/inserQueue.php',
+                          url: myService.configAPI.webserviceURL + 'webservices/insertQueue.php',
                           method: 'POST',
                           data: {
                             var_memberid: myService.memberDetailFromLogin.member_id,

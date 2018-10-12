@@ -20,6 +20,9 @@ if ((window.localStorage.memberUsername == "") || (window.localStorage.memberUse
   } else if (window.localStorage.memberType == "2") {
     url = "/loginown/ownbookinglist";
     state = "loginown.ownbookinglist";
+  } else if (window.localStorage.memberType == "3") {
+    url = "/loginvan/van";
+    state = "loginvan.van";
   }
 }
 
@@ -429,6 +432,14 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 templateUrl: "templates/login-own-menu.html",
                 controller: 'loginOwnMenuCtrl'
             })
+            .state('loginvan', {
+                url: "/loginvan",
+                cache: false,
+                reload: true,
+                abstract: true,
+                templateUrl: "templates/login-van-menu.html",
+                controller: 'loginVanMenuCtrl'
+            })
             .state('notlogin.login', {
                 url: "/login",
                 cache: false,
@@ -690,6 +701,39 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                     'menuContent': {
                         templateUrl: "templates/queue.html",
                         controller: 'queueCtrl'
+                    }
+                }
+            })
+            .state('loginvan.van', {
+                url: "/van",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/van.html",
+                        controller: 'vanCtrl'
+                    }
+                }
+            })
+            .state('loginvan.vanprofile', {
+                url: "/vanprofile",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/van-profile.html",
+                        controller: 'vanProfileCtrl'
+                    }
+                }
+            })
+            .state('loginown.ownvandetail', {
+                url: "/ownvandetail",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-van-detail.html",
+                        controller: 'ownVanDetailCtrl'
                     }
                 }
             });

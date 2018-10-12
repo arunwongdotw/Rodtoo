@@ -1,0 +1,30 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>รายการข้อมูลรถตู้</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content id="online-course-content">
+    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">สถานะรถตู้</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="vanDetail.van_status == 1">สถานะรถตู้ : <text style="color: red;">ยังไม่ได้รับการยืนยัน</text></p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="vanDetail.van_status == 2">สถานะรถตู้ : <text style="color: green;">ได้รับการยืนยัน</text></p>
+    </div>
+    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">ข้อมูลรถตู้</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">หมายเลขรถตู้ : {{vanDetail.van_queue_no}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ป้ายทะเบียนรถตู้ : {{vanDetail.van_plate_no}}</p>
+    </div>
+    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">ข้อมูลผู้ขับรถตู้</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ชื่อ-นามสกุล : {{vanDetail.member_firstname}} {{vanDetail.member_lastname}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เบอร์โทรศัพท์ : {{vanDetail.member_phone}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">อีเมล : {{vanDetail.member_email}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">จังหวัด : {{provinceDetail.PROVINCE_NAME}}</p>
+    </div>
+    <div>
+      <center><a class="md-raised social-button md-button md-default-theme material-background" ng-if="vanDetail.van_status == 1" ng-click="btnConfirmVan(vanDetail.van_id)" style="margin-top: 20px; width: 90%;">ยืนยันข้อมูลรถตู้</a></center>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,57 @@
+<ion-view hide-nav-bar="false">
+  <ion-nav-title>ข้อมูลรถตู้</ion-nav-title>
+  <ion-content id="social-sign-up-content" overflow-scroll="false">
+    <md-input-container md-no-float="" style="margin-top: 20px;">
+      <div>
+        <input class="user-name" ng-model="van.queueno" placeholder="หมายเลขรถตู้ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="van.plateno" placeholder="ป้ายทะเบียนรถ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-select ng-model="originProvinceValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
+      <md-option value="selectOriginProvince" ng-click="setOriginProviceValue('selectOriginProvince')">
+        เลือกจังหวัดต้นทางที่ให้บริการ *
+      </md-option>
+      <md-option value="{{originProvince.PROVINCE_ID}}" ng-repeat="originProvince in originProvinceArrayList" ng-click="getOriginDistrict(originProvince.PROVINCE_ID)">
+        {{originProvince.PROVINCE_NAME}}
+      </md-option>
+    </md-select>
+    <md-select ng-model="originDistrictValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px; width: 300%;">
+      <md-option value="selectOriginDistrict" ng-click="setOriginDistrictValue('selectOriginDistrict')">
+        เลือกอำเภอต้นทางที่ให้บริการ *
+      </md-option>
+      <md-option value="{{originDistrict.AMPHUR_ID}}" ng-repeat="originDistrict in originDistrictArrayList" ng-click="setOriginDistrict(originDistrict.AMPHUR_ID)">
+        {{originDistrict.AMPHUR_NAME}}
+      </md-option>
+    </md-select>
+    <md-select ng-model="destinationProvinceValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
+      <md-option value="selectDestinationProvince" ng-click="setDestinationProvinceValue('selectDestinationProvince')">
+        เลือกจังหวัดปลายทางที่ให้บริการ *
+      </md-option>
+      <md-option value="{{destinationProvince.PROVINCE_ID}}" ng-repeat="destinationProvince in destinationProvinceArrayList" ng-click="getDestinationDistrict(destinationProvince.PROVINCE_ID)">
+        {{destinationProvince.PROVINCE_NAME}}
+      </md-option>
+    </md-select>
+    <md-select ng-model="destinationDistrictValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;">
+      <md-option value="selectDestinationDistrict" ng-click="setDestinationDistrictValue('selectDestinationDistrict')">
+        เลือกอำเภอปลายทางที่ให้บริการ *
+      </md-option>
+      <md-option value="{{destinationDistrict.AMPHUR_ID}}" ng-repeat="destinationDistrict in destinationDistrictArrayList" ng-click="getQueueList(destinationDistrict.AMPHUR_ID)">
+        {{destinationDistrict.AMPHUR_NAME}}
+      </md-option>
+    </md-select>
+    <md-select ng-model="queueValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;"
+      ng-if="originProvinceValue != 'selectOriginProvince' && originDistrictValue != 'selectOriginDistrict' && destinationProvinceValue != 'selectDestinationProvince' && destinationDistrictValue != 'selectDestinationDistrict'">
+      <md-option value="selectQueue" ng-click="setQueueValue('selectQueue')">
+        เลือกคิวรถตู้ที่ให้บริการ *
+      </md-option>
+      <md-option value="{{queue.queue_id}}" ng-repeat="queue in queueArrayList" ng-click="setQueue(queue.queue_id)">
+        {{queue.queue_name}}
+      </md-option>
+    </md-select>
+    <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnAddVan()">เพิ่มข้อมูลรถตู้</a>
+  </ion-content>
+</ion-view>

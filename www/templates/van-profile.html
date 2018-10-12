@@ -1,0 +1,35 @@
+<ion-view hide-nav-bar="false">
+  <ion-nav-title>โปรไฟล์</ion-nav-title>
+  <ion-content id="social-sign-up-content" overflow-scroll="false">
+    <div class="app-icon">
+      <img src="{{van.profileImg}}" class="md-card-image" id="sign-up-image">
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUpPickImage()" style="width: 200px; margin-top: 20px;">อัปเดตรูปโปรไฟล์</a>
+    </div>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="van.firstname" placeholder="ชื่อ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="van.lastname" placeholder="นามสกุล *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-select ng-model="addressValue" aria-label="md-option" style="margin-left: 10px; padding: 0px 2px 26px;">
+      <md-option value="{{province.PROVINCE_ID}}" ng-repeat="province in provinceArrayList" ng-click="setAddressValue(province.PROVINCE_ID)">
+        {{province.PROVINCE_NAME}}
+      </md-option>
+    </md-select>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="van.phone" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้ *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="van.email" placeholder="อีเมล *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnUpdate()">อัปเดตโปรไฟล์</a>
+  </ion-content>
+</ion-view>

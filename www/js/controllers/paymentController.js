@@ -298,5 +298,4 @@ appControllers.controller('paymentCtrl', function($scope, $timeout, $state, $ion
       });
     }
   };
-
 });

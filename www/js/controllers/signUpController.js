@@ -140,6 +140,7 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                   var_phone: $scope.signup.phone,
                                   var_email: $scope.signup.email,
                                   var_membertype: $scope.memberTypeValue,
+                                  var_membertypestatus: 0,
                                   var_evidence: "-"
                                 }
                               }).then(function(response) {
@@ -156,37 +157,37 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                     }
                                   });
                                 } else {
-                                  if ($scope.memberTypeValue == 1) {
-                                    $mdDialog.show({
-                                      controller: 'DialogController',
-                                      templateUrl: 'confirm-dialog.html',
-                                      locals: {
-                                        displayOption: {
-                                          title: "สมัครสมาชิกสำเร็จ !",
-                                          content: "คุณสมัครสมาชิกสำเร็จ ระบบจะเข้าสู่ระบบโดยอัตโนมัติ",
-                                          ok: "ตกลง"
-                                        }
+                                  // if ($scope.memberTypeValue == 1) {
+                                  $mdDialog.show({
+                                    controller: 'DialogController',
+                                    templateUrl: 'confirm-dialog.html',
+                                    locals: {
+                                      displayOption: {
+                                        title: "สมัครสมาชิกสำเร็จ !",
+                                        content: "คุณสมัครสมาชิกสำเร็จ ระบบจะเข้าสู่ระบบโดยอัตโนมัติ",
+                                        ok: "ตกลง"
                                       }
-                                    }).then(function(response) {
-                                      window.localStorage.memberUsername = $scope.signup.username;
-                                      window.localStorage.memberType = $scope.memberTypeValue;
-                                      $state.go('logincus.cusbooking');
-                                    });
-                                  } else if ($scope.memberTypeValue == 2) {
-                                    $mdDialog.show({
-                                      controller: 'DialogController',
-                                      templateUrl: 'confirm-dialog.html',
-                                      locals: {
-                                        displayOption: {
-                                          title: "สมัครสมาชิกสำเร็จ !",
-                                          content: "คุณสมัครสมาชิกสำเร็จ แต่ยังไม่สามารถใช้งานได้จนกว่าจะได้รับการอนุมัติจากผู้ดูแลระบบ",
-                                          ok: "ตกลง"
-                                        }
-                                      }
-                                    }).then(function(response) {
-                                      $state.go('notlogin.login');
-                                    });
-                                  }
+                                    }
+                                  }).then(function(response) {
+                                    window.localStorage.memberUsername = $scope.signup.username;
+                                    window.localStorage.memberType = $scope.memberTypeValue;
+                                    $state.go('logincus.cusbooking');
+                                  });
+                                  // } else if ($scope.memberTypeValue == 2) {
+                                  //   $mdDialog.show({
+                                  //     controller: 'DialogController',
+                                  //     templateUrl: 'confirm-dialog.html',
+                                  //     locals: {
+                                  //       displayOption: {
+                                  //         title: "สมัครสมาชิกสำเร็จ !",
+                                  //         content: "คุณสมัครสมาชิกสำเร็จ แต่ยังไม่สามารถใช้งานได้จนกว่าจะได้รับการอนุมัติจากผู้ดูแลระบบ",
+                                  //         ok: "ตกลง"
+                                  //       }
+                                  //     }
+                                  //   }).then(function(response) {
+                                  //     $state.go('notlogin.login');
+                                  //   });
+                                  // }
                                 }
                               }, function(error) {
                                 $mdDialog.show({
@@ -239,6 +240,7 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                     var_phone: $scope.signup.phone,
                                     var_email: $scope.signup.email,
                                     var_membertype: $scope.memberTypeValue,
+                                    var_membertypestatus: 1,
                                     var_evidence: "-"
                                   }
                                 }).then(function(response) {
@@ -255,37 +257,37 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                       }
                                     });
                                   } else {
-                                    if ($scope.memberTypeValue == 1) {
-                                      $mdDialog.show({
-                                        controller: 'DialogController',
-                                        templateUrl: 'confirm-dialog.html',
-                                        locals: {
-                                          displayOption: {
-                                            title: "สมัครสมาชิกสำเร็จ !",
-                                            content: "คุณสมัครสมาชิกสำเร็จ ระบบจะเข้าสู่ระบบโดยอัตโนมัติ",
-                                            ok: "ตกลง"
-                                          }
+                                    // if ($scope.memberTypeValue == 1) {
+                                    //   $mdDialog.show({
+                                    //     controller: 'DialogController',
+                                    //     templateUrl: 'confirm-dialog.html',
+                                    //     locals: {
+                                    //       displayOption: {
+                                    //         title: "สมัครสมาชิกสำเร็จ !",
+                                    //         content: "คุณสมัครสมาชิกสำเร็จ ระบบจะเข้าสู่ระบบโดยอัตโนมัติ",
+                                    //         ok: "ตกลง"
+                                    //       }
+                                    //     }
+                                    //   }).then(function(response) {
+                                    //     window.localStorage.memberUsername = $scope.signup.username;
+                                    //     window.localStorage.memberType = $scope.memberTypeValue;
+                                    //     $state.go('logincus.cusbooking');
+                                    //   });
+                                    // } else if ($scope.memberTypeValue == 2) {
+                                    $mdDialog.show({
+                                      controller: 'DialogController',
+                                      templateUrl: 'confirm-dialog.html',
+                                      locals: {
+                                        displayOption: {
+                                          title: "สมัครสมาชิกสำเร็จ !",
+                                          content: "คุณสมัครสมาชิกสำเร็จ แต่ยังไม่สามารถใช้งานได้จนกว่าจะได้รับการอนุมัติจากผู้ดูแลระบบ",
+                                          ok: "ตกลง"
                                         }
-                                      }).then(function(response) {
-                                        window.localStorage.memberUsername = $scope.signup.username;
-                                        window.localStorage.memberType = $scope.memberTypeValue;
-                                        $state.go('logincus.cusbooking');
-                                      });
-                                    } else if ($scope.memberTypeValue == 2) {
-                                      $mdDialog.show({
-                                        controller: 'DialogController',
-                                        templateUrl: 'confirm-dialog.html',
-                                        locals: {
-                                          displayOption: {
-                                            title: "สมัครสมาชิกสำเร็จ !",
-                                            content: "คุณสมัครสมาชิกสำเร็จ แต่ยังไม่สามารถใช้งานได้จนกว่าจะได้รับการอนุมัติจากผู้ดูแลระบบ",
-                                            ok: "ตกลง"
-                                          }
-                                        }
-                                      }).then(function(response) {
-                                        $state.go('notlogin.login');
-                                      });
-                                    }
+                                      }
+                                    }).then(function(response) {
+                                      $state.go('notlogin.login');
+                                    });
+                                    // }
                                   }
                                 }, function(error) {
                                   $mdDialog.show({
@@ -316,6 +318,7 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                     var_phone: $scope.signup.phone,
                                     var_email: $scope.signup.email,
                                     var_membertype: $scope.memberTypeValue,
+                                    var_membertypestatus: 1,
                                     var_evidence: $scope.signup.username
                                   }
                                 }).then(function(response) {
@@ -332,37 +335,37 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                       }
                                     });
                                   } else {
-                                    if ($scope.memberTypeValue == 1) {
-                                      $mdDialog.show({
-                                        controller: 'DialogController',
-                                        templateUrl: 'confirm-dialog.html',
-                                        locals: {
-                                          displayOption: {
-                                            title: "สมัครสมาชิกสำเร็จ !",
-                                            content: "คุณสมัครสมาชิกสำเร็จ ระบบจะเข้าสู่ระบบโดยอัตโนมัติ",
-                                            ok: "ตกลง"
-                                          }
+                                    // if ($scope.memberTypeValue == 1) {
+                                    //   $mdDialog.show({
+                                    //     controller: 'DialogController',
+                                    //     templateUrl: 'confirm-dialog.html',
+                                    //     locals: {
+                                    //       displayOption: {
+                                    //         title: "สมัครสมาชิกสำเร็จ !",
+                                    //         content: "คุณสมัครสมาชิกสำเร็จ ระบบจะเข้าสู่ระบบโดยอัตโนมัติ",
+                                    //         ok: "ตกลง"
+                                    //       }
+                                    //     }
+                                    //   }).then(function(response) {
+                                    //     window.localStorage.memberUsername = $scope.signup.username;
+                                    //     window.localStorage.memberType = $scope.memberTypeValue;
+                                    //     $state.go('logincus.cusbooking');
+                                    //   });
+                                    // } else if ($scope.memberTypeValue == 2) {
+                                    $mdDialog.show({
+                                      controller: 'DialogController',
+                                      templateUrl: 'confirm-dialog.html',
+                                      locals: {
+                                        displayOption: {
+                                          title: "สมัครสมาชิกสำเร็จ !",
+                                          content: "คุณสมัครสมาชิกสำเร็จ แต่ยังไม่สามารถใช้งานได้จนกว่าจะได้รับการอนุมัติจากผู้ดูแลระบบ",
+                                          ok: "ตกลง"
                                         }
-                                      }).then(function(response) {
-                                        window.localStorage.memberUsername = $scope.signup.username;
-                                        window.localStorage.memberType = $scope.memberTypeValue;
-                                        $state.go('logincus.cusbooking');
-                                      });
-                                    } else if ($scope.memberTypeValue == 2) {
-                                      $mdDialog.show({
-                                        controller: 'DialogController',
-                                        templateUrl: 'confirm-dialog.html',
-                                        locals: {
-                                          displayOption: {
-                                            title: "สมัครสมาชิกสำเร็จ !",
-                                            content: "คุณสมัครสมาชิกสำเร็จ แต่ยังไม่สามารถใช้งานได้จนกว่าจะได้รับการอนุมัติจากผู้ดูแลระบบ",
-                                            ok: "ตกลง"
-                                          }
-                                        }
-                                      }).then(function(response) {
-                                        $state.go('notlogin.login');
-                                      });
-                                    }
+                                      }
+                                    }).then(function(response) {
+                                      $state.go('notlogin.login');
+                                    });
+                                    // }
                                   }
                                 }, function(error) {
                                   $mdDialog.show({
@@ -380,6 +383,78 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                   });
                                 });
                               }
+                            } else if ($scope.memberTypeValue == 3) {
+                              var img = document.getElementById('sign-up-image');
+                              var imageURI = img.src;
+                              var server = myService.configAPI.webserviceURL + 'webservices/uploadSignUpImage.php?username=' + $scope.signup.username;
+                              var trustHosts = true;
+                              var options2 = {
+                                fileKey: "myCameraImg",
+                                fileName: imageURI.substr(imageURI.lastIndexOf('/') + 1),
+                                mimeType: "image/jpeg",
+                                chunkedMode: false
+                              };
+                              $cordovaFileTransfer.upload(server, imageURI, options2);
+                              $http({
+                                url: myService.configAPI.webserviceURL + 'webservices/signUp.php',
+                                method: 'POST',
+                                data: {
+                                  var_username: $scope.signup.username,
+                                  var_password: $scope.signup.password,
+                                  var_firstname: $scope.signup.firstname,
+                                  var_lastname: $scope.signup.lastname,
+                                  var_provinceid: $scope.addressValue,
+                                  var_phone: $scope.signup.phone,
+                                  var_email: $scope.signup.email,
+                                  var_membertype: $scope.memberTypeValue,
+                                  var_membertypestatus: 0,
+                                  var_evidence: "-"
+                                }
+                              }).then(function(response) {
+                                if (response.data.results == 'duplicate_username') {
+                                  $mdDialog.show({
+                                    controller: 'DialogController',
+                                    templateUrl: 'confirm-dialog.html',
+                                    locals: {
+                                      displayOption: {
+                                        title: "Username ไม่ถูกต้อง !",
+                                        content: "พบ Username นี้มีอยู่ในระบบแล้ว กรุณาเปลี่ยน Username",
+                                        ok: "ตกลง"
+                                      }
+                                    }
+                                  });
+                                } else {
+                                  $mdDialog.show({
+                                    controller: 'DialogController',
+                                    templateUrl: 'confirm-dialog.html',
+                                    locals: {
+                                      displayOption: {
+                                        title: "สมัครสมาชิกสำเร็จ !",
+                                        content: "คุณสมัครสมาชิกสำเร็จ ระบบจะเข้าสู่ระบบโดยอัตโนมัติ",
+                                        ok: "ตกลง"
+                                      }
+                                    }
+                                  }).then(function(response) {
+                                    window.localStorage.memberUsername = $scope.signup.username;
+                                    window.localStorage.memberType = $scope.memberTypeValue;
+                                    $state.go('loginvan.van');
+                                  });
+                                }
+                              }, function(error) {
+                                $mdDialog.show({
+                                  controller: 'DialogController',
+                                  templateUrl: 'confirm-dialog.html',
+                                  locals: {
+                                    displayOption: {
+                                      title: "เกิดข้อผิดพลาด !",
+                                      content: "เกิดข้อผิดพลาด btnSignUp ใน signUpController ระบบจะปิดอัตโนมัติ",
+                                      ok: "ตกลง"
+                                    }
+                                  }
+                                }).then(function(response) {
+                                  ionic.Platform.exitApp();
+                                });
+                              });
                             }
                           });
                         } else {
