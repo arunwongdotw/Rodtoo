@@ -171,7 +171,7 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                   }).then(function(response) {
                                     window.localStorage.memberUsername = $scope.signup.username;
                                     window.localStorage.memberType = $scope.memberTypeValue;
-                                    $state.go('logincus.cusbooking');
+                                    $state.go('logincus.cusprofile');
                                   });
                                   // } else if ($scope.memberTypeValue == 2) {
                                   //   $mdDialog.show({
@@ -437,7 +437,7 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                   }).then(function(response) {
                                     window.localStorage.memberUsername = $scope.signup.username;
                                     window.localStorage.memberType = $scope.memberTypeValue;
-                                    $state.go('loginvan.van');
+                                    $state.go('loginvan.vanprofile');
                                   });
                                 }
                               }, function(error) {

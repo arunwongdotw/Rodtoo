@@ -1,6 +1,6 @@
 appControllers.controller('ownVanSelectCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
 
-  $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnVanList.php?memberid=' + myService.memberDetailFromLogin.member_id)
+  $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnVanList2.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
       $scope.ownVanArrayList = response.data.results;
     }, function(error) {

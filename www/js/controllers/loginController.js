@@ -65,7 +65,7 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
               }).then(function(response) {
                 window.localStorage.memberUsername = $scope.login.username;
                 window.localStorage.memberType = $scope.response.member_type;
-                $state.go('logincus.cusbooking');
+                $state.go('logincus.cusprofile');
               });
             } else if ($scope.response.member_type == 2) {
               if ($scope.response.member_type_status == 1) {
@@ -95,7 +95,7 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
                   myService.memberDetailFromLogin = $scope.response;
                   window.localStorage.memberUsername = $scope.login.username;
                   window.localStorage.memberType = $scope.response.member_type;
-                  $state.go('loginown.ownbookinglist');
+                  $state.go('loginown.ownprofile');
                 });
               }
             } else if ($scope.response.member_type == 3) {
@@ -113,7 +113,7 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
                 myService.memberDetailFromLogin = $scope.response;
                 window.localStorage.memberUsername = $scope.login.username;
                 window.localStorage.memberType = $scope.response.member_type;
-                $state.go('loginvan.van');
+                $state.go('loginvan.vanprofile');
               });
             }
           }

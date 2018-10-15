@@ -1,6 +1,11 @@
 <ion-view hide-nav-bar="false">
   <ion-nav-title>ข้อมูลรถตู้</ion-nav-title>
   <ion-content id="social-sign-up-content" overflow-scroll="false">
+    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;" ng-if="nullResponse == false">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">สถานะรถตู้</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="van.vanstatus == 1">สถานะรถตู้ : <text style="color: red;">ยังไม่ได้รับการยืนยัน</text></p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="van.vanstatus == 2">สถานะรถตู้ : <text style="color: green;">ได้รับการยืนยัน</text></p>
+    </div>
     <md-input-container md-no-float="" style="margin-top: 20px;">
       <div>
         <input class="user-name" ng-model="van.queueno" placeholder="หมายเลขรถตู้ *" style="width: 284px;">

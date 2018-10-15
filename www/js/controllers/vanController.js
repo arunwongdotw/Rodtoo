@@ -26,6 +26,7 @@ appControllers.controller('vanCtrl', function($scope, $timeout, $state, $statePa
     .then(function(response) {
       if (response.data.results != null) {
         $scope.nullResponse = false;
+        $scope.van.vanstatus = response.data.results[0].van_status;
         $scope.van.vanid = response.data.results[0].van_id;
         $scope.van.queueno = response.data.results[0].van_queue_no;
         $scope.van.plateno = response.data.results[0].van_plate_no;
