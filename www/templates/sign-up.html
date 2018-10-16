@@ -3,7 +3,7 @@
   <ion-content id="social-sign-up-content" overflow-scroll="false">
     <div class="app-icon">
       <img src="img/app_icon.png" class="md-card-image" id="sign-up-image">
-      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUpPickImage()" style="width: 200px; margin-top: 20px;">อัปโหลดรูปสมาชิก</a>
+        <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUpPickImage()" style="width: 200px; margin-top: 20px;">อัปโหลดรูปสมาชิก</a>
     </div>
     <md-select ng-model="memberTypeValue" aria-label="md-option" style="margin-left: 10px; padding: 0px 2px 26px;">
       <md-option value="selectType">เลือกประเภทสมาชิก</md-option>
@@ -29,7 +29,7 @@
       </md-input-container>
       <md-input-container md-no-float="">
         <div>
-          <input class="user-name" ng-model="signup.firstname" placeholder="ชื่อ *" style="width: 284px;">
+          <input class="user-name" ng-model="signup.firstname" placeholder="ชื่อจริง *" style="width: 284px;">
         </div>
       </md-input-container>
       <md-input-container md-no-float="">
@@ -50,12 +50,12 @@
       </md-input-container>
       <md-input-container md-no-float="">
         <div>
-          <input class="user-name" ng-model="signup.email" placeholder="อีเมล *" style="width: 284px;">
+          <input class="user-name" ng-model="signup.email" placeholder="อีเมลที่ติดต่อได้ *" style="width: 284px;">
         </div>
       </md-input-container>
-      <div class="app-icon" ng-if="memberTypeValue == 2">
+      <div class="app-icon" ng-if="memberTypeValue == 2 || memberTypeValue == 3">
         <img src="img/btnEvidencePickImage.png" class="md-card-image" id="evidence-image">
-        <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnEvidencePickImage()" style="width: 200px; margin-top: 20px;">อัปโหลดหลักฐาน</a>
+        <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnEvidencePickImage()" style="width: 200px; margin-top: 20px;">อัปโหลดรูปหลักฐาน</a>
       </div>
       <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnSignUp()">สมัครสมาชิก</a>
     </div>

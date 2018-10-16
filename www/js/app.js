@@ -15,14 +15,14 @@ if ((window.localStorage.memberUsername == "") || (window.localStorage.memberUse
   state = "notlogin.login";
 } else {
   if (window.localStorage.memberType == "1") {
-    url = "/logincus/cusbooking";
-    state = "logincus.cusbooking";
+    url = "/logincus/cusprofile";
+    state = "logincus.cusprofile";
   } else if (window.localStorage.memberType == "2") {
-    url = "/loginown/ownbookinglist";
-    state = "loginown.ownbookinglist";
+    url = "/loginown/ownprofile";
+    state = "loginown.ownprofile";
   } else if (window.localStorage.memberType == "3") {
-    url = "/loginvan/van";
-    state = "loginvan.van";
+    url = "/loginvan/vanprofile";
+    state = "loginvan.vanprofile";
   }
 }
 

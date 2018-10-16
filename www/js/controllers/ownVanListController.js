@@ -3,10 +3,9 @@ appControllers.controller('ownVanListCtrl', function($scope, $timeout, $state, $
   // $scope.$on('$ionicView.enter', function(e) {
   //   $ionicNavBarDelegate.showBar(true);
   // });
-  console.log(myService.memberDetailFromLogin.member_id);
+
   $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnVanList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
-      console.log(response);
       $scope.ownVanArrayList = response.data.results;
     }, function(error) {
       $mdDialog.show({

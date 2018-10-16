@@ -68,7 +68,7 @@ appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil
     } else if (jQuery('md-select-menu').length > 0) {
       $mdSelect.hide();
     } else {
-      if ($state.current.name == 'logincus.cusbooking') {
+      if ($state.current.name == 'logincus.cusprofile') {
         if (jQuery('[id^=dialog]').length == 0) {
           $mdDialog.show({
             controller: 'DialogController',

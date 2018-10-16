@@ -1,14 +1,18 @@
 appControllers.controller('ownProfileCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $cordovaFileTransfer, $cordovaCamera) {
   $scope.own = {};
-  $scope.randomNumber = Math.random();
-  $scope.own.profileImg = 'http://1did.net/rodtoo/img/img_profile/' + myService.memberDetailFromLogin.member_username + '.jpg?random=' + $scope.randomNumber;
-  $scope.own.firstname = myService.memberDetailFromLogin.member_firstname;
-  $scope.own.lastname = myService.memberDetailFromLogin.member_lastname;
-  $scope.addressValue = myService.memberDetailFromLogin.member_province_id;
-  $scope.own.phone = myService.memberDetailFromLogin.member_phone;
-  $scope.own.email = myService.memberDetailFromLogin.member_email;
-  $scope.own.username = myService.memberDetailFromLogin.member_username;
-  $scope.own.memberid = myService.memberDetailFromLogin.member_id;
+
+  $http.get(myService.configAPI.webserviceURL + 'webservices/getMemberDetail.php?memberUsername=' + window.localStorage.memberUsername)
+    .then(function(response) {
+      $scope.randomNumber = Math.random();
+      $scope.own.profileImg = 'http://1did.net/rodtoo/img/img_profile/' + response.data.results[0].member_username + '.jpg?random=' + $scope.randomNumber;
+      $scope.own.firstname = response.data.results[0].member_firstname;
+      $scope.own.lastname = response.data.results[0].member_lastname;
+      $scope.addressValue = response.data.results[0].member_province_id;
+      $scope.own.phone = response.data.results[0].member_phone;
+      $scope.own.email = response.data.results[0].member_email;
+      $scope.own.username = response.data.results[0].member_username;
+      $scope.own.memberid = response.data.results[0].member_id;
+    });
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getProvinceList.php')
     .then(function(response) {

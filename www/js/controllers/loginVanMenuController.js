@@ -68,7 +68,7 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
     } else if (jQuery('md-select-menu').length > 0) {
       $mdSelect.hide();
     } else {
-      if ($state.current.name == 'loginown.ownbookinglist') {
+      if ($state.current.name == 'loginown.vanprofile') {
         if (jQuery('[id^=dialog]').length == 0) {
           $mdDialog.show({
             controller: 'DialogController',
