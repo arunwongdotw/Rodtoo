@@ -1,4 +1,4 @@
-appControllers.controller('ownVanDetailCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate) {
+appControllers.controller('ownVanDetailCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate, $cordovaInAppBrowser) {
 
   $scope.navigateTo = function(stateName) {
     $timeout(function() {
@@ -58,6 +58,15 @@ appControllers.controller('ownVanDetailCtrl', function($scope, $timeout, $state,
       });
   }
 
+  $scope.openLink = function(member_username) {
+    var options = {
+      location: 'yes',
+      clearcache: 'yes',
+      toolbar: 'no'
+    };
+    $cordovaInAppBrowser.open('http://1did.net/rodtoo/img/img_evidence/' + member_username + '.jpg', '_system', options);
+  };
+
   $scope.btnConfirmVan = function(van_id) {
     $mdDialog.show({
       controller: 'DialogController',
@@ -73,6 +82,57 @@ appControllers.controller('ownVanDetailCtrl', function($scope, $timeout, $state,
     }).then(function(response) {
       $http({
         url: myService.configAPI.webserviceURL + 'webservices/confirmVan.php',
+        method: 'POST',
+        data: {
+          var_vanid: van_id,
+        }
+      }).then(function(response) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "ยืนยันข้อมูลรถตู้สำเร็จ !",
+              content: "คุณยืนยันข้อมูลรถตู้สำเร็จ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          $state.go('loginown.ownvanlist');
+        });
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด btnConfirmVan ใน ownVanDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+    });
+  };
+
+  $scope.btnCancelVan = function(van_id) {
+    $mdDialog.show({
+      controller: 'DialogController',
+      templateUrl: 'confirm-dialog.html',
+      locals: {
+        displayOption: {
+          title: "ปฏิเสธข้อมูลรถตู้ ?",
+          content: "คุณแน่ใจที่จะปฏิเสธข้อมูลรถตู้",
+          ok: "ตกลง",
+          cancel: "ยกเลิก"
+        }
+      }
+    }).then(function(response) {
+      $http({
+        url: myService.configAPI.webserviceURL + 'webservices/deleteVan.php',
         method: 'POST',
         data: {
           var_vanid: van_id,
