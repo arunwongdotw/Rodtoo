@@ -736,6 +736,28 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'ownVanDetailCtrl'
                     }
                 }
+            })
+            .state('loginvan.vanbookinglist', {
+                url: "/vanbookinglist",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/van-booking-list.html",
+                        controller: 'vanBookingListCtrl'
+                    }
+                }
+            })
+            .state('loginvan.vanbookingdetail', {
+                url: "/vanbookingdetail",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/van-booking-detail.html",
+                        controller: 'vanBookingDetailCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

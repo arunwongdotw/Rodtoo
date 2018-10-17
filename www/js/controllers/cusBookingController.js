@@ -371,6 +371,10 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
   }
 
   $scope.btnBooking = function() {
+    console.log($scope.originProvinceValue);
+    console.log($scope.originDistrictValue);
+    console.log($scope.destinationProvinceValue);
+    console.log($scope.destinationDistrictValue);
     if (typeof $scope.booking.date != 'undefined') {
       if (typeof $scope.booking.time != 'undefined') {
         checkDateTime(function(status) {
@@ -395,6 +399,10 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                     var_status: 1,
                     var_fee: $scope.bookingDetail.fee,
                     var_total: $scope.bookingDetail.total_price,
+                    var_originprovince: $scope.originProvinceValue,
+                    var_origindistrict: $scope.originDistrictValue,
+                    var_destinationprovince: $scope.destinationProvinceValue,
+                    var_destinationdistrict: $scope.destinationDistrictValue,
                     var_memberid: myService.memberDetailFromLogin.member_id,
                     var_queueid: $scope.queueValue,
                     var_getintype: $scope.getInValue,
@@ -445,6 +453,10 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                       var_status: 1,
                       var_fee: $scope.bookingDetail.fee,
                       var_total: $scope.bookingDetail.total_price,
+                      var_originprovince: $scope.originProvinceValue,
+                      var_origindistrict: $scope.originDistrictValue,
+                      var_destinationprovince: $scope.destinationProvinceValue,
+                      var_destinationdistrict: $scope.destinationDistrictValue,
                       var_memberid: myService.memberDetailFromLogin.member_id,
                       var_queueid: $scope.queueValue,
                       var_getintype: $scope.getInValue,
@@ -508,6 +520,10 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                       var_status: 1,
                       var_fee: $scope.bookingDetail.fee,
                       var_total: $scope.bookingDetail.total_price,
+                      var_originprovince: $scope.originProvinceValue,
+                      var_origindistrict: $scope.originDistrictValue,
+                      var_destinationprovince: $scope.destinationProvinceValue,
+                      var_destinationdistrict: $scope.destinationDistrictValue,
                       var_memberid: myService.memberDetailFromLogin.member_id,
                       var_queueid: $scope.queueValue,
                       var_getintype: $scope.getInValue,

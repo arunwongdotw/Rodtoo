@@ -26,15 +26,15 @@
         <br><img src="http://1did.net/rodtoo/img/img_evidence/{{vanDetail.member_username}}.jpg" style="width: 85%; margin-top: 20px; margin-left: 20px;" ng-click="openLink(vanDetail.member_username)"></img>
       </p>
     </div>
-    <!-- <div>
+    <div>
       <center><a class="md-raised social-button md-button md-default-theme material-background" ng-if="vanDetail.van_status == 1" ng-click="btnConfirmVan(vanDetail.van_id)" style="margin-top: 20px; width: 90%;">ยืนยันข้อมูลรถตู้</a></center>
     </div>
     <div>
-      <center><a class="md-raised social-button md-button md-default-theme material-background" ng-if="vanDetail.van_status == 1" ng-click="btnConfirmVan(vanDetail.van_id)" style="width: 90%;">ปฏิเสธข้อมูลรถตู้</a></center>
-    </div> -->
-    <div>
-      <a class="md-raised social-button md-button md-default-theme material-background" ng-if="vanDetail.van_status == 1" ng-click="btnConfirmVan(vanDetail.van_id)" style="margin-top: 20px; margin-left: 30px; width: 40%;">ยืนยันข้อมูลรถตู้</a>
-      <a class="md-raised social-button md-button md-default-theme material-background" ng-if="vanDetail.van_status == 1" ng-click="btnCancelVan(vanDetail.van_id)" style="width: 40%;">ปฏิเสธข้อมูลรถตู้</a>
+      <center><a class="md-raised social-button md-button md-default-theme material-background" ng-if="vanDetail.van_status == 1" ng-click="btnCancelVan(vanDetail.van_id)" style="width: 90%;">ปฏิเสธข้อมูลรถตู้</a></center>
     </div>
+    <!-- <div>
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-if="vanDetail.van_status == 1" ng-click="btnConfirmVan(vanDetail.van_id)" style="margin-top: 20px; margin-left: 30px; margin-bottom: 20px; width: 40%;">ยืนยันข้อมูลรถตู้</a>
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-if="vanDetail.van_status == 1" ng-click="btnCancelVan(vanDetail.van_id)" style="width: 40%;">ปฏิเสธข้อมูลรถตู้</a>
+    </div> -->
   </ion-content>
 </ion-view>

@@ -57,6 +57,6 @@
         {{queue.queue_name}}
       </md-option>
     </md-select>
-    <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnAddVan()">เพิ่มข้อมูลรถตู้</a>
+    <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnAddVan()" ng-if="van.vanstatus != 2">เพิ่มข้อมูลรถตู้</a>
   </ion-content>
 </ion-view>

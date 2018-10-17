@@ -3,10 +3,10 @@ appControllers.controller('ownPaymentDetailCtrl', function($scope, $timeout, $st
   $http.get(myService.configAPI.webserviceURL + 'webservices/getPaymentDetail.php?bookingid=' + myService.bookingIDInList.booking_id)
     .then(function(response) {
       $scope.paymentDetail = response.data.results[0];
-      getOriginProvince($scope.paymentDetail.queue_origin_province_id);
-      getOriginDistrict($scope.paymentDetail.queue_origin_district_id);
-      getDestinationProvince($scope.paymentDetail.queue_destination_province_id);
-      getDestinationDistrict($scope.paymentDetail.queue_destination_district_id);
+      getOriginProvince($scope.paymentDetail.booking_origin_province_id);
+      getOriginDistrict($scope.paymentDetail.booking_origin_district_id);
+      getDestinationProvince($scope.paymentDetail.booking_destination_province_id);
+      getDestinationDistrict($scope.paymentDetail.booking_destination_district_id);
       if ($scope.paymentDetail.booking_getin_id != "-") {
         getGetInDetail($scope.paymentDetail.booking_getin_id);
       }

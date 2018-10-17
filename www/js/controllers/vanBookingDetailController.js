@@ -1,13 +1,12 @@
-appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
+appControllers.controller('vanBookingDetailCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
 
-  $http.get(myService.configAPI.webserviceURL + 'webservices/getBooking.php?bookingid=' + myService.bookingIDInList.booking_id)
+  $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnBookingDetail.php?bookingid=' + myService.bookingIDInList.booking_id)
     .then(function(response) {
       $scope.bookingDetail = response.data.results[0];
       getOriginProvince($scope.bookingDetail.booking_origin_province_id);
       getOriginDistrict($scope.bookingDetail.booking_origin_district_id);
       getDestinationProvince($scope.bookingDetail.booking_destination_province_id);
       getDestinationDistrict($scope.bookingDetail.booking_destination_district_id);
-      getQueueOwner($scope.bookingDetail.queue_member_id);
       if ($scope.bookingDetail.booking_van_id != 0) {
         getVanDetail($scope.bookingDetail.booking_van_id);
       }
@@ -21,7 +20,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getBooking ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getOwnBookingDetail ใน vanBookingDetailController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -44,7 +43,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
   };
 
   $scope.btnBack = function() {
-    $scope.navigateTo('logincus.cusbookinglist');
+    $scope.navigateTo('loginvan.vanbookinglist');
   };
 
   function getOriginProvince(origin_province_id) {
@@ -58,7 +57,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getOriginProvince ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getOriginProvince ใน vanBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -79,7 +78,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getOriginDistrict ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getOriginDistrict ใน vanBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -100,7 +99,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getDestinationProvince ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getDestinationProvince ใน vanBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -121,28 +120,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getDestinationDistrict ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
-              ok: "ตกลง"
-            }
-          }
-        }).then(function(response) {
-          ionic.Platform.exitApp();
-        });
-      });
-  }
-
-  function getQueueOwner(queue_member_id) {
-    $http.get(myService.configAPI.webserviceURL + 'webservices/getQueueOwner.php?memberid=' + queue_member_id)
-      .then(function(response) {
-        $scope.ownerDetail = response.data.results[0];
-      }, function(error) {
-        $mdDialog.show({
-          controller: 'DialogController',
-          templateUrl: 'confirm-dialog.html',
-          locals: {
-            displayOption: {
-              title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getQueueOwner ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getDestinationDistrict ใน vanBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -163,7 +141,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getVanDetail ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getVanDetail ใน vanBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -184,7 +162,7 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getGetInDetail ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getGetInDetail ใน vanBookingDetailController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }

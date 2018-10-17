@@ -3,10 +3,10 @@ appControllers.controller('ownBookingDetailCtrl', function($scope, $timeout, $st
   $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnBookingDetail.php?bookingid=' + myService.bookingIDInList.booking_id)
     .then(function(response) {
       $scope.bookingDetail = response.data.results[0];
-      getOriginProvince($scope.bookingDetail.queue_origin_province_id);
-      getOriginDistrict($scope.bookingDetail.queue_origin_district_id);
-      getDestinationProvince($scope.bookingDetail.queue_destination_province_id);
-      getDestinationDistrict($scope.bookingDetail.queue_destination_district_id);
+      getOriginProvince($scope.bookingDetail.booking_origin_province_id);
+      getOriginDistrict($scope.bookingDetail.booking_origin_district_id);
+      getDestinationProvince($scope.bookingDetail.booking_destination_province_id);
+      getDestinationDistrict($scope.bookingDetail.booking_destination_district_id);
       if ($scope.bookingDetail.booking_van_id != 0) {
         getVanDetail($scope.bookingDetail.booking_van_id);
       }
