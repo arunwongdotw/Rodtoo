@@ -784,6 +784,17 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'vanMapCtrl'
                     }
                 }
+            })
+            .state('logincus.cusmap', {
+                url: "/cusmap",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/cus-map.html",
+                        controller: 'cusMapCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

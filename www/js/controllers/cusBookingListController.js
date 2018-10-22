@@ -46,6 +46,47 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
     $state.go('logincus.payment');
   };
 
+  $scope.getMap = function(van_id) {
+    $http({
+      url: myService.configAPI.webserviceURL + 'webservices/checkVanStatus.php',
+      method: 'POST',
+      data: {
+        var_vanid: van_id
+      }
+    }).then(function(response) {
+      if ((response.data.results == "checkVanStatus_isZero") || (response.data.results == "checkVanStatus_isOne")) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "รถตู้ยังไม่ออกเดินทาง !",
+              content: "รถตู้ที่คุณติดตาม ยังไม่ออกเดินทาง กรุณาลองใหม่ภายหลัง",
+              ok: "ตกลง"
+            }
+          }
+        });
+      } else {
+        myService.vanDetail.van_id = van_id;
+        $state.go('logincus.cusmap');
+      }
+    }, function(error) {
+      $mdDialog.show({
+        controller: 'DialogController',
+        templateUrl: 'confirm-dialog.html',
+        locals: {
+          displayOption: {
+            title: "เกิดข้อผิดพลาด !",
+            content: "เกิดข้อผิดพลาด getMap ใน cusMapController ระบบจะปิดอัตโนมัติ",
+            ok: "ตกลง"
+          }
+        }
+      }).then(function(response) {
+        ionic.Platform.exitApp();
+      });
+    });
+  };
+
   $scope.delBooking = function(booking_id) {
     $mdDialog.show({
       controller: 'DialogController',

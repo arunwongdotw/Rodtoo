@@ -12,4 +12,5 @@ angular.module('starter')
     this.editVan = {};
     this.editPoint = {};
     this.editGetIn = {};
+    this.vanDetail = {};
   });

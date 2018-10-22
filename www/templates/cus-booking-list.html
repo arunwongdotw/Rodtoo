@@ -18,6 +18,9 @@
             <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getInfomation(bookingList.booking_id)">
               <i class="fas fa-info-circle"></i> รายละเอียดการจอง
             </a>
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getMap(bookingList.booking_van_id)" ng-if="bookingList.booking_status == 3 && bookingList.booking_van_id != 0">
+              <i class="fas fa-credit-card"></i> ติดตามรถตู้
+            </a>
             <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getPayment(bookingList.booking_id)" ng-if="bookingList.booking_status == 1">
               <i class="fas fa-credit-card"></i> แจ้งชำระเงิน
             </a>

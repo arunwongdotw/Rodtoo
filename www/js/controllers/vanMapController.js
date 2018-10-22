@@ -3,14 +3,6 @@ appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, d
   $scope.dLocation = {};
   var map, marker, marker2, myLatLng, desLatLng, directionsService, directionsDisplay, mapOptions;
 
-  $ionicPlatform.ready(function() {
-    $http.get(myService.configAPI.webserviceURL + 'webservices/getVanDetail2.php?memberid=' + myService.memberDetailFromLogin.member_id)
-      .then(function(response) {
-        $scope.vanDetail = response.data.results[0];
-      });
-    $scope.initMap();
-  });
-
   function getCurrentLocation(callback) {
     deviceService.checkGPS(function(status) {
       if (status == 'GPS_OFF') {
@@ -80,7 +72,7 @@ appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, d
   function updateMarker() {
     myLatLng = new google.maps.LatLng($scope.cLocation.latitude, $scope.cLocation.longitude);
     marker.setPosition(myLatLng);
-    map.setCenter(new google.maps.LatLng($scope.cLocation.latitude, $scope.cLocation.longitude));
+    // map.setCenter(myLatLng);
   }
 
   $scope.initMap = function() {
@@ -88,6 +80,14 @@ appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, d
       googleMap();
     });
   };
+
+  $ionicPlatform.ready(function() {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getVanDetail2.php?memberid=' + myService.memberDetailFromLogin.member_id)
+      .then(function(response) {
+        $scope.vanDetail = response.data.results[0];
+      });
+    $scope.initMap();
+  });
 
   function updatePosition(callback) {
     $http({
@@ -170,7 +170,7 @@ appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, d
             updateMarker();
           });
         });
-      }, 10000);
+      }, 60000);
     });
   };
 
