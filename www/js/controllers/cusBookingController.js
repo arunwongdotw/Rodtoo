@@ -371,10 +371,6 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
   }
 
   $scope.btnBooking = function() {
-    console.log($scope.originProvinceValue);
-    console.log($scope.originDistrictValue);
-    console.log($scope.destinationProvinceValue);
-    console.log($scope.destinationDistrictValue);
     if (typeof $scope.booking.date != 'undefined') {
       if (typeof $scope.booking.time != 'undefined') {
         checkDateTime(function(status) {
@@ -385,8 +381,8 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                 templateUrl: 'confirm-dialog.html',
                 locals: {
                   displayOption: {
-                    title: "จอง ?",
-                    content: "คุณแน่ใจที่จะจอง",
+                    title: "จองรถตู้ ?",
+                    content: "คุณแน่ใจที่จะจองรถตู้",
                     ok: "ตกลง",
                     cancel: "ยกเลิก"
                   }
@@ -439,8 +435,8 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                   templateUrl: 'confirm-dialog.html',
                   locals: {
                     displayOption: {
-                      title: "จอง ?",
-                      content: "คุณแน่ใจที่จะจอง",
+                      title: "จองรถตู้ ?",
+                      content: "คุณแน่ใจที่จะจองรถตู้",
                       ok: "ตกลง",
                       cancel: "ยกเลิก"
                     }
@@ -506,8 +502,8 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                   templateUrl: 'confirm-dialog.html',
                   locals: {
                     displayOption: {
-                      title: "จอง ?",
-                      content: "คุณแน่ใจที่จะจอง",
+                      title: "จองรถตู้ ?",
+                      content: "คุณแน่ใจที่จะจองรถตู้",
                       ok: "ตกลง",
                       cancel: "ยกเลิก"
                     }

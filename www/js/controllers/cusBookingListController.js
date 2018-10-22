@@ -52,8 +52,8 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
       templateUrl: 'confirm-dialog.html',
       locals: {
         displayOption: {
-          title: "ยกเลิกการจอง ?",
-          content: "คุณแน่ใจที่จะยกเลิกการจองครั้งนี้",
+          title: "ยกเลิกการจองรถตู้ ?",
+          content: "คุณแน่ใจที่จะยกเลิกการจองรถตู้ครั้งนี้",
           ok: "ตกลง",
           cancel: "ยกเลิก"
         }
@@ -71,8 +71,8 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
           templateUrl: 'confirm-dialog.html',
           locals: {
             displayOption: {
-              title: "ยกเลิกการจองสำเร็จ !",
-              content: "คุณยกเลิกการจองสำเร็จ",
+              title: "ยกเลิกการจองรถตู้สำเร็จ !",
+              content: "คุณยกเลิกการจองรถตู้สำเร็จ",
               ok: "ตกลง"
             }
           }

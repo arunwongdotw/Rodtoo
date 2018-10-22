@@ -1,24 +1,9 @@
-appControllers.controller('mapCtrl', function($scope, $state, $stateParams, deviceService, $rootScope, $ionicPlatform, $interval) {
-  // $scope.fakeLocation = {};
-  // $scope.cLocation = {};
-
-  // $scope.fakeLocation.latitude = 8.443231;
-  // $scope.fakeLocation.longitude = 99.957052;
-  //
-  // $scope.cLocation.latitude = 8.4426769;
-  // $scope.cLocation.longitude = 99.9556992;
-
-  // $interval(function() {
-  //   $scope.getLocation();
-  // }, 60000);
-  //
-  // $scope.getLocation = function() {
-  //   getCurrentLocation(function(status) {
-  //     $scope.fakeLocation.latitude = 8.443231;
-  //     $scope.fakeLocation.longitude = 99.957052;
-  //     $scope.initMap($scope.fakeLocation, $scope.cLocation);
-  //   });
-  // };
+appControllers.controller('mapCtrl', function($scope, $state, $stateParams, deviceService, $rootScope, $ionicPlatform, $interval, $timeout) {
+  $scope.cLocation = {};
+  $scope.dLocation = {};
+  $scope.dLocation.latitude = 8.439857;
+  $scope.dLocation.longitude = 99.961636;
+  var map, marker, marker2, myLatLng, desLatLng, directionsService, directionsDisplay, mapOptions;
 
   function getCurrentLocation(callback) {
     deviceService.checkGPS(function(status) {
@@ -30,7 +15,6 @@ appControllers.controller('mapCtrl', function($scope, $state, $stateParams, devi
                 deviceService.currentLocation(function(data) {
                   if (data != 'ERROR_POSITION') {
                     $rootScope.currentLocation = data;
-                    // $scope.mapStatus = true;
                     $scope.cLocation.latitude = data.latitude;
                     $scope.cLocation.longitude = data.longitude;
                     callback($scope.cLocation);
@@ -46,7 +30,6 @@ appControllers.controller('mapCtrl', function($scope, $state, $stateParams, devi
                 deviceService.currentLocation(function(data) {
                   if (data != 'ERROR_POSITION') {
                     $rootScope.currentLocation = data;
-                    // $scope.mapStatus = true;
                     $scope.cLocation.latitude = data.latitude;
                     $scope.cLocation.longitude = data.longitude;
                     callback($scope.cLocation);
@@ -62,7 +45,6 @@ appControllers.controller('mapCtrl', function($scope, $state, $stateParams, devi
         deviceService.currentLocation(function(data) {
           if (data != 'ERROR_POSITION') {
             $rootScope.currentLocation = data;
-            // $scope.mapStatus = true;
             $scope.cLocation.latitude = data.latitude;
             $scope.cLocation.longitude = data.longitude;
             callback($scope.cLocation);
@@ -72,49 +54,56 @@ appControllers.controller('mapCtrl', function($scope, $state, $stateParams, devi
     });
   }
 
-  // $scope.initMap = function(destination, origin) {
-  //   var directionsService = new google.maps.DirectionsService();
-  //   var directionsDisplay = new google.maps.DirectionsRenderer();
-  //   var myLatlng = new google.maps.LatLng(destination.latitude, destination.longitude);
-  //   var map = new google.maps.Map(document.getElementById('map'), {
-  //     zoom: 15,
-  //     center: myLatlng
-  //   });
-  //   directionsDisplay.setMap(map);
-  //   directionsService.route({
-  //     origin: origin.latitude + "," + origin.longitude,
-  //     destination: destination.latitude + "," + destination.longitude,
-  //     travelMode: 'DRIVING'
-  //   }, function(response, status) {
-  //     if (status === 'OK') {
-  //       directionsDisplay.setDirections(response);
-  //     } else {
-  //       console.log('Directions request failed due to ' + status);
-  //     }
-  //   });
-  // };
-
-  $scope.initMap = function() {
-    console.log('test');
-    var directionsService = new google.maps.DirectionsService();
-    var directionsDisplay = new google.maps.DirectionsRenderer();
-    var myLatlng = new google.maps.LatLng(8.443231, 99.957052);
-    var mapOptions = {
+  function googleMap() {
+    directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    myLatLng = new google.maps.LatLng($scope.cLocation.latitude, $scope.cLocation.longitude);
+    desLatLng = new google.maps.LatLng($scope.dLocation.latitude, $scope.dLocation.longitude);
+    mapOptions = {
       zoom: 15,
-      center: myLatlng
+      center: myLatLng
     };
-    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      label: 'origin'
+    });
+    marker2 = new google.maps.Marker({
+      position: desLatLng,
+      map: map,
+      label: 'des'
+    });
     directionsDisplay.setMap(map);
     // directionsService.route({
-    //   origin: "8.4426769, 99.9556992",
-    //   destination: "8.443231, 99.957052",
+    //   origin: myLatLng,
+    //   destination: desLatLng,
     //   travelMode: 'DRIVING'
     // }, function(response, status) {
     //   if (status === 'OK') {
     //     directionsDisplay.setDirections(response);
+    //   } else {
+    //     console.log('Directions request failed due to ' + status);
     //   }
     // });
+  }
+
+  function updateMarker() {
+    desLatLng = new google.maps.LatLng($scope.dLocation.latitude, $scope.dLocation.longitude);
+    marker2.setPosition(desLatLng);
+  }
+
+  $scope.initMap = function() {
+    getCurrentLocation(function(status) {
+      googleMap();
+    });
   };
 
-  $scope.initMap();
+  $ionicPlatform.ready(function() {
+    $scope.initMap();
+    setInterval(function() {
+      $scope.dLocation.longitude = $scope.dLocation.longitude - 0.001;
+      updateMarker();
+    }, 10000);
+  });
 });

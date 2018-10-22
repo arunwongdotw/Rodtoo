@@ -1,14 +1,11 @@
 appControllers.service('deviceService', function($http, $ionicPopup, $rootScope, $cordovaNetwork, $cordovaGeolocation, $cordovaLaunchNavigator, $ionicLoading, $cordovaDevice) {
   var me = this;
 
-  this.configAPI = {
-    version: '@senchabox v0.0.1',
-    webserviceURL: 'http://1did.net/centerapp/webservices'
-    //webserviceURL:'http://localhost/www_web_api'
-  };
-
-  this.passDataObject = {};
-  var me = this;
+  // this.configAPI = {
+  //   version: '@senchabox v0.0.1',
+  //   webserviceURL: 'http://1did.net/centerapp/webservices'
+  //   //webserviceURL:'http://localhost/www_web_api'
+  // };
 
   // Recursive Function
   this.setMarkerInfo = function(map, mapArray, callback) {

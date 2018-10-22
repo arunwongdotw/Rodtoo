@@ -42,6 +42,10 @@ window.globalVariable = {
         url: url,//Url of start page.
         state: state//State name of start page.
     },
+    // startPage: {
+    //     url: "notlogin/map",//Url of start page.
+    //     state: "notlogin.map"//State name of start page.
+    // },
     message: {
         errorMessage: "Technical error please try again later." //Default error message.
     },
@@ -305,7 +309,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 StatusBar.styleDefault();
             }
 
-            initialSQLite();
+            // initialSQLite();
             initialRootScope();
 
             //Checking if view is changing it will go to this function.
@@ -756,6 +760,28 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                     'menuContent': {
                         templateUrl: "templates/van-booking-detail.html",
                         controller: 'vanBookingDetailCtrl'
+                    }
+                }
+            })
+            .state('notlogin.map', {
+                url: "/map",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/map.html",
+                        controller: 'mapCtrl'
+                    }
+                }
+            })
+            .state('loginvan.vanmap', {
+                url: "/vanmap",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/van-map.html",
+                        controller: 'vanMapCtrl'
                     }
                 }
             });
