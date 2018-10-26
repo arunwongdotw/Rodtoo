@@ -1,6 +1,5 @@
 appControllers.controller('cusMapCtrl', function($scope, $state, $stateParams, deviceService, $rootScope, $ionicPlatform, $interval, $timeout, $http, myService, $mdDialog) {
   $scope.cLocation = {};
-  $scope.dLocation = {};
   var map, marker, marker2, myLatLng, desLatLng, directionsService, directionsDisplay, mapOptions;
 
   $scope.btnBack = function() {
@@ -61,7 +60,7 @@ appControllers.controller('cusMapCtrl', function($scope, $state, $stateParams, d
     directionsDisplay = new google.maps.DirectionsRenderer();
     myLatLng = new google.maps.LatLng($scope.cLocation.latitude, $scope.cLocation.longitude);
     desLatLng = new google.maps.LatLng($scope.vanPosition.position_latitude, $scope.vanPosition.position_longitude);
-    // desLatLng = new google.maps.LatLng(8.439857, 99.961636);
+    // desLatLng = new google.maps.LatLng(8.437786, 99.970234);
     mapOptions = {
       zoom: 15,
       center: myLatLng

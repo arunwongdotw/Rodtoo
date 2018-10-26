@@ -1,12 +1,11 @@
 appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate) {
-
-  $scope.$on('$ionicView.enter', function(e) {
-    $ionicNavBarDelegate.showBar(true);
-  });
+  var iloop = 0;
+  var currentDateTime = new Date();
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getBookingList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
       $scope.bookingListArrayList = response.data.results;
+      addHoursDiff(function(status) {});
     }, function(error) {
       $mdDialog.show({
         controller: 'DialogController',
@@ -22,6 +21,20 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
         ionic.Platform.exitApp();
       });
     });
+
+  function addHoursDiff(callback) {
+    if (iloop < $scope.bookingListArrayList.length) {
+      var dateTimeString = $scope.bookingListArrayList[iloop].booking_boarding_date  + " " + $scope.bookingListArrayList[iloop].booking_boarding_time;
+      var bookingDateTime = new Date(dateTimeString);
+      var timeDiff = Math.abs(bookingDateTime.getTime() - currentDateTime.getTime());
+      var hoursDiff = timeDiff / 3600000;
+      $scope.bookingListArrayList[iloop].booking_hours_diff = hoursDiff;
+      iloop = iloop + 1;
+      addHoursDiff(callback);
+    } else {
+      callback();
+    }
+  }
 
   $scope.navigateTo = function(stateName) {
     $timeout(function() {
@@ -136,5 +149,10 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
         });
       });
     });
+  };
+
+  $scope.getPostpone = function(booking_id) {
+    myService.bookingIDInList.booking_id = booking_id;
+    $state.go('logincus.postpone');
   };
 });

@@ -19,10 +19,13 @@
               <i class="fas fa-info-circle"></i> รายละเอียดการจอง
             </a>
             <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getMap(bookingList.booking_van_id)" ng-if="bookingList.booking_status == 3 && bookingList.booking_van_id != 0">
-              <i class="fas fa-credit-card"></i> ติดตามรถตู้
+              <i class="fas fa-search-location"></i> ติดตามรถตู้
             </a>
             <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getPayment(bookingList.booking_id)" ng-if="bookingList.booking_status == 1">
               <i class="fas fa-credit-card"></i> แจ้งชำระเงิน
+            </a>
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important; margin-top: 10px;" ng-click="getPostpone(bookingList.booking_id)" ng-if="bookingList.booking_hours_diff > 2 && bookingList.booking_postpone == 0">
+              <i class="fas fa-calendar-alt"></i> เลื่อนเที่ยว
             </a>
             <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important; margin-top: 10px;" ng-click="delBooking(bookingList.booking_id)" ng-if="bookingList.booking_status == 1">
               <i class="fas fa-trash"></i> ยกเลิกการจอง

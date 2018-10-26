@@ -1,6 +1,5 @@
 appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, deviceService, $rootScope, $ionicPlatform, $interval, $timeout, $http, myService, $mdDialog) {
   $scope.cLocation = {};
-  $scope.dLocation = {};
   var map, marker, marker2, myLatLng, desLatLng, directionsService, directionsDisplay, mapOptions;
 
   function getCurrentLocation(callback) {
@@ -72,7 +71,7 @@ appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, d
   function updateMarker() {
     myLatLng = new google.maps.LatLng($scope.cLocation.latitude, $scope.cLocation.longitude);
     marker.setPosition(myLatLng);
-    // map.setCenter(myLatLng);
+    map.setCenter(myLatLng);
   }
 
   $scope.initMap = function() {

@@ -795,6 +795,17 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'cusMapCtrl'
                     }
                 }
+            })
+            .state('logincus.postpone', {
+                url: "/postpone",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/postpone.html",
+                        controller: 'postponeCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

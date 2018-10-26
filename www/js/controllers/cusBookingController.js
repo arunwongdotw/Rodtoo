@@ -276,10 +276,10 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
       });
   };
 
-  $scope.getBookingDetail = function(point_id) {
+  $scope.getPrice = function(point_id) {
     $scope.stopValue = point_id;
     $http({
-      url: myService.configAPI.webserviceURL + 'webservices/getBookingDetail.php',
+      url: myService.configAPI.webserviceURL + 'webservices/getPrice.php',
       method: 'POST',
       data: {
         var_queueid: $scope.queueValue,
@@ -301,7 +301,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getBookingDetail ใน cusBookingController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getPrice ใน cusBookingController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -407,7 +407,8 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                     var_pointid: $scope.stopValue,
                     var_date: $scope.booking.date,
                     var_time: $scope.booking.time,
-                    var_vanid: "0"
+                    var_vanid: "0",
+                    var_postpone: "0"
                   }
                 }).then(function(response) {
                   myService.bookingDetail.bookingID = response.data.results;
@@ -461,7 +462,8 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                       var_pointid: $scope.stopValue,
                       var_date: $scope.booking.date,
                       var_time: $scope.booking.time,
-                      var_vanid: "0"
+                      var_vanid: "0",
+                      var_postpone: "0"
                     }
                   }).then(function(response) {
                     myService.bookingDetail.bookingID = response.data.results;
@@ -528,7 +530,8 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                       var_pointid: $scope.stopValue,
                       var_date: $scope.booking.date,
                       var_time: $scope.booking.time,
-                      var_vanid: "0"
+                      var_vanid: "0",
+                      var_postpone: "0"
                     }
                   }).then(function(response) {
                     myService.bookingDetail.bookingID = response.data.results;

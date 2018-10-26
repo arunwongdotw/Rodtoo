@@ -73,7 +73,7 @@
       <md-option value="selectStop" ng-click="setStopValue('selectStop')">
         เลือกจุดลงรถตู้ *
       </md-option>
-      <md-option value="{{point.point_id}}" ng-repeat="point in pointArrayList" ng-click="getBookingDetail(point.point_id)">
+      <md-option value="{{point.point_id}}" ng-repeat="point in pointArrayList" ng-click="getPrice(point.point_id)">
         {{point.point_name}}
       </md-option>
     </md-select>

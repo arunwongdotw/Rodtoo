@@ -32,9 +32,9 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
         $scope.originDistrictValue = response.data.results[0].queue_origin_district_id;
         $scope.destinationProvinceValue = response.data.results[0].queue_destination_province_id;
         $scope.destinationDistrictValue = response.data.results[0].queue_destination_district_id;
-        $scope.queue.bankname = response.data.results[0].queue_bank;
-        $scope.queue.bankno = response.data.results[0].queue_bank_no;
-        $scope.queue.bankowner = response.data.results[0].queue_bank_owner;
+        // $scope.queue.bankname = response.data.results[0].queue_bank;
+        // $scope.queue.bankno = response.data.results[0].queue_bank_no;
+        // $scope.queue.bankowner = response.data.results[0].queue_bank_owner;
         getOriginDistrictFromResponse($scope.originProvinceValue);
         getDestinationDistrictFromResponse($scope.destinationProvinceValue);
       } else {
@@ -164,9 +164,9 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
         if ($scope.originDistrictValue != "selectOriginDistrict") {
           if ($scope.destinationProvinceValue != "selectDestinationProvince") {
             if ($scope.destinationDistrictValue != "selectDestinationDistrict") {
-              if (($scope.queue.bankname != null) && ($scope.queue.bankname != "")) {
-                if (($scope.queue.bankno != null) && ($scope.queue.bankno != "")) {
-                  if (($scope.queue.bankowner != null) && ($scope.queue.bankowner != "")) {
+              // if (($scope.queue.bankname != null) && ($scope.queue.bankname != "")) {
+              //   if (($scope.queue.bankno != null) && ($scope.queue.bankno != "")) {
+              //     if (($scope.queue.bankowner != null) && ($scope.queue.bankowner != "")) {
                     $mdDialog.show({
                       controller: 'DialogController',
                       templateUrl: 'confirm-dialog.html',
@@ -190,9 +190,12 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
                             var_origindistrict: $scope.originDistrictValue,
                             var_destinationprovince: $scope.destinationProvinceValue,
                             var_destinationdistrict: $scope.destinationDistrictValue,
-                            var_bankname: $scope.queue.bankname,
-                            var_bankno: $scope.queue.bankno,
-                            var_bankowner: $scope.queue.bankowner
+                            var_bankname: "0",
+                            var_bankno: "0",
+                            var_bankowner: "0"
+                            // var_bankname: $scope.queue.bankname,
+                            // var_bankno: $scope.queue.bankno,
+                            // var_bankowner: $scope.queue.bankowner
                           }
                         }).then(function(response) {
                           $mdDialog.show({
@@ -234,9 +237,12 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
                             var_origindistrict: $scope.originDistrictValue,
                             var_destinationprovince: $scope.destinationProvinceValue,
                             var_destinationdistrict: $scope.destinationDistrictValue,
-                            var_bankname: $scope.queue.bankname,
-                            var_bankno: $scope.queue.bankno,
-                            var_bankowner: $scope.queue.bankowner
+                            var_bankname: "0",
+                            var_bankno: "0",
+                            var_bankowner: "0"
+                            // var_bankname: $scope.queue.bankname,
+                            // var_bankno: $scope.queue.bankno,
+                            // var_bankowner: $scope.queue.bankowner
                           }
                         }).then(function(response) {
                           $mdDialog.show({
@@ -269,45 +275,45 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
                         });
                       }
                     });
-                  } else {
-                    $mdDialog.show({
-                      controller: 'DialogController',
-                      templateUrl: 'confirm-dialog.html',
-                      locals: {
-                        displayOption: {
-                          title: "ชื่อเจ้าของบัญชีไม่ถูกต้อง !",
-                          content: "กรุณากรอกชื่อเจ้าของบัญชี",
-                          ok: "ตกลง"
-                        }
-                      }
-                    });
-                  }
-                } else {
-                  $mdDialog.show({
-                    controller: 'DialogController',
-                    templateUrl: 'confirm-dialog.html',
-                    locals: {
-                      displayOption: {
-                        title: "หมายเลขบัญชีไม่ถูกต้อง !",
-                        content: "กรุณากรอกหมายเลขบัญชี",
-                        ok: "ตกลง"
-                      }
-                    }
-                  });
-                }
-              } else {
-                $mdDialog.show({
-                  controller: 'DialogController',
-                  templateUrl: 'confirm-dialog.html',
-                  locals: {
-                    displayOption: {
-                      title: "ชื่อธนาคารไม่ถูกต้อง !",
-                      content: "กรุณากรอกชื่อธนาคาร",
-                      ok: "ตกลง"
-                    }
-                  }
-                });
-              }
+              //     } else {
+              //       $mdDialog.show({
+              //         controller: 'DialogController',
+              //         templateUrl: 'confirm-dialog.html',
+              //         locals: {
+              //           displayOption: {
+              //             title: "ชื่อเจ้าของบัญชีไม่ถูกต้อง !",
+              //             content: "กรุณากรอกชื่อเจ้าของบัญชี",
+              //             ok: "ตกลง"
+              //           }
+              //         }
+              //       });
+              //     }
+              //   } else {
+              //     $mdDialog.show({
+              //       controller: 'DialogController',
+              //       templateUrl: 'confirm-dialog.html',
+              //       locals: {
+              //         displayOption: {
+              //           title: "หมายเลขบัญชีไม่ถูกต้อง !",
+              //           content: "กรุณากรอกหมายเลขบัญชี",
+              //           ok: "ตกลง"
+              //         }
+              //       }
+              //     });
+              //   }
+              // } else {
+              //   $mdDialog.show({
+              //     controller: 'DialogController',
+              //     templateUrl: 'confirm-dialog.html',
+              //     locals: {
+              //       displayOption: {
+              //         title: "ชื่อธนาคารไม่ถูกต้อง !",
+              //         content: "กรุณากรอกชื่อธนาคาร",
+              //         ok: "ตกลง"
+              //       }
+              //     }
+              //   });
+              // }
             } else {
               $mdDialog.show({
                 controller: 'DialogController',

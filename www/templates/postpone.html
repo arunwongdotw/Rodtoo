@@ -1,0 +1,18 @@
+<ion-view hide-nav-bar="false">
+  <ion-nav-title>เลื่อนเที่ยวรถตู้</ion-nav-title>
+  <ion-content id="social-sign-up-content">
+    <md-input-container md-no-float="" style="margin-top: 20px;">
+      <div>
+        <input class="user-name" placeholder="วันขึ้นรถตู้ *" style="width: 300px;" ng-model="booking.date" ng-click="openDatePickerStart()">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" placeholder="เวลาขึ้นรถตู้ *" style="width: 300px;" ng-model="booking.time" ng-click="openTimePickerStart()">
+      </div>
+    </md-input-container>
+    <div>
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnPostpone()" style="margin-top: 20px;">เลื่อนเที่ยวรถตู้</a>
+    </div>
+  </ion-content>
+</ion-view>
