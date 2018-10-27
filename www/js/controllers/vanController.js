@@ -454,7 +454,7 @@ appControllers.controller('vanCtrl', function($scope, $timeout, $state, $statePa
     } else if (jQuery('md-select-menu').length > 0) {
       $mdSelect.hide();
     } else {
-      if ($state.current.name == 'loginown.van') {
+      if ($state.current.name == 'loginvan.van') {
         if (jQuery('[id^=dialog]').length == 0) {
           $mdDialog.show({
             controller: 'DialogController',

@@ -215,7 +215,7 @@ appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, d
     } else if (jQuery('md-select-menu').length > 0) {
       $mdSelect.hide();
     } else {
-      if ($state.current.name == 'loginown.van') {
+      if ($state.current.name == 'loginvan.vanmap') {
         if (jQuery('[id^=dialog]').length == 0) {
           $mdDialog.show({
             controller: 'DialogController',
