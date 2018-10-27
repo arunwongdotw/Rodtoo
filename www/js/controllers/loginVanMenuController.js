@@ -76,7 +76,7 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
             targetEvent: null,
             locals: {
               displayOption: {
-                title: "การยืนยัน",
+                title: "ออกจากแอปพลิเคชัน",
                 content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน ?",
                 ok: "ยืนยัน",
                 cancel: "ยกเลิก"
