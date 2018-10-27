@@ -88,6 +88,16 @@ appControllers.controller('cusMapCtrl', function($scope, $state, $stateParams, d
     $http.get(myService.configAPI.webserviceURL + 'webservices/getVanPosition.php?vanid=' + myService.vanDetail.van_id)
       .then(function(response) {
         $scope.vanPosition = response.data.results[0];
+        getVanMemberDetail(function(status) {
+          callback();
+        });
+      });
+  }
+
+  function getVanMemberDetail(callback) {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getVanMemberDetail.php?memberid=' + $scope.vanPosition.van_member_id)
+      .then(function(response) {
+        $scope.vanMemberDetail = response.data.results[0];
         callback();
       });
   }

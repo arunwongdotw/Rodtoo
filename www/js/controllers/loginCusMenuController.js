@@ -76,8 +76,8 @@ appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil
             targetEvent: null,
             locals: {
               displayOption: {
-                title: "การยืนยัน",
-                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน ?",
+                title: "ออกจากแอปพลิเคชัน ?",
+                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน",
                 ok: "ยืนยัน",
                 cancel: "ยกเลิก"
               }
