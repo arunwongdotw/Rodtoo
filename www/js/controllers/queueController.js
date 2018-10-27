@@ -1,4 +1,4 @@
-appControllers.controller('queueCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog) {
+appControllers.controller('queueCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $ionicPlatform, $mdSidenav) {
   $scope.queue = {};
   $scope.originProvinceValue = "selectOriginProvince";
   $scope.originDistrictValue = "selectOriginDistrict";
@@ -380,4 +380,40 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
       });
     }
   };
+
+  $ionicPlatform.registerBackButtonAction(function() {
+    if ($mdSidenav("left").isOpen()) {
+      $mdSidenav('left').close();
+    } else if (jQuery('md-bottom-sheet').length > 0) {
+      $mdBottomSheet.cancel();
+    } else if (jQuery('[id^=dialog]').length > 0) {
+      $mdDialog.cancel();
+    } else if (jQuery('md-menu-content').length > 0) {
+      $mdMenu.hide();
+    } else if (jQuery('md-select-menu').length > 0) {
+      $mdSelect.hide();
+    } else {
+      if ($state.current.name == 'loginown.queue') {
+        if (jQuery('[id^=dialog]').length == 0) {
+          $mdDialog.show({
+            controller: 'DialogController',
+            templateUrl: 'confirm-dialog.html',
+            targetEvent: null,
+            locals: {
+              displayOption: {
+                title: "ออกจากแอปพลิเคชัน ?",
+                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน",
+                ok: "ยืนยัน",
+                cancel: "ยกเลิก"
+              }
+            }
+          }).then(function(response) {
+            ionic.Platform.exitApp();
+          });
+        }
+      } else {
+        $ionicHistory.goBack();
+      }
+    }
+  }, 100);
 });
