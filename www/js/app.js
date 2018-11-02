@@ -62,6 +62,7 @@ window.globalVariable = {
 
 angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'ngMessages', 'ngCordova', 'ionic-datepicker', 'ionic-timepicker'])
     .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet) {
+      // , myService, $cordovaPushV5, $cordovaDevice, notifyService, $ionicPopup
       $ionicPlatform.ready(function() {
           if (window.Connection) {
             if (navigator.connection.type == Connection.NONE) {
@@ -300,6 +301,67 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
         $rootScope.customStyle = createCustomStyle(window.globalVariable.startPage.state);
 
         $ionicPlatform.ready(function () {
+            // if (window.cordova) {
+            //   var options = {
+            //     android: {
+            //       senderID: "591683399524"
+            //     },
+            //     ios: {
+            //       alert: "true",
+            //       badge: "true",
+            //       sound: "true"
+            //     },
+            //     windows: {}
+            //   };
+            //
+            //   // initialize
+            //   $cordovaPushV5.initialize(options)
+            //     .then(function() {
+            //       $cordovaPushV5.onNotification();
+            //       $cordovaPushV5.onError();
+            //       $cordovaPushV5.register()
+            //         .then(function(registrationId) {
+            //           var dataSend = {
+            //             uid: $cordovaDevice.getUUID(),
+            //             regid: registrationId
+            //           };
+            //           // service เรียกใช้ฟังก์ชั่น notifyService ส่งค่าไปยัง server
+            //           notifyService.setNotify(dataSend)
+            //             .then(function(response) {
+            //               // ทดสอบแสดงค่าว่าบันทึกสำเร็จหรือไม่
+            //             });
+            //           // save `registrationId` somewhere;
+            //         });
+            //     });
+            //
+            //     var message = '';
+            //     var message_id = '';
+            //     // triggered every time notification received
+            //     $rootScope.$on('$cordovaPushV5:notificationReceived', function(event, data) {
+            //       if (data.additionalData.foreground == true) {
+            //         console.log('app open');
+            //       } else {
+            //         if ((message == '') && (message_id == '')) {
+            //           console.log('if 1');
+            //           message = data.message;
+            //           message_id = data.additionalData['google.message_id'];
+            //           $state.go('app2.listchat2');
+            //         } else if ((message != data.message) || (message_id != data.additionalData['google.message_id'])) {
+            //           console.log('if 2');
+            //           message = data.message;
+            //           message_id = data.additionalData['google.message_id'];
+            //           $state.go('app2.listchat2');
+            //         }
+            //       }
+            //     });
+            //
+            //     // triggered every time error occurs
+            //     $rootScope.$on('$cordovaPushV5:errorOcurred', function(event, e) {
+            //       console.log(e);
+            //       // e.message
+            //     });
+            // }
+
             ionic.Platform.isFullScreen = true;
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);

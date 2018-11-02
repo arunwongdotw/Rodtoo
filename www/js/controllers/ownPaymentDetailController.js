@@ -157,7 +157,7 @@ appControllers.controller('ownPaymentDetailCtrl', function($scope, $timeout, $st
     $cordovaInAppBrowser.open('http://1did.net/rodtoo/img/img_slip/' + payment_img, '_system', options);
   };
 
-  $scope.btnConfirmPayment = function(booking_id) {
+  $scope.btnConfirmPayment = function(booking_id, member_id) {
     $mdDialog.show({
       controller: 'DialogController',
       templateUrl: 'confirm-dialog.html',
@@ -188,6 +188,10 @@ appControllers.controller('ownPaymentDetailCtrl', function($scope, $timeout, $st
             }
           }
         }).then(function(response) {
+          // $http.get(myService.configAPI.webserviceURL + 'php_push/paymentConfirm.php?memberid=' + member_id + '&bookingid=' + booking_id)
+          //   .then(function(response) {
+          //     console.log(response);
+          //   });
           $state.go('loginown.ownpaymentlist');
         });
       }, function(error) {
