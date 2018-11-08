@@ -1,5 +1,4 @@
-appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
-  // , $cordovaDevice
+appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $cordovaDevice) {
   $scope.login = {};
 
   $scope.navigateTo = function(stateName) {
@@ -16,7 +15,7 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
   };
 
   $scope.btnSignIn = function() {
-    // var notify_id = $cordovaDevice.getUUID();
+    var uuid = $cordovaDevice.getUUID();
     if (($scope.login.username != null) && ($scope.login.username != "")) {
       if (($scope.login.password != null) && ($scope.login.password != "")) {
         $http({
@@ -24,8 +23,9 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
           method: 'POST',
           data: {
             var_username: $scope.login.username,
-            var_password: $scope.login.password
-            // var_notifyid: notify_id
+            var_password: $scope.login.password,
+            var_uuid: uuid,
+            var_token: window.localStorage.token
           }
         }).then(function(response) {
           if (response.data.results == 'notfound_username') {

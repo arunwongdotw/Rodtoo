@@ -1,4 +1,4 @@
-appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $cordovaFileTransfer, $cordovaCamera) {
+appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $cordovaFileTransfer, $cordovaCamera, $cordovaDevice) {
   $scope.signup = {};
   $scope.memberTypeValue = "selectType";
   $scope.addressValue = "select";
@@ -172,7 +172,18 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                     myService.memberDetailFromLogin = $scope.response;
                                     window.localStorage.memberUsername = $scope.signup.username;
                                     window.localStorage.memberType = $scope.memberTypeValue;
-                                    $state.go('logincus.cusprofile');
+                                    var uuid = $cordovaDevice.getUUID();
+                                    $http({
+                                      url: myService.configAPI.webserviceURL + 'webservices/signUpNotification.php',
+                                      method: 'POST',
+                                      data: {
+                                        var_uuid: uuid,
+                                        var_token: window.localStorage.token,
+                                        var_memberid: myService.memberDetailFromLogin.member_id
+                                      }
+                                    }).then(function(response) {
+                                      $state.go('logincus.cusprofile');
+                                    });
                                   });
                                 }
                               }, function(error) {
@@ -355,7 +366,18 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
                                       myService.memberDetailFromLogin = $scope.response;
                                       window.localStorage.memberUsername = $scope.signup.username;
                                       window.localStorage.memberType = $scope.memberTypeValue;
-                                      $state.go('loginvan.vanprofile');
+                                      var uuid = $cordovaDevice.getUUID();
+                                      $http({
+                                        url: myService.configAPI.webserviceURL + 'webservices/signUpNotification.php',
+                                        method: 'POST',
+                                        data: {
+                                          var_uuid: uuid,
+                                          var_token: window.localStorage.token,
+                                          var_memberid: myService.memberDetailFromLogin.member_id
+                                        }
+                                      }).then(function(response) {
+                                        $state.go('loginvan.vanprofile');
+                                      });
                                     });
                                   }
                                 }, function(error) {

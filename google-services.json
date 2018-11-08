@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "851752018079",
+    "firebase_url": "https://rodtoo-1539685620972.firebaseio.com",
+    "project_id": "rodtoo-1539685620972",
+    "storage_bucket": "rodtoo-1539685620972.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851752018079:android:eab4b49b6a868aea",
+        "android_client_info": {
+          "package_name": "com.smartonline.rodtoo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851752018079-i6bdjg225mp2a9emo5ueitulerbkrdlm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBp-G8yp4PHsRmgoM0vI8jS5gjPJOzyhY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

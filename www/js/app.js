@@ -9,7 +9,7 @@
 //  - Custom style
 //
 //Global variable use for setting color, start page, message, oAuth key.
-
+console.log(window.localStorage);
 if ((window.localStorage.memberUsername == "") || (window.localStorage.memberUsername == null)) {
   url = "/notlogin/login";
   state = "notlogin.login";
@@ -43,8 +43,8 @@ window.globalVariable = {
         state: state//State name of start page.
     },
     // startPage: {
-    //     url: "notlogin/map",//Url of start page.
-    //     state: "notlogin.map"//State name of start page.
+    //     url: "notlogin/login",//Url of start page.
+    //     state: "notlogin.login"//State name of start page.
     // },
     message: {
         errorMessage: "Technical error please try again later." //Default error message.
@@ -61,55 +61,23 @@ window.globalVariable = {
 
 
 angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'ngMessages', 'ngCordova', 'ionic-datepicker', 'ionic-timepicker'])
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet) {
-      // , myService, $cordovaPushV5, $cordovaDevice, notifyService, $ionicPopup
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $cordovaDevice, $http, $ionicPopup, myService, $cordovaPushV5) {
       $ionicPlatform.ready(function() {
           if (window.Connection) {
             if (navigator.connection.type == Connection.NONE) {
-              if (typeof window.localStorage.appLanguageID == 'undefined') {
-                $mdDialog.show({
-                  controller: 'DialogController',
-                  templateUrl: 'confirm-dialog.html',
-                  locals: {
-                    displayOption: {
-                      title: "ไม่มีการเชื่อมต่ออินเทอร์เน็ต !",
-                      content: "โทรศัพท์ของคุณยังไม่ได้เชื่อมต่ออินเทอร์เน็ต กรุณาเชื่อมต่ออินเทอร์เน็ตก่อนใช้งาน",
-                      ok: "ตกลง"
-                    }
+              $mdDialog.show({
+                controller: 'DialogController',
+                templateUrl: 'confirm-dialog.html',
+                locals: {
+                  displayOption: {
+                    title: "ไม่มีการเชื่อมต่ออินเทอร์เน็ต !",
+                    content: "โทรศัพท์ของคุณยังไม่ได้เชื่อมต่ออินเทอร์เน็ต กรุณาเชื่อมต่ออินเทอร์เน็ตก่อนใช้งาน",
+                    ok: "ตกลง"
                   }
-                }).then(function() {
-                  ionic.Platform.exitApp();
-                });
-              } else if (window.localStorage.appLanguageID == 1) {
-                $mdDialog.show({
-                  controller: 'DialogController',
-                  templateUrl: 'confirm-dialog.html',
-                  locals: {
-                    displayOption: {
-                      title: "ไม่มีการเชื่อมต่ออินเทอร์เน็ต !",
-                      content: "โทรศัพท์ของคุณยังไม่ได้เชื่อมต่ออินเทอร์เน็ต กรุณาเชื่อมต่ออินเทอร์เน็ตก่อนใช้งาน",
-                      ok: "ตกลง"
-                    }
-                  }
-                }).then(function() {
-                  ionic.Platform.exitApp();
-                });
-              } else {
-                $mdDialog.show({
-                  controller: 'DialogController',
-                  templateUrl: 'confirm-dialog.html',
-                  locals: {
-                    displayOption: {
-                      title: "No Internet Connection !",
-                      content: "Your device is not connected internet, please connect internet before.",
-                      ok: "ตกลง",
-                      cancel: "ยกเลิก"
-                    }
-                  }
-                }).then(function() {
-                  ionic.Platform.exitApp();
-                });
-              }
+                }
+              }).then(function() {
+                ionic.Platform.exitApp();
+              });
             }
           }
         });
@@ -301,66 +269,118 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
         $rootScope.customStyle = createCustomStyle(window.globalVariable.startPage.state);
 
         $ionicPlatform.ready(function () {
-            // if (window.cordova) {
-            //   var options = {
-            //     android: {
-            //       senderID: "591683399524"
-            //     },
-            //     ios: {
-            //       alert: "true",
-            //       badge: "true",
-            //       sound: "true"
-            //     },
-            //     windows: {}
-            //   };
-            //
-            //   // initialize
-            //   $cordovaPushV5.initialize(options)
-            //     .then(function() {
-            //       $cordovaPushV5.onNotification();
-            //       $cordovaPushV5.onError();
-            //       $cordovaPushV5.register()
-            //         .then(function(registrationId) {
-            //           var dataSend = {
-            //             uid: $cordovaDevice.getUUID(),
-            //             regid: registrationId
-            //           };
-            //           // service เรียกใช้ฟังก์ชั่น notifyService ส่งค่าไปยัง server
-            //           notifyService.setNotify(dataSend)
-            //             .then(function(response) {
-            //               // ทดสอบแสดงค่าว่าบันทึกสำเร็จหรือไม่
-            //             });
-            //           // save `registrationId` somewhere;
-            //         });
-            //     });
-            //
-            //     var message = '';
-            //     var message_id = '';
-            //     // triggered every time notification received
-            //     $rootScope.$on('$cordovaPushV5:notificationReceived', function(event, data) {
-            //       if (data.additionalData.foreground == true) {
-            //         console.log('app open');
-            //       } else {
-            //         if ((message == '') && (message_id == '')) {
-            //           console.log('if 1');
-            //           message = data.message;
-            //           message_id = data.additionalData['google.message_id'];
-            //           $state.go('app2.listchat2');
-            //         } else if ((message != data.message) || (message_id != data.additionalData['google.message_id'])) {
-            //           console.log('if 2');
-            //           message = data.message;
-            //           message_id = data.additionalData['google.message_id'];
-            //           $state.go('app2.listchat2');
+            // android platform 6.3.0
+            // cordova-plugin-fcm@2.1.2 "FCMPlugin"
+            // FCMPlugin.getToken(
+            //     function(token) {
+            //       $http({
+            //         url: "http://1did.net/rodtoo/php_push/token.php",
+            //         method: 'POST',
+            //         data: {
+            //           var_token: token,
+            //           var_uid: $cordovaDevice.getUUID()
             //         }
-            //       }
-            //     });
+            //       }).then(function(response) {
+            //         console.log(response);
+            //       });
+            //     }
+            // );
             //
-            //     // triggered every time error occurs
-            //     $rootScope.$on('$cordovaPushV5:errorOcurred', function(event, e) {
-            //       console.log(e);
-            //       // e.message
-            //     });
-            // }
+            // FCMPlugin.onNotification(function(data) {
+            //     console.log(data);
+            //     if (data.wasTapped) {
+            //         //Notification was received on device tray and tapped by the user.
+            //         alert(JSON.stringify(data));
+            //     } else {
+            //         //Notification was received in foreground. Maybe the user needs to be notified.
+            //         alert(JSON.stringify(data));
+            //     }
+            // });
+
+            // FCMPlugin.onNotification(
+            //     function(data) {
+            //       if (data.wasTapped) {
+            //           // alert( JSON.stringify(data) );
+            //           console.log(data);
+            //           var alertPopup = $ionicPopup.alert({
+            //             title: data.title,
+            //             template: data.body
+            //           });
+            //       } else {
+            //         console.log(data);
+            //           // alert( JSON.stringify(data) );
+            //           var alertPopup = $ionicPopup.alert({
+            //             title: data.title,
+            //             template: data.body
+            //           });
+            //       }
+            //     }
+            // );
+
+            // cordova plugin add phonegap-plugin-push@1.10.5 --variable SENDER_ID="851752018079"
+            if (window.cordova) {
+              var options = {
+                android: {
+                  icon: "notification_icon"
+                },
+                ios: {
+                  alert: "true",
+                  badge: "true",
+                  sound: "true"
+                },
+                windows: {}
+              };
+
+              // initialize
+              $cordovaPushV5.initialize(options)
+                .then(function() {
+                  // start listening for new notifications
+                  $cordovaPushV5.onNotification();
+                  // start listening for errors
+                  $cordovaPushV5.onError();
+                  // register to get registrationId
+                  $cordovaPushV5.register()
+                    .then(function(registrationId) {
+                      console.log(registrationId);
+                      window.localStorage.token = registrationId;
+                      console.log(window.localStorage.token);
+                      // var dataSend = {
+                      //   var_uid: $cordovaDevice.getUUID(),
+                      //   var_token: registrationId
+                      // };
+                      // service เรียกใช้ฟังก์ชั่น notifyService ส่งค่าไปยัง server
+                      // notifyService.setNotify(dataSend)
+                      //   .then(function(response) {
+                      //     // ทดสอบแสดงค่าว่าบันทึกสำเร็จหรือไม่
+                      //     console.log(response);
+                      //   });
+                    });
+                });
+
+                // triggered every time notification received
+                $rootScope.$on('$cordovaPushV5:notificationReceived', function(event, data) {
+                  console.log(data);
+                  if (data.additionalData.foreground == true) {
+                    $mdDialog.show({
+                      controller: 'DialogController',
+                      templateUrl: 'confirm-dialog.html',
+                      locals: {
+                        displayOption: {
+                          title: data.title,
+                          content: data.message,
+                          ok: "ตกลง"
+                        }
+                      }
+                    });
+                  };
+                });
+
+                // triggered every time error occurs
+                $rootScope.$on('$cordovaPushV5:errorOcurred', function(event, e) {
+                  console.log(e);
+                  // e.message
+                });
+            }
 
             ionic.Platform.isFullScreen = true;
             if (window.cordova && window.cordova.plugins.Keyboard) {

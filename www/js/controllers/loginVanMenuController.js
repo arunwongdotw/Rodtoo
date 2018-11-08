@@ -1,4 +1,4 @@
-appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect, $http, myService) {
+appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect, $http, myService, $cordovaDevice) {
   $scope.toggleLeft = buildToggler('left');
   $scope.memberDetail = {}; // $scope.memberDetail คือ obj ข้อมูลของ member
   $scope.randomNumber = Math.random();
@@ -50,9 +50,21 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
         }
       }
     }).then(function(response) {
-      window.localStorage.memberUsername = "";
-      window.localStorage.memberType = "";
-      $state.go('notlogin.login');
+      var uuid = $cordovaDevice.getUUID();
+      // window.localStorage.memberUsername = "";
+      // window.localStorage.memberType = "";
+      $http({
+        url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
+        method: 'POST',
+        data: {
+          var_uuid: uuid,
+          var_token: window.localStorage.token,
+          var_memberid: myService.memberDetailFromLogin.member_id
+        }
+      }).then(function(response) {
+        // window.localStorage.clear();
+        $state.go('notlogin.login');
+      });
     });
   };
 
