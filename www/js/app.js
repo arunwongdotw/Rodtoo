@@ -9,7 +9,6 @@
 //  - Custom style
 //
 //Global variable use for setting color, start page, message, oAuth key.
-console.log(window.localStorage);
 if ((window.localStorage.memberUsername == "") || (window.localStorage.memberUsername == null)) {
   url = "/notlogin/login";
   state = "notlogin.login";
@@ -341,9 +340,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                   // register to get registrationId
                   $cordovaPushV5.register()
                     .then(function(registrationId) {
-                      console.log(registrationId);
                       window.localStorage.token = registrationId;
-                      console.log(window.localStorage.token);
                       // var dataSend = {
                       //   var_uid: $cordovaDevice.getUUID(),
                       //   var_token: registrationId
@@ -372,7 +369,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         }
                       }
                     });
-                  };
+                  }
                 });
 
                 // triggered every time error occurs

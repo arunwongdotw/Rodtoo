@@ -167,6 +167,7 @@ appControllers.controller('paymentCtrl', function($scope, $timeout, $state, $ion
                       }
                     }
                   }).then(function(response) {
+                    $http.get(myService.configAPI.webserviceURL + 'php_push/cusPaymentNotification.php?bookingid=' + $scope.payment.booking_id);
                     $state.go('logincus.cusbookinglist');
                   });
                 }, function(error) {

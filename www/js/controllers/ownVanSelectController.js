@@ -68,6 +68,7 @@ appControllers.controller('ownVanSelectCtrl', function($scope, $timeout, $state,
             }
           }
         }).then(function(response) {
+          $http.get(myService.configAPI.webserviceURL + 'php_push/vanSelectNotification.php?bookingid=' + myService.bookingIDInList.booking_id);
           $state.go('loginown.ownbookinglist');
         });
       }, function(error) {

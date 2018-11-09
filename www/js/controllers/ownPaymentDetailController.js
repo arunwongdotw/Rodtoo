@@ -188,10 +188,7 @@ appControllers.controller('ownPaymentDetailCtrl', function($scope, $timeout, $st
             }
           }
         }).then(function(response) {
-          // $http.get(myService.configAPI.webserviceURL + 'php_push/paymentConfirm.php?memberid=' + member_id + '&bookingid=' + booking_id)
-          //   .then(function(response) {
-          //     console.log(response);
-          //   });
+          $http.get(myService.configAPI.webserviceURL + 'php_push/paymentNotification.php?memberid=' + member_id + '&bookingid=' + booking_id);
           $state.go('loginown.ownpaymentlist');
         });
       }, function(error) {
