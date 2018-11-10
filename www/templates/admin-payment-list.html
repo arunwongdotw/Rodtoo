@@ -1,0 +1,24 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>รายการแจ้งชำระเงิน</ion-nav-title>
+  <ion-content id="online-course-content">
+    <div style="text-align: center; margin-top: 20px; font-weight: bold; font-size: 16px; color: #666;" ng-if="adminPaymentArrayList == null">ไม่พบรายการแจ้งชำระเงิน</div>
+    <div class="course-list" style="margin-top: 0px;">
+      <div class="course-item" ng-repeat="adminPayment in adminPaymentArrayList">
+        <div class="title ionic-course-background" style="background-color: #3F51B5 !important">
+          หมายเลขการจองรถตู้ : {{adminPayment.booking_id}}
+        </div>
+        <div class="content">
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="adminPayment.booking_status == 1">สถานะการจองรถตู้ : <text style="color: red;">ยังไม่แจ้งชำระเงิน</text></p>
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="adminPayment.booking_status == 2">สถานะการจองรถตู้ : <text style="color: orange;">แจ้งชำระเงิน</text></p>
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="adminPayment.booking_status == 3">สถานะการจองรถตู้ : <text style="color: green;">ยืนยันการชำระเงิน</text></p>
+          <p style="padding: 0px 10px 0px 10px;">วันเวลาแจ้งชำระเงิน : {{adminPayment.payment_datetime}}</p>
+          <p style="padding: 5px 10px 0px 10px;">
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getInfomation(adminPayment.booking_id)">
+              <i class="fas fa-info-circle"></i> รายละเอียดการแจ้งชำระเงิน
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

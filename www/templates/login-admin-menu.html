@@ -24,7 +24,7 @@
       <!--list section-->
       <div ng-if="isAndroid" class="menu-list">
         <!-- <md-subheader class="md-warn">Themes</md-subheader> -->
-        <div class="row menu-item" ng-click="navigateTo('loginown.ownprofile')">
+        <!-- <div class="row menu-item" ng-click="navigateTo('loginown.ownprofile')">
           <div class="col-33">
             <i class="fas fa-list"></i>
           </div>
@@ -47,16 +47,16 @@
           <div class="col-66">
             <span>รายการจองรถตู้ที่ชำระเงินแล้ว</span>
           </div>
-        </div>
-        <!-- <div class="row menu-item" ng-click="navigateTo('loginown.ownpaymentlist')">
+        </div> -->
+        <div class="row menu-item" ng-click="navigateTo('loginadmin.adminpaymentlist')">
           <div class="col-33">
             <i class="fas fa-list"></i>
           </div>
           <div class="col-66">
             <span>รายการแจ้งชำระเงิน</span>
           </div>
-        </div> -->
-        <div class="row menu-item" ng-click="navigateTo('loginown.ownvanlist')">
+        </div>
+        <!-- <div class="row menu-item" ng-click="navigateTo('loginown.ownvanlist')">
           <div class="col-33">
             <i class="fas fa-list"></i>
           </div>
@@ -79,7 +79,7 @@
           <div class="col-66">
             <span>รายการจุดลงรถตู้</span>
           </div>
-        </div>
+        </div> -->
         <div class="row menu-item" ng-click="btnLogout()">
           <div class="col-33">
             <i class="fas fa-sign-out-alt"></i>
@@ -94,7 +94,7 @@
       <!--It will show animation when selecting row.-->
       <md-list ng-if="!isAndroid">
         <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
-        <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownprofile')">
+        <!-- <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownprofile')">
           <i class="fas fa-list"></i>
           <span>โปรไฟล์</span>
         </md-list-item>
@@ -105,12 +105,12 @@
         <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownbookinglist')">
           <i class="fas fa-list"></i>
           <span>รายการจองรถตู้ที่ชำระเงินแล้ว</span>
-        </md-list-item>
-        <!-- <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownpaymentlist')">
+        </md-list-item> -->
+        <md-list-item class="menu-list-item" ng-click="navigateTo('loginadmin.adminpaymentlist')">
           <i class="fas fa-list"></i>
           <span>รายการแจ้งชำระเงิน</span>
-        </md-list-item> -->
-        <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownvanlist')">
+        </md-list-item>
+        <!-- <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownvanlist')">
           <i class="fas fa-list"></i>
           <span>รายการข้อมูลรถตู้</span>
         </md-list-item>
@@ -121,7 +121,7 @@
         <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownpointlist')">
           <i class="fas fa-list"></i>
           <span>รายการจุดลงรถตู้</span>
-        </md-list-item>
+        </md-list-item> -->
         <md-list-item class="menu-list-item" ng-click="btnLogout()">
           <i class="fas fa-sign-out-alt"></i>
           <span>ออกจากระบบ</span>

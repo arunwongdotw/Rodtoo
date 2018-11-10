@@ -22,6 +22,9 @@ if ((window.localStorage.memberUsername == "") || (window.localStorage.memberUse
   } else if (window.localStorage.memberType == "3") {
     url = "/loginvan/vanprofile";
     state = "loginvan.vanprofile";
+  } else if (window.localStorage.memberType == "4") {
+    url = "/loginadmin/adminpaymentlist";
+    state = "loginadmin.adminpaymentlist";
   }
 }
 
@@ -523,6 +526,14 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 templateUrl: "templates/login-van-menu.html",
                 controller: 'loginVanMenuCtrl'
             })
+            .state('loginadmin', {
+                url: "/loginadmin",
+                cache: false,
+                reload: true,
+                abstract: true,
+                templateUrl: "templates/login-admin-menu.html",
+                controller: 'loginAdminMenuCtrl'
+            })
             .state('notlogin.login', {
                 url: "/login",
                 cache: false,
@@ -883,6 +894,28 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                     'menuContent': {
                         templateUrl: "templates/postpone.html",
                         controller: 'postponeCtrl'
+                    }
+                }
+            })
+            .state('loginadmin.adminpaymentlist', {
+                url: "/adminpaymentlist",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/admin-payment-list.html",
+                        controller: 'adminPaymentListCtrl'
+                    }
+                }
+            })
+            .state('loginadmin.adminpaymentdetail', {
+                url: "/adminpaymentdetail",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/admin-payment-detail.html",
+                        controller: 'adminPaymentDetailCtrl'
                     }
                 }
             });

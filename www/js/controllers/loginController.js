@@ -118,6 +118,23 @@ appControllers.controller('loginCtrl', function($scope, $timeout, $state, $ionic
                 window.localStorage.memberType = $scope.response.member_type;
                 $state.go('loginvan.vanprofile');
               });
+            } else if ($scope.response.member_type == 4) {
+              $mdDialog.show({
+                controller: 'DialogController',
+                templateUrl: 'confirm-dialog.html',
+                locals: {
+                  displayOption: {
+                    title: "เข้าสู่ระบบสำเร็จ !",
+                    content: "คุณเข้าสู่ระบบสำเร็จ",
+                    ok: "ตกลง"
+                  }
+                }
+              }).then(function(response) {
+                myService.memberDetailFromLogin = $scope.response;
+                window.localStorage.memberUsername = $scope.login.username;
+                window.localStorage.memberType = $scope.response.member_type;
+                $state.go('loginadmin.adminpaymentlist');
+              });
             }
           }
         }, function(error) {
