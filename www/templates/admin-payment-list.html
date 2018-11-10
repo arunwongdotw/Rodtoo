@@ -1,5 +1,8 @@
 <ion-view id="online-course" hide-nav-bar="false">
   <ion-nav-title>รายการแจ้งชำระเงิน</ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-refresh" ng-click="btnRefresh()"></button>
+  </ion-nav-buttons>
   <ion-content id="online-course-content">
     <div style="text-align: center; margin-top: 20px; font-weight: bold; font-size: 16px; color: #666;" ng-if="adminPaymentArrayList == null">ไม่พบรายการแจ้งชำระเงิน</div>
     <div class="course-list" style="margin-top: 0px;">

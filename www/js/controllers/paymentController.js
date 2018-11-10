@@ -58,7 +58,7 @@ appControllers.controller('paymentCtrl', function($scope, $timeout, $state, $ion
       quality: 100,
       destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      allowEdit: true,
+      allowEdit: false,
       encodingType: Camera.EncodingType.JPEG,
       targetWidth: 1000,
       targetHeight: 1000,
@@ -212,6 +212,7 @@ appControllers.controller('paymentCtrl', function($scope, $timeout, $state, $ion
                           }
                         }
                       }).then(function(response) {
+                        $http.get(myService.configAPI.webserviceURL + 'php_push/cusPaymentNotification.php?bookingid=' + $scope.payment.booking_id);
                         $state.go('logincus.cusbookinglist');
                       });
                     }, function(error) {

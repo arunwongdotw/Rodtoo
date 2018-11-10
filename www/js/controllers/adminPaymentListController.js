@@ -2,7 +2,6 @@ appControllers.controller('adminPaymentListCtrl', function($scope, $timeout, $st
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getAdminPaymentList.php')
     .then(function(response) {
-      console.log(response);
       $scope.adminPaymentArrayList = response.data.results;
     }, function(error) {
       $mdDialog.show({
@@ -36,6 +35,27 @@ appControllers.controller('adminPaymentListCtrl', function($scope, $timeout, $st
   $scope.getInfomation = function(booking_id) {
     myService.bookingIDInList.booking_id = booking_id;
     $state.go('loginadmin.adminpaymentdetail');
+  };
+
+  $scope.btnRefresh = function() {
+    $http.get(myService.configAPI.webserviceURL + 'webservices/getAdminPaymentList.php')
+      .then(function(response) {
+        $scope.adminPaymentArrayList = response.data.results;
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด getAdminPaymentList ใน adminPaymentListController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
   };
 
   $ionicPlatform.registerBackButtonAction(function() {
