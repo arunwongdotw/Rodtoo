@@ -43,8 +43,8 @@ appControllers.controller('vanBookingListCtrl', function($scope, $timeout, $stat
             targetEvent: null,
             locals: {
               displayOption: {
-                title: "ออกจากแอปพลิเคชัน",
-                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน ?",
+                title: "ออกจากแอปพลิเคชัน ?",
+                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน",
                 ok: "ยืนยัน",
                 cancel: "ยกเลิก"
               }

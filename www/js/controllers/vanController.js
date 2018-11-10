@@ -462,8 +462,8 @@ appControllers.controller('vanCtrl', function($scope, $timeout, $state, $statePa
             targetEvent: null,
             locals: {
               displayOption: {
-                title: "ออกจากแอปพลิเคชัน",
-                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน ?",
+                title: "ออกจากแอปพลิเคชัน ?",
+                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน",
                 ok: "ยืนยัน",
                 cancel: "ยกเลิก"
               }

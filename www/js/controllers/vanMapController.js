@@ -223,8 +223,8 @@ appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, d
             targetEvent: null,
             locals: {
               displayOption: {
-                title: "ออกจากแอปพลิเคชัน",
-                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน ?",
+                title: "ออกจากแอปพลิเคชัน ?",
+                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน",
                 ok: "ยืนยัน",
                 cancel: "ยกเลิก"
               }

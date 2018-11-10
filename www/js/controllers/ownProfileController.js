@@ -241,8 +241,8 @@ appControllers.controller('ownProfileCtrl', function($scope, $timeout, $state, $
             targetEvent: null,
             locals: {
               displayOption: {
-                title: "ออกจากแอปพลิเคชัน",
-                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน ?",
+                title: "ออกจากแอปพลิเคชัน ?",
+                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน",
                 ok: "ยืนยัน",
                 cancel: "ยกเลิก"
               }
