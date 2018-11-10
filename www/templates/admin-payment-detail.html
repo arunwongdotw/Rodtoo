@@ -9,7 +9,7 @@
     <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
       <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">ข้อมูลการแจ้งชำระเงิน</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ยอดแจ้งชำระเงิน : {{paymentDetail.payment_price}} บาท</p>
-      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">วันเวลาแจ้งชำระเงิน : {{paymentDetail.payment_date}} {{paymentDetail.payment_time}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">วันเวลาที่ทำการชำระเงิน : {{paymentDetail.payment_date}} {{paymentDetail.payment_time}}</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="paymentDetail.payment_img == '-'">หลักฐานการโอน : ไม่มี</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="paymentDetail.payment_img != '-'">หลักฐานการโอน :
         <br><img src="http://1did.net/rodtoo/img/img_slip/{{paymentDetail.payment_img}}" style="width: 85%; margin-top: 20px; margin-left: 20px;" ng-click="openLink(paymentDetail.payment_img)"></img>
