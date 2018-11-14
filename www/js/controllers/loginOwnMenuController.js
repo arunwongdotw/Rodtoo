@@ -33,6 +33,19 @@ appControllers.controller('loginOwnMenuCtrl', function($scope, $timeout, $mdUtil
     }, ($scope.isAndroid == false ? 300 : 0));
   };
 
+  function navigateTo(stateName) {
+    $timeout(function() {
+      $mdSidenav('left').close();
+      if ($ionicHistory.currentStateName() != stateName) {
+        $ionicHistory.nextViewOptions({
+          disableAnimate: true,
+          disableBack: true
+        });
+        $state.go(stateName);
+      }
+    }, ($scope.isAndroid == false ? 300 : 0));
+  }
+
   $scope.closeSideNav = function() {
     $mdSidenav('left').close();
   };
@@ -51,8 +64,8 @@ appControllers.controller('loginOwnMenuCtrl', function($scope, $timeout, $mdUtil
       }
     }).then(function(response) {
       var uuid = $cordovaDevice.getUUID();
-      // window.localStorage.memberUsername = "";
-      // window.localStorage.memberType = "";
+      window.localStorage.memberUsername = "";
+      window.localStorage.memberType = "";
       $http({
         url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
         method: 'POST',
@@ -65,6 +78,35 @@ appControllers.controller('loginOwnMenuCtrl', function($scope, $timeout, $mdUtil
         // window.localStorage.clear();
         $state.go('notlogin.login');
       });
+    });
+  };
+
+  $scope.checkQueue = function(state) {
+    $http({
+      url: myService.configAPI.webserviceURL + 'webservices/checkHaveQueue.php',
+      method: 'POST',
+      data: {
+        var_memberid: myService.memberDetailFromLogin.member_id
+      }
+    }).then(function(response) {
+      if (response.data.results == "checkHaveQueue_isZero") {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "รายการข้อมูลรถตู้ไม่ถูกต้อง !",
+              content: "คุณต้องลงทะบียนคิวรถตู้ก่อน ระบบจะนำทางไปอัตโนมัติ",
+              ok: "ตกลง",
+              cancel: "ยกเลิก"
+            }
+          }
+        }).then(function(response) {
+          navigateTo('loginown.queue');
+        });
+      } else if (response.data.results == "checkHaveQueue_notZero") {
+        navigateTo(state);
+      }
     });
   };
 
