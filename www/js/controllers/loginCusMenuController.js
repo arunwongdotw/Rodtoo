@@ -51,8 +51,8 @@ appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil
       }
     }).then(function(response) {
       var uuid = $cordovaDevice.getUUID();
-      // window.localStorage.memberUsername = "";
-      // window.localStorage.memberType = "";
+      window.localStorage.memberUsername = "";
+      window.localStorage.memberType = "";
       $http({
         url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
         method: 'POST',
