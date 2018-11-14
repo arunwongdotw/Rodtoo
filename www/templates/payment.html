@@ -10,12 +10,14 @@
       <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">ข้อมูลการแจ้งชำระเงิน</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">หมายเลขการจอง : {{bookingDetail.booking_id}}</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ยอดชำระทั้งหมด : {{bookingDetail.booking_price}} บาท</p>
-      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ชื่อบัญชี : บจ. สมาร์ท ออนไลน์</p>
-      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ธนาคาร : ธนาคารกรุงไทย</p>
-      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">หมายเลขบัญชี : 816-0-47869-0</p>
-      <!-- <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ชื่อบัญชี : {{bookingDetail.queue_bank_owner}}</p>
-      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ธนาคาร : {{bookingDetail.queue_bank}}</p>
-      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">หมายเลขบัญชี : {{bookingDetail.queue_bank_no}}</p> -->
+
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="bookingDetail.queue_payment_flag == 1">ชื่อบัญชี : บจ. สมาร์ท ออนไลน์</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="bookingDetail.queue_payment_flag == 1">ธนาคาร : ธนาคารกรุงไทย</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="bookingDetail.queue_payment_flag == 1">หมายเลขบัญชี : 816-0-47869-0</p>
+
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="bookingDetail.queue_payment_flag == 0">ชื่อบัญชี : {{bookingDetail.queue_bank_owner}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="bookingDetail.queue_payment_flag == 0">ธนาคาร : {{bookingDetail.queue_bank}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="bookingDetail.queue_payment_flag == 0">หมายเลขบัญชี : {{bookingDetail.queue_bank_no}}</p>
     </div>
     <md-input-container md-no-float="" style="margin-top: 20px;">
       <div>
