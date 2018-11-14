@@ -1,0 +1,39 @@
+appControllers.controller('adminQueueDetailCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav) {
+
+  $http.get(myService.configAPI.webserviceURL + 'webservices/getQueueDetailInAdmin.php?queueid=' + myService.queueDetail.queue_id)
+    .then(function(response) {
+      $scope.bookingListArrayList = response.data.results;
+      addHoursDiff(function(status) {});
+    }, function(error) {
+      $mdDialog.show({
+        controller: 'DialogController',
+        templateUrl: 'confirm-dialog.html',
+        locals: {
+          displayOption: {
+            title: "เกิดข้อผิดพลาด !",
+            content: "เกิดข้อผิดพลาด getBookingList ใน cusBookingListController ระบบจะปิดอัตโนมัติ",
+            ok: "ตกลง"
+          }
+        }
+      }).then(function(response) {
+        ionic.Platform.exitApp();
+      });
+    });
+
+  $scope.navigateTo = function(stateName) {
+    $timeout(function() {
+      $mdSidenav('left').close();
+      if ($ionicHistory.currentStateName() != stateName) {
+        $ionicHistory.nextViewOptions({
+          disableAnimate: true,
+          disableBack: true
+        });
+        $state.go(stateName);
+      }
+    }, ($scope.isAndroid == false ? 300 : 0));
+  };
+
+  $scope.btnBack = function() {
+    $scope.navigateTo('loginadmin.adminqueuelist');
+  };
+});

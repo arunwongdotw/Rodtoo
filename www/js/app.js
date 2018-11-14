@@ -918,6 +918,28 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'adminPaymentDetailCtrl'
                     }
                 }
+            })
+            .state('loginadmin.adminqueuelist', {
+                url: "/adminqueuelist",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/admin-queue-list.html",
+                        controller: 'adminQueueListCtrl'
+                    }
+                }
+            })
+            .state('loginadmin.adminqueuedetail', {
+                url: "/adminqueuedetail",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/admin-queue-detail.html",
+                        controller: 'adminQueueDetailCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

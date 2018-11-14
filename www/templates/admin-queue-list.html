@@ -1,0 +1,33 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>ตรวจสอบคิวรถตู้</ion-nav-title>
+  <!-- <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-refresh" ng-click="btnRefresh()"></button>
+  </ion-nav-buttons> -->
+  <ion-content id="online-course-content">
+    <md-select ng-model="provinceValue" aria-label="md-option" style="padding: 10px 31px 2px 31px; margin-top: 20px;">
+      <md-option value="selectProvince" ng-click="setProvince('selectProvince')">
+        เลือกจังหวัดที่ต้องการ *
+      </md-option>
+      <md-option value="{{province.PROVINCE_ID}}" ng-repeat="province in provinceArrayList" ng-click="getQueueList(province.PROVINCE_ID)">
+        {{province.PROVINCE_NAME}}
+      </md-option>
+    </md-select>
+    <div style="text-align: center; margin-top: 30px; font-weight: bold; font-size: 16px; color: #666;" ng-if="queueArrayList == null">ไม่พบรายการแจ้งชำระเงิน</div>
+    <div class="course-list" style="margin-top: 30px;">
+      <div class="course-item" ng-repeat="queue in queueArrayList">
+        <div class="title ionic-course-background" style="background-color: #3F51B5 !important">
+          ชื่อคิวรถตู้ : {{queue.queue_name}}
+        </div>
+        <div class="content">
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;">ต้นทาง : {{queue.AMPHUR_NAME}} {{queue.PROVINCE_NAME}}</p>
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;">ปลายทาง : {{queue.queue_destination_amphur_name}} {{queue.queue_destination_province_name}}</p>
+          <p style="padding: 5px 10px 0px 10px;">
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getInfomation(queue.queue_id)">
+              <i class="fas fa-info-circle"></i> รายละเอียดคิวรถตู้
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

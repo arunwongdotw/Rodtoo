@@ -34,4 +34,5 @@ angular.module('starter')
     this.editPoint = {};
     this.editGetIn = {};
     this.vanDetail = {};
+    this.queueDetail = {};
   });
