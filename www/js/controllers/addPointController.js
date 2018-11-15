@@ -22,8 +22,8 @@ appControllers.controller('addPointCtrl', function($scope, $timeout, $state, $st
     if (($scope.point.name != null) && ($scope.point.name != "")) {
       if (($scope.point.price != null) && ($scope.point.price != "")) {
         if (checkNumberRegEx.test($scope.point.price)) {
-          if (($scope.point.fee != null) && ($scope.point.fee != "")) {
-            if (checkNumberRegEx.test($scope.point.fee)) {
+          // if (($scope.point.fee != null) && ($scope.point.fee != "")) {
+          //   if (checkNumberRegEx.test($scope.point.fee)) {
               $mdDialog.show({
                 controller: 'DialogController',
                 templateUrl: 'confirm-dialog.html',
@@ -75,32 +75,32 @@ appControllers.controller('addPointCtrl', function($scope, $timeout, $state, $st
                   });
                 });
               });
-            } else {
-              $mdDialog.show({
-                controller: 'DialogController',
-                templateUrl: 'confirm-dialog.html',
-                locals: {
-                  displayOption: {
-                    title: "ราคาค่านำเนียมไม่ถูกต้อง !",
-                    content: "ราคาค่าทำเนียม ต้องเป็นตัวเลขเท่านั้น",
-                    ok: "ตกลง"
-                  }
-                }
-              });
-            }
-          } else {
-            $mdDialog.show({
-              controller: 'DialogController',
-              templateUrl: 'confirm-dialog.html',
-              locals: {
-                displayOption: {
-                  title: "ราคาค่านำเนียมไม่ถูกต้อง !",
-                  content: "กรุณากรอกราคาค่าทำเนียม",
-                  ok: "ตกลง"
-                }
-              }
-            });
-          }
+          //   } else {
+          //     $mdDialog.show({
+          //       controller: 'DialogController',
+          //       templateUrl: 'confirm-dialog.html',
+          //       locals: {
+          //         displayOption: {
+          //           title: "ราคาค่านำเนียมไม่ถูกต้อง !",
+          //           content: "ราคาค่าทำเนียม ต้องเป็นตัวเลขเท่านั้น",
+          //           ok: "ตกลง"
+          //         }
+          //       }
+          //     });
+          //   }
+          // } else {
+          //   $mdDialog.show({
+          //     controller: 'DialogController',
+          //     templateUrl: 'confirm-dialog.html',
+          //     locals: {
+          //       displayOption: {
+          //         title: "ราคาค่านำเนียมไม่ถูกต้อง !",
+          //         content: "กรุณากรอกราคาค่าทำเนียม",
+          //         ok: "ตกลง"
+          //       }
+          //     }
+          //   });
+          // }
         } else {
           $mdDialog.show({
             controller: 'DialogController',

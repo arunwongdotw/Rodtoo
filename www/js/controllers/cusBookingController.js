@@ -286,13 +286,20 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
         var_pointid: $scope.stopValue
       }
     }).then(function(response) {
-      $scope.bookingDetail = response.data.results[0];
-      if ($scope.bookingDetail.point_price < 100) {
-        $scope.bookingDetail.fee = 5;
-        $scope.bookingDetail.total_price = parseInt($scope.bookingDetail.point_price) + 5;
-      } else if ($scope.bookingDetail.point_price >= 100) {
-        $scope.bookingDetail.fee = 10;
-        $scope.bookingDetail.total_price = parseInt($scope.bookingDetail.point_price) + 10;
+      console.log(response);
+      if (response.data.response == "getPrice_isFree") {
+        $scope.bookingDetail = response.data.results[0];
+        $scope.bookingDetail.fee = 0;
+        $scope.bookingDetail.total_price = parseInt($scope.bookingDetail.point_price) + 0;
+      } else if (response.data.response == "getPrice_notFree") {
+        $scope.bookingDetail = response.data.results[0];
+        if ($scope.bookingDetail.point_price < 100) {
+          $scope.bookingDetail.fee = $scope.bookingDetail.queue_fee_lessthan_hundred;
+          $scope.bookingDetail.total_price = parseInt($scope.bookingDetail.point_price) + parseInt($scope.bookingDetail.fee);
+        } else if ($scope.bookingDetail.point_price >= 100) {
+          $scope.bookingDetail.fee = $scope.bookingDetail.queue_fee_morethan_hundred;
+          $scope.bookingDetail.total_price = parseInt($scope.bookingDetail.point_price) + parseInt($scope.bookingDetail.fee);
+        }
       }
     }, function(error) {
       $mdDialog.show({
