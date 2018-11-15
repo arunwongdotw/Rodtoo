@@ -1,15 +1,12 @@
-appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate, $ionicPlatform) {
-  var iloop = 0;
-  var currentDateTime = new Date();
+appControllers.controller('ownPromotionListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate, $ionicPlatform) {
 
   $scope.$on('$ionicView.enter', function(e) {
     $ionicNavBarDelegate.showBar(true);
   });
 
-  $http.get(myService.configAPI.webserviceURL + 'webservices/getBookingList.php?memberid=' + myService.memberDetailFromLogin.member_id)
+  $http.get(myService.configAPI.webserviceURL + 'webservices/getPromotionList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
-      $scope.bookingListArrayList = response.data.results;
-      addHoursDiff(function(status) {});
+      $scope.promotionArrayList = response.data.results;
     }, function(error) {
       $mdDialog.show({
         controller: 'DialogController',
@@ -17,7 +14,7 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getBookingList ใน cusBookingListController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด getPromotionList ใน ownPromotionListController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -25,20 +22,6 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
         ionic.Platform.exitApp();
       });
     });
-
-  function addHoursDiff(callback) {
-    if (iloop < $scope.bookingListArrayList.length) {
-      var dateTimeString = $scope.bookingListArrayList[iloop].booking_boarding_date  + " " + $scope.bookingListArrayList[iloop].booking_boarding_time;
-      var bookingDateTime = new Date(dateTimeString);
-      var timeDiff = Math.abs(bookingDateTime.getTime() - currentDateTime.getTime());
-      var hoursDiff = timeDiff / 3600000;
-      $scope.bookingListArrayList[iloop].booking_hours_diff = hoursDiff;
-      iloop = iloop + 1;
-      addHoursDiff(callback);
-    } else {
-      callback();
-    }
-  }
 
   $scope.navigateTo = function(stateName) {
     $timeout(function() {
@@ -53,39 +36,28 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
     }, ($scope.isAndroid == false ? 300 : 0));
   };
 
-  $scope.getInfomation = function(booking_id) {
-    myService.bookingIDInList.booking_id = booking_id;
-    $state.go('logincus.cusbookingdetail');
-  };
-
-  $scope.getPayment = function(booking_id) {
-    myService.bookingIDInList.booking_id = booking_id;
-    $state.go('logincus.payment');
-  };
-
-  $scope.getMap = function(van_id) {
+  $scope.btnAddPromotion = function() {
     $http({
-      url: myService.configAPI.webserviceURL + 'webservices/checkVanStatus.php',
+      url: myService.configAPI.webserviceURL + 'webservices/checkPromotion.php',
       method: 'POST',
       data: {
-        var_vanid: van_id
+        var_memberid: myService.memberDetailFromLogin.member_id
       }
     }).then(function(response) {
-      if ((response.data.results == "checkVanStatus_isZero") || (response.data.results == "checkVanStatus_isOne")) {
+      if (response.data.results == "checkPromotion_have") {
         $mdDialog.show({
           controller: 'DialogController',
           templateUrl: 'confirm-dialog.html',
           locals: {
             displayOption: {
-              title: "รถตู้ยังไม่ออกเดินทาง !",
-              content: "รถตู้ที่คุณติดตาม ยังไม่ออกเดินทาง กรุณาลองใหม่ภายหลัง",
+              title: "เพิ่มโปรโมชันไม่ถูกต้อง !",
+              content: "พบโปรโมชันของคิวรถตู้มีอยู่ในระบบแล้ว กรุณาแก้ไขหรือลบเพื่อเพิ่มโปรโมชันใหม่",
               ok: "ตกลง"
             }
           }
         });
       } else {
-        myService.vanDetail.van_id = van_id;
-        $state.go('logincus.cusmap');
+        $state.go('loginown.addpromotion');
       }
     }, function(error) {
       $mdDialog.show({
@@ -94,7 +66,7 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด getMap ใน cusMapController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด btnAddPromotion ใน ownPromotionListController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -104,24 +76,29 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
     });
   };
 
-  $scope.delBooking = function(booking_id) {
+  $scope.editPromotion = function(promotion_id) {
+    myService.editPromotion.promotion_id = promotion_id;
+    $state.go('loginown.editpromotion');
+  };
+
+  $scope.delPromotion = function(promotion_id) {
     $mdDialog.show({
       controller: 'DialogController',
       templateUrl: 'confirm-dialog.html',
       locals: {
         displayOption: {
-          title: "ยกเลิกการจองรถตู้ ?",
-          content: "คุณแน่ใจที่จะยกเลิกการจองรถตู้ครั้งนี้",
+          title: "ลบโปรโมชัน ?",
+          content: "คุณแน่ใจที่จะลบโปรโมชันนี้",
           ok: "ตกลง",
           cancel: "ยกเลิก"
         }
       }
     }).then(function(response) {
       $http({
-        url: myService.configAPI.webserviceURL + 'webservices/delBooking.php',
+        url: myService.configAPI.webserviceURL + 'webservices/delPromotion.php',
         method: 'POST',
         data: {
-          var_bookingid: booking_id,
+          var_promotionid: promotion_id,
         }
       }).then(function(response) {
         $mdDialog.show({
@@ -129,8 +106,8 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
           templateUrl: 'confirm-dialog.html',
           locals: {
             displayOption: {
-              title: "ยกเลิกการจองรถตู้สำเร็จ !",
-              content: "คุณยกเลิกการจองรถตู้สำเร็จ",
+              title: "ลบโปรโมชันสำเร็จ !",
+              content: "คุณลบโปรโมชันสำเร็จ",
               ok: "ตกลง"
             }
           }
@@ -144,7 +121,7 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด delBooking ใน cusBookingListController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด delPromotion ใน ownPromotionListController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -153,11 +130,6 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
         });
       });
     });
-  };
-
-  $scope.getPostpone = function(booking_id) {
-    myService.bookingIDInList.booking_id = booking_id;
-    $state.go('logincus.postpone');
   };
 
   $ionicPlatform.registerBackButtonAction(function() {
@@ -172,7 +144,7 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
     } else if (jQuery('md-select-menu').length > 0) {
       $mdSelect.hide();
     } else {
-      if ($state.current.name == 'logincus.cusbookinglist') {
+      if ($state.current.name == 'loginown.ownpromotionlist') {
         if (jQuery('[id^=dialog]').length == 0) {
           $mdDialog.show({
             controller: 'DialogController',

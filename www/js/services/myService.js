@@ -33,6 +33,7 @@ angular.module('starter')
     this.editVan = {};
     this.editPoint = {};
     this.editGetIn = {};
+    this.editPromotion = {};
     this.vanDetail = {};
     this.queueDetail = {};
   });

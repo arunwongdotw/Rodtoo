@@ -1,0 +1,26 @@
+<ion-view hide-nav-bar="false">
+  <ion-nav-title>แก้ไขโปรโมชัน</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content id="social-sign-up-content" overflow-scroll="false">
+    <md-input-container md-no-float="" style="margin-top: 20px;">
+      <div>
+        <input class="user-name" ng-model="promotion.name" placeholder="ชื่อโปรโมชัน *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="promotion.detail" placeholder="รายละเอียดโปรโมชัน *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" ng-model="promotion.freq" placeholder="จำนวนครั้งที่ใช้แลกโปรโมชัน *" style="width: 284px;">
+      </div>
+    </md-input-container>
+    <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnEditPromotion()">แก้ไขโปรโมชัน</a>
+  </ion-content>
+</ion-view>

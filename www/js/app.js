@@ -940,6 +940,39 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'adminQueueDetailCtrl'
                     }
                 }
+            })
+            .state('loginown.ownpromotionlist', {
+                url: "/ownpromotionlist",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-promotion-list.html",
+                        controller: 'ownPromotionListCtrl'
+                    }
+                }
+            })
+            .state('loginown.addpromotion', {
+                url: "/addpromotion",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/add-promotion.html",
+                        controller: 'addPromotionCtrl'
+                    }
+                }
+            })
+            .state('loginown.editpromotion', {
+                url: "/editpromotion",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/edit-promotion.html",
+                        controller: 'editPromotionCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",
