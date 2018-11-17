@@ -1,0 +1,60 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>สรุปข้อมูลการจอง</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content id="online-course-content">
+    <md-input-container md-no-float="" style="margin-left: 20px; margin-top: 20px;">
+      <p>วันที่เริ่มต้น</p>
+      <div>
+        <input class="user-name" placeholder="วันที่เริ่มต้น *" style="width: 300px;" ng-model="queueSelection.startdate" ng-click="openDatePickerStart()">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="" style="margin-left: 20px;">
+      <p>เวลาเริ่มต้น</p>
+      <div>
+        <input class="user-name" placeholder="เวลาเริ่มต้น *" style="width: 300px;" ng-model="queueSelection.starttime" ng-click="openTimePickerStart()">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="" style="margin-left: 20px;">
+      <p>วันที่สิ้นสุด</p>
+      <div>
+        <input class="user-name" placeholder="วันที่สิ้นสุด *" style="width: 300px;" ng-model="queueSelection.enddate" ng-click="openDatePickerEnd()">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="" style="margin-left: 20px;">
+      <p>เวลาสิ้นสุด</p>
+      <div>
+        <input class="user-name" placeholder="เวลาสิ้นสุด *" style="width: 300px;" ng-model="queueSelection.endtime" ng-click="openTimePickerEnd()">
+      </div>
+    </md-input-container>
+    <div style="margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">ข้อมูลคิวรถตู้</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">คิวรถตู้ : {{queueDetail.queue_name}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ผู้จัดการคิวรถตู้ : {{queueDetail.member_firstname}} {{queueDetail.member_lastname}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เบอร์โทรศัพท์ : {{queueDetail.member_phone}}</p>
+    </div>
+    <div style="text-align: center; margin-top: 20px; font-weight: bold; font-size: 16px; color: #666;" ng-if="paymentDetail == null">ไม่พบสรุปข้อมูลการจอง</div>
+    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;" ng-if="paymentDetail != null">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">สรุปข้อมูลการจอง</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">การจองทั้งหมด : {{paymentDetail.allrow}} รายการ</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ค่าธรรมเนียมทั้งหมด : {{paymentDetail.allfee}} บาท</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ค่าบริการทั้งหมด : {{paymentDetail.allprice}} บาท</p>
+    </div>
+    <!-- <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">ข้อมูลคิวรถตู้</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">คิวรถตู้ : {{bookingDetail.queue_name}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ผู้จัดการคิวรถตู้ : {{ownerDetail.member_firstname}} {{ownerDetail.member_lastname}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เบอร์โทรศัพท์ : {{ownerDetail.member_phone}}</p>
+    </div>
+    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; margin-bottom: 20px; border: 3px solid #3F51B5; border-radius: 5px;" ng-if="bookingDetail.booking_van_id != 0">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">ข้อมูลการเดินทาง</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เดินทางกับรถตู้หมายเลข : {{vanDetail.van_queue_no}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">รถตู้หมายเลขทะเบียน : {{vanDetail.van_plate_no}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ผู้ขับรถตู้ : {{vanDetail.member_firstname}} {{vanDetail.member_lastname}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เบอร์โทรศัพท์ : {{vanDetail.member_phone}}</p>
+    </div> -->
+  </ion-content>
+</ion-view>

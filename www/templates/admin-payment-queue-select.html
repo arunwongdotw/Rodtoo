@@ -1,5 +1,5 @@
 <ion-view id="online-course" hide-nav-bar="false">
-  <ion-nav-title>ตรวจสอบคิวรถตู้</ion-nav-title>
+  <ion-nav-title>สรุปข้อมูลการจอง</ion-nav-title>
   <!-- <ion-nav-buttons side="right">
     <button class="button button-icon ion-android-refresh" ng-click="btnRefresh()"></button>
   </ion-nav-buttons> -->
@@ -22,7 +22,7 @@
           <p style="margin-top: 10px; padding: 0px 10px 0px 10px;">ต้นทาง : {{queue.AMPHUR_NAME}} {{queue.PROVINCE_NAME}}</p>
           <p style="margin-top: 10px; padding: 0px 10px 0px 10px;">ปลายทาง : {{queue.queue_destination_amphur_name}} {{queue.queue_destination_province_name}}</p>
           <p style="padding: 5px 10px 0px 10px;">
-            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getInfomation(queue.queue_id)">
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="getInfomation(queue)">
               <i class="fas fa-info-circle"></i> รายละเอียดคิวรถตู้
             </a>
           </p>

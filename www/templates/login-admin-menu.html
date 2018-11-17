@@ -24,22 +24,22 @@
       <!--list section-->
       <div ng-if="isAndroid" class="menu-list">
         <!-- <md-subheader class="md-warn">Themes</md-subheader> -->
-        <div class="row menu-item" ng-click="navigateTo('loginadmin.adminqueuelist')">
+        <div class="row menu-item" ng-click="navigateTo('loginadmin.adminpaymentqueueselect')">
           <div class="col-33">
             <i class="fas fa-list"></i>
           </div>
           <div class="col-66">
-            <span>ตรวจสอบคิวรถตู้</span>
+            <span>สรุปข้อมูลการจอง</span>
           </div>
         </div>
-        <div class="row menu-item" ng-click="navigateTo('loginadmin.adminpaymentlist')">
+        <!-- <div class="row menu-item" ng-click="navigateTo('loginadmin.adminpaymentlist')">
           <div class="col-33">
             <i class="fas fa-list"></i>
           </div>
           <div class="col-66">
             <span>รายการแจ้งชำระเงิน</span>
           </div>
-        </div>
+        </div> -->
         <div class="row menu-item" ng-click="btnLogout()">
           <div class="col-33">
             <i class="fas fa-sign-out-alt"></i>
@@ -54,14 +54,14 @@
       <!--It will show animation when selecting row.-->
       <md-list ng-if="!isAndroid">
         <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
-        <md-list-item class="menu-list-item" ng-click="navigateTo('loginadmin.adminqueuelist')">
+        <md-list-item class="menu-list-item" ng-click="navigateTo('loginadmin.adminpaymentqueueselect')">
           <i class="fas fa-list"></i>
-          <span>ตรวจสอบคิวรถตู้</span>
+          <span>สรุปข้อมูลการจอง</span>
         </md-list-item>
-        <md-list-item class="menu-list-item" ng-click="navigateTo('loginadmin.adminpaymentlist')">
+        <!-- <md-list-item class="menu-list-item" ng-click="navigateTo('loginadmin.adminpaymentlist')">
           <i class="fas fa-list"></i>
           <span>รายการแจ้งชำระเงิน</span>
-        </md-list-item>
+        </md-list-item> -->
         <md-list-item class="menu-list-item" ng-click="btnLogout()">
           <i class="fas fa-sign-out-alt"></i>
           <span>ออกจากระบบ</span>

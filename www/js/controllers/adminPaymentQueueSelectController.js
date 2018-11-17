@@ -1,4 +1,4 @@
-appControllers.controller('adminQueueListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicPlatform) {
+appControllers.controller('adminPaymentQueueSelectCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicPlatform) {
   $scope.provinceValue = "selectProvince";
   var iloop = 0;
 
@@ -38,7 +38,7 @@ appControllers.controller('adminQueueListCtrl', function($scope, $timeout, $stat
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด getQueueList ใน adminQueueListController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด getQueueList ใน adminPaymentQueueSelectController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
@@ -62,9 +62,9 @@ appControllers.controller('adminQueueListCtrl', function($scope, $timeout, $stat
     }
   }
 
-  $scope.getInfomation = function(queue_id) {
-    myService.queueDetail.queue_id = queue_id;
-    $state.go('loginadmin.adminqueuedetail');
+  $scope.getInfomation = function(queue) {
+    myService.queueDetail = queue;
+    $state.go('loginadmin.adminpaymentdatetimeselect');
   };
 
   $ionicPlatform.registerBackButtonAction(function() {
@@ -79,7 +79,7 @@ appControllers.controller('adminQueueListCtrl', function($scope, $timeout, $stat
     } else if (jQuery('md-select-menu').length > 0) {
       $mdSelect.hide();
     } else {
-      if ($state.current.name == 'loginadmin.adminqueuelist') {
+      if ($state.current.name == 'loginadmin.adminpaymentqueueselect') {
         if (jQuery('[id^=dialog]').length == 0) {
           $mdDialog.show({
             controller: 'DialogController',
