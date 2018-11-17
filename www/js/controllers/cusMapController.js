@@ -79,9 +79,14 @@ appControllers.controller('cusMapCtrl', function($scope, $state, $stateParams, d
     directionsDisplay.setMap(map);
   }
 
-  function updateMarker() {
+  function updateVanMarker() {
     desLatLng = new google.maps.LatLng($scope.vanPosition.position_latitude, $scope.vanPosition.position_longitude);
     marker2.setPosition(desLatLng);
+  }
+
+  function updateUserMarker() {
+    myLatLng = new google.maps.LatLng($scope.cLocation.latitude, $scope.cLocation.longitude);
+    marker.setPosition(myLatLng);
   }
 
   function getVanPosition(callback) {
@@ -110,12 +115,40 @@ appControllers.controller('cusMapCtrl', function($scope, $state, $stateParams, d
     });
   };
 
+  function fnInitMap() {
+    getCurrentLocation(function(status) {
+      getVanPosition(function(status) {
+        googleMap();
+      });
+    });
+  }
+
   $ionicPlatform.ready(function() {
     $scope.initMap();
-    setInterval(function() {
-      getVanPosition(function(status) {
-        updateMarker();
+    $scope.updatePosition = setInterval(function() {
+      getCurrentLocation(function(status) {
+        updateUserMarker();
+        getVanPosition(function(status) {
+          updateVanMarker();
+        });
       });
     }, 60000);
   });
+
+  function clearSetInterval() {
+    clearInterval($scope.updatePosition);
+  }
+
+  $scope.btnRefresh = function() {
+    clearInterval();
+    fnInitMap();
+    $scope.updatePosition = setInterval(function() {
+      getCurrentLocation(function(status) {
+        updateUserMarker();
+        getVanPosition(function(status) {
+          updateVanMarker();
+        });
+      });
+    }, 60000);
+  };
 });
