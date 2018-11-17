@@ -177,6 +177,7 @@ appControllers.controller('ownPaymentDetailCtrl', function($scope, $timeout, $st
           var_bookingid: booking_id,
         }
       }).then(function(response) {
+        $http.get(myService.configAPI.webserviceURL + 'webservices/updateMemberPromotion.php?bookingid=' + booking_id);
         $mdDialog.show({
           controller: 'DialogController',
           templateUrl: 'confirm-dialog.html',
