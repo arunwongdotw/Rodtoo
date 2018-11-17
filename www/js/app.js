@@ -23,8 +23,8 @@ if ((window.localStorage.memberUsername == "") || (window.localStorage.memberUse
     url = "/loginvan/vanprofile";
     state = "loginvan.vanprofile";
   } else if (window.localStorage.memberType == "4") {
-    url = "/loginadmin/adminpaymentlist";
-    state = "loginadmin.adminpaymentlist";
+    url = "/loginadmin/adminpaymentqueueselect";
+    state = "loginadmin.adminpaymentqueueselect";
   }
 }
 
@@ -919,25 +919,25 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                     }
                 }
             })
-            .state('loginadmin.adminqueuelist', {
-                url: "/adminqueuelist",
+            .state('loginadmin.adminpaymentqueueselect', {
+                url: "/adminpaymentqueueselect",
                 cache: false,
                 reload: true,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/admin-queue-list.html",
-                        controller: 'adminQueueListCtrl'
+                        templateUrl: "templates/admin-payment-queue-select.html",
+                        controller: 'adminPaymentQueueSelectCtrl'
                     }
                 }
             })
-            .state('loginadmin.adminqueuedetail', {
-                url: "/adminqueuedetail",
+            .state('loginadmin.adminpaymentdatetimeselect', {
+                url: "/adminpaymentdatetimeselect",
                 cache: false,
                 reload: true,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/admin-queue-detail.html",
-                        controller: 'adminQueueDetailCtrl'
+                        templateUrl: "templates/admin-payment-datetime-select.html",
+                        controller: 'adminPaymentDatetimeSelectCtrl'
                     }
                 }
             })
@@ -971,6 +971,17 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                     'menuContent': {
                         templateUrl: "templates/edit-promotion.html",
                         controller: 'editPromotionCtrl'
+                    }
+                }
+            })
+            .state('logincus.cuspromotionlist', {
+                url: "/cuspromotionlist",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/cus-promotion-list.html",
+                        controller: 'cusPromotionListCtrl'
                     }
                 }
             });
