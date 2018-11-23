@@ -1,0 +1,25 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>เลือกรถตู้ฝากของ</ion-nav-title>
+  <ion-content id="online-course-content">
+    <div style="text-align: center; margin-top: 20px; font-weight: bold; font-size: 16px; color: #666;" ng-if="ownVanArrayList == null">ไม่พบรายการข้อมูลรถตู้</div>
+    <div class="course-list" style="margin-top: 0px;">
+      <div class="course-item" ng-repeat="ownVan in ownVanArrayList">
+        <div class="title ionic-course-background" style="background-color: #3F51B5 !important">
+          หมายเลขรถตู้ : {{ownVan.van_queue_no}}
+        </div>
+        <div class="content">
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="ownVan.van_status == 1">สถานะรถตู้ : <text style="color: red;">ยังไม่ได้รับการยืนยัน</text></p>
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;" ng-if="ownVan.van_status == 2">สถานะรถตู้ : <text style="color: green;">ได้รับการยืนยัน</text></p>
+          <p style="padding: 5px 10px 0px 10px;">
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="codeList(ownVan)">
+              <i class="fas fa-info-circle"></i> รายการโค้ด
+            </a>
+            <a href="" class="md-raised md-button md-default-theme angular-course-background" style="background-color: #3F51B5 !important" ng-click="generateCode(ownVan)">
+              <i class="fas fa-info-circle"></i> สร้างโค้ดติดตามฝากของ
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

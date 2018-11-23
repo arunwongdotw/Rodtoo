@@ -138,6 +138,9 @@
     <script src="js/controllers/addPromotionController.js"></script>
     <script src="js/controllers/editPromotionController.js"></script>
     <script src="js/controllers/cusPromotionListController.js"></script>
+    <script src="js/controllers/ownDepositGenerateCodeController.js"></script>
+    <script src="js/controllers/ownDepositVanSelectController.js"></script>
+    <script src="js/controllers/ownDepositCodeListController.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPDCwyMVuyLhnPR2nNy1vUJAVJV6lRlHg"></script>
     <!-- end Controllers section-->
 
@@ -186,6 +189,28 @@
         </form>
     </md-dialog>
 </script> <!-- end share template confirm-dialog section-->
+
+<script type="text/ng-template" id="input-dialog.html">
+    <md-dialog aria-label="confirm-dialog">
+        <form>
+            <md-dialog-content>
+                <div>
+                    <h2 class="md-title">{{displayOption.title}}</h2>
+                    <p>{{displayOption.content}}</p>
+                    <input type="text" class="user-password" placeholder="{{displayOption.inputplaceholder}}" ng-model="input.code"></input>
+                </div>
+            </md-dialog-content>
+            <div class="md-actions" layout="row">
+                <a class="md-primary-color dialog-action-btn" ng-click="cancel()">
+                    {{displayOption.cancel}}
+                </a>
+                <a class="md-primary-color dialog-action-btn" ng-click="ok()">
+                    {{displayOption.ok}}
+                </a>
+            </div>
+        </form>
+    </md-dialog>
+</script>
 
 <!-- Share template toast section-->
 <script type="text/ng-template" id="toast.html">

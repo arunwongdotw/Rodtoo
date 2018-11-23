@@ -36,4 +36,5 @@ angular.module('starter')
     this.editPromotion = {};
     this.vanDetail = {};
     this.queueDetail = {};
+    this.inputDialog = {}; // object เก็บข้อมูล input จาก input dialog
   });

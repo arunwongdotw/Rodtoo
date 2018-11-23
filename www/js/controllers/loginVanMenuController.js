@@ -21,49 +21,106 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
   }
 
   $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      $mdSidenav('left').close();
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAndroid == false ? 300 : 0));
+    if (stateName != "loginvan.vanmap") {
+      checkVanStatus(function(status) {
+        $timeout(function() {
+          $mdSidenav('left').close();
+          if ($ionicHistory.currentStateName() != stateName) {
+            $ionicHistory.nextViewOptions({
+              disableAnimate: true,
+              disableBack: true
+            });
+            $state.go(stateName);
+          }
+        }, ($scope.isAndroid == false ? 300 : 0));
+      });
+    } else {
+      $timeout(function() {
+        $mdSidenav('left').close();
+        if ($ionicHistory.currentStateName() != stateName) {
+          $ionicHistory.nextViewOptions({
+            disableAnimate: true,
+            disableBack: true
+          });
+          $state.go(stateName);
+        }
+      }, ($scope.isAndroid == false ? 300 : 0));
+    }
   };
+
+  function checkVanStatus(callback) {
+    $http({
+      url: myService.configAPI.webserviceURL + 'webservices/checkVanStatusByID.php',
+      method: 'POST',
+      data: {
+        var_memberid: $scope.memberDetail.member_id
+      }
+    }).then(function(response) {
+      if (response.data.results == "checkVanStatus_isOne") {
+        callback();
+      } else if (response.data.results == "checkVanStatus_isTwo") {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "สถานะการเดินทางของรถตู้ไม่ถูกต้อง !",
+              content: "กรุณากดหยุดเดินทางก่อนเปลี่ยนเมนู",
+              ok: "ตกลง"
+            }
+          }
+        });
+      }
+    }, function(error) {
+      $mdDialog.show({
+        controller: 'DialogController',
+        templateUrl: 'confirm-dialog.html',
+        locals: {
+          displayOption: {
+            title: "เกิดข้อผิดพลาด !",
+            content: "เกิดข้อผิดพลาด checkVanStatus ใน vanMapController ระบบจะปิดอัตโนมัติ",
+            ok: "ตกลง"
+          }
+        }
+      }).then(function(response) {
+        ionic.Platform.exitApp();
+      });
+    });
+  }
 
   $scope.closeSideNav = function() {
     $mdSidenav('left').close();
   };
 
   $scope.btnLogout = function() {
-    $mdDialog.show({
-      controller: 'DialogController',
-      templateUrl: 'confirm-dialog.html',
-      locals: {
-        displayOption: {
-          title: "ออกจากระบบ ?",
-          content: "คุณต้องการที่จะออกจากระบบ",
-          ok: "ตกลง",
-          cancel: "ยกเลิก"
-        }
-      }
-    }).then(function(response) {
-      var uuid = $cordovaDevice.getUUID();
-      window.localStorage.memberUsername = "";
-      window.localStorage.memberType = "";
-      $http({
-        url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
-        method: 'POST',
-        data: {
-          var_uuid: uuid,
-          var_token: window.localStorage.token,
-          var_memberid: myService.memberDetailFromLogin.member_id
+    checkVanStatus(function(status) {
+      $mdDialog.show({
+        controller: 'DialogController',
+        templateUrl: 'confirm-dialog.html',
+        locals: {
+          displayOption: {
+            title: "ออกจากระบบ ?",
+            content: "คุณต้องการที่จะออกจากระบบ",
+            ok: "ตกลง",
+            cancel: "ยกเลิก"
+          }
         }
       }).then(function(response) {
-        // window.localStorage.clear();
-        $state.go('notlogin.login');
+        var uuid = $cordovaDevice.getUUID();
+        window.localStorage.memberUsername = "";
+        window.localStorage.memberType = "";
+        $http({
+          url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
+          method: 'POST',
+          data: {
+            var_uuid: uuid,
+            var_token: window.localStorage.token,
+            var_memberid: myService.memberDetailFromLogin.member_id
+          }
+        }).then(function(response) {
+          // window.localStorage.clear();
+          $state.go('notlogin.login');
+        });
       });
     });
   };

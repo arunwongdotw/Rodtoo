@@ -1,6 +1,21 @@
 <ion-view>
   <ion-nav-title>แผนที่</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
   <ion-content>
     <div id="map" style="height: 100vw; position: relative;"></div>
+    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">ข้อมูลการเดินทาง</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">คิวรถตู้ : {{vanPosition.queue_name}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ชื่อ-นามสกุลผู้ดูแลคิวรถตู้ : {{vanPosition.member_firstname}} {{vanPosition.member_lastname}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เบอร์โทรศัพท์ผู้ดูแลคิวรถตู้ : {{vanPosition.member_phone}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เดินทางกับรถตู้หมายเลข : {{vanPosition.van_queue_no}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">รถตู้หมายเลขทะเบียน : {{vanPosition.van_plate_no}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ชื่อ-นามสกุลผู้ขับรถตู้ : {{vanMemberDetail.member_firstname}} {{vanMemberDetail.member_lastname}}</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เบอร์โทรศัพท์ผู้ขับรถตู้: {{vanMemberDetail.member_phone}}</p>
+    </div>
   </ion-content>
 </ion-view>

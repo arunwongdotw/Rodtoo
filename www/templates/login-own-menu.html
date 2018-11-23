@@ -88,6 +88,14 @@
             <span>จัดการโปรโมชั่น</span>
           </div>
         </div>
+        <div class="row menu-item" ng-click="checkQueue('loginown.owndeposit')">
+          <div class="col-33">
+            <i class="fas fa-list"></i>
+          </div>
+          <div class="col-66">
+            <span>ฝากของ</span>
+          </div>
+        </div>
         <div class="row menu-item" ng-click="btnLogout()">
           <div class="col-33">
             <i class="fas fa-sign-out-alt"></i>
@@ -133,6 +141,10 @@
         <md-list-item class="menu-list-item" ng-click="checkQueue('loginown.ownpromotionlist')">
           <i class="fas fa-list"></i>
           <span>จัดการโปรโมชั่น</span>
+        </md-list-item>
+        <md-list-item class="menu-list-item" ng-click="checkQueue('loginown.owndeposit')">
+          <i class="fas fa-list"></i>
+          <span>ฝากของ</span>
         </md-list-item>
         <md-list-item class="menu-list-item" ng-click="btnLogout()">
           <i class="fas fa-sign-out-alt"></i>

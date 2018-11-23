@@ -1,6 +1,7 @@
 appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, deviceService, $rootScope, $ionicPlatform, $interval, $timeout, $http, myService, $mdDialog, $mdSidenav) {
   $scope.cLocation = {};
   var map, marker, marker2, myLatLng, desLatLng, directionsService, directionsDisplay, mapOptions;
+
   function getCurrentLocation(callback) {
     deviceService.checkGPS(function(status) {
       if (status == 'GPS_OFF') {
@@ -98,6 +99,7 @@ appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, d
         var_status: "2"
       }
     }).then(function(response) {
+      console.log(response);
       callback();
     }, function(error) {
       $mdDialog.show({

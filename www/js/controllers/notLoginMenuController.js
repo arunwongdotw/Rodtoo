@@ -9,21 +9,137 @@ appControllers.controller('notLoginMenuCtrl', function($scope, $timeout, $mdUtil
   }
 
   $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      $mdSidenav('left').close();
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAndroid == false ? 300 : 0));
+    if (stateName == "notlogin.map") {
+      inputCode(function(status) {
+        $timeout(function() {
+          $mdSidenav('left').close();
+          if ($ionicHistory.currentStateName() != stateName) {
+            $ionicHistory.nextViewOptions({
+              disableAnimate: true,
+              disableBack: true
+            });
+            $state.go(stateName);
+          }
+        }, ($scope.isAndroid == false ? 300 : 0));
+      });
+    } else {
+      $timeout(function() {
+        $mdSidenav('left').close();
+        if ($ionicHistory.currentStateName() != stateName) {
+          $ionicHistory.nextViewOptions({
+            disableAnimate: true,
+            disableBack: true
+          });
+          $state.go(stateName);
+        }
+      }, ($scope.isAndroid == false ? 300 : 0));
+    }
   };
 
   $scope.closeSideNav = function() {
     $mdSidenav('left').close();
   };
+
+  function inputCode(callback) {
+    $mdDialog.show({
+        controller: 'inputDialogController',
+        templateUrl: 'input-dialog.html',
+        locals: {
+          displayOption: {
+            title: "ติดตามการฝากของ ?",
+            content: "คุณต้องการที่จะติดตามการฝากของ",
+            inputplaceholder: "กรุณากรอกโค้ด",
+            ok: "ยืนยัน",
+            cancel: "ยกเลิก"
+          }
+        }
+      }).then(function(response) {
+        $http({
+          url: myService.configAPI.webserviceURL + 'webservices/checkCode.php',
+          method: 'POST',
+          data: {
+            var_code: myService.inputDialog.code
+          }
+        }).then(function(response) {
+          if (response.data.results == "checkCode_notHaveCode") {
+            $mdDialog.show({
+              controller: 'DialogController',
+              templateUrl: 'confirm-dialog.html',
+              locals: {
+                displayOption: {
+                  title: "โค้ดไม่ถูกต้อง !",
+                  content: "ไม่พบโค้ดในระบบ กรุณากรอกโค้ดใหม่",
+                  ok: "ตกลง"
+                }
+              }
+            });
+          } else if (response.data.results == "checkCode_vanNotStart") {
+            $mdDialog.show({
+              controller: 'DialogController',
+              templateUrl: 'confirm-dialog.html',
+              locals: {
+                displayOption: {
+                  title: "ติดตามการฝากของไม่ถูกต้อง !",
+                  content: "รถตู้ยังไม่ได้ออกเดินทาง กรุณาลองใหม่ภายหลัง",
+                  ok: "ตกลง"
+                }
+              }
+            });
+          } else if (response.data.results == "checkCode_codeUnavailable") {
+            $mdDialog.show({
+              controller: 'DialogController',
+              templateUrl: 'confirm-dialog.html',
+              locals: {
+                displayOption: {
+                  title: "โค้ดไม่ถูกต้อง !",
+                  content: "โค้ดนี้ไม่สามารถใช้งานได้แล้ว",
+                  ok: "ตกลง"
+                }
+              }
+            });
+          } else if (response.data.results == "checkCode_codeAvailable") {
+            myService.vanDetail.van_id = response.data.vanid;
+            $http({
+              url: myService.configAPI.webserviceURL + 'webservices/insertCodeUsed.php',
+              method: 'POST',
+              data: {
+                var_code: myService.inputDialog.code
+              }
+            }).then(function(response) {
+              callback();
+            }, function(response) {
+              $mdDialog.show({
+                controller: 'DialogController',
+                templateUrl: 'confirm-dialog.html',
+                locals: {
+                  displayOption: {
+                    title: "เกิดข้อผิดพลาด !",
+                    content: "เกิดข้อผิดพลาด checkCode ใน notLoginMenuController ระบบจะปิดอัตโนมัติ",
+                    ok: "ตกลง"
+                  }
+                }
+              }).then(function(response) {
+                ionic.Platform.exitApp();
+              });
+            });
+          }
+        }, function(error) {
+          $mdDialog.show({
+            controller: 'DialogController',
+            templateUrl: 'confirm-dialog.html',
+            locals: {
+              displayOption: {
+                title: "เกิดข้อผิดพลาด !",
+                content: "เกิดข้อผิดพลาด checkCode ใน notLoginMenuController ระบบจะปิดอัตโนมัติ",
+                ok: "ตกลง"
+              }
+            }
+          }).then(function(response) {
+            ionic.Platform.exitApp();
+          });
+        });
+      });
+  }
 
   $ionicPlatform.registerBackButtonAction(function() {
     if ($mdSidenav("left").isOpen()) {

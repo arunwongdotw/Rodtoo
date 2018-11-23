@@ -405,7 +405,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
 
     })
 
-    .config(function ($ionicConfigProvider, $stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider, $mdColorPalette, $mdIconProvider, ionicDatePickerProvider, ionicTimePickerProvider) {
+    .config(function ($ionicConfigProvider, $stateProvider, $urlRouterProvider, $mdThemingProvider, $mdColorPalette, $mdIconProvider, ionicDatePickerProvider, ionicTimePickerProvider) {
         var datePickerObj = {
             inputDate: new Date(),
             titleLabel: 'Select a Date',
@@ -982,6 +982,39 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                     'menuContent': {
                         templateUrl: "templates/cus-promotion-list.html",
                         controller: 'cusPromotionListCtrl'
+                    }
+                }
+            })
+            .state('loginown.owndepositgeneratecode', {
+                url: "/owndepositgeneratecode",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-deposit-generate-code.html",
+                        controller: 'ownDepositGenerateCodeCtrl'
+                    }
+                }
+            })
+            .state('loginown.owndepositvanselect', {
+                url: "/owndepositvanselect",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-deposit-van-select.html",
+                        controller: 'ownDepositVanSelectCtrl'
+                    }
+                }
+            })
+            .state('loginown.owndepositcodelist', {
+                url: "/owndepositcodelist",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-deposit-code-list.html",
+                        controller: 'ownDepositCodeListCtrl'
                     }
                 }
             });

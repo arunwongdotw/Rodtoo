@@ -1,0 +1,17 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>รายการโค้ดติดตามฝากของ</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content id="online-course-content">
+    <div style="text-align: center; margin-top: 20px; font-weight: bold; font-size: 16px; color: #666;" ng-if="codeArrayList == null">ไม่พบรายการข้อมูลโค้ดติดตามฝากของ</div>
+    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;" ng-if="codeArrayList != null">
+      <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">รายการข้อมูลโค้ดติดตามฝากของ</p>
+      <div ng-repeat="code in codeArrayList">
+        <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">{{$index + 1}}. {{code.code_code}}</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

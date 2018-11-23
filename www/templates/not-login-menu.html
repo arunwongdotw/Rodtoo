@@ -40,6 +40,14 @@
             <span>สมัครสมาชิก</span>
           </div>
         </div>
+        <div class="row menu-item" ng-click="navigateTo('notlogin.map')">
+          <div class="col-33">
+            <i class="fas fa-search-location"></i>
+          </div>
+          <div class="col-66">
+            <span>ติดตามการฝากของ</span>
+          </div>
+        </div>
       </div>
 
       <!--If device is not Android application will present below code.-->
@@ -53,6 +61,10 @@
         <md-list-item class="menu-list-item" ng-click="navigateTo('notlogin.signup')">
           <i class="fa fa fa-registered"></i>
           <span>สมัครสมาชิก</span>
+        </md-list-item>
+        <md-list-item class="menu-list-item" ng-click="navigateTo('notlogin.map')">
+          <i class="fas fa-search-location"></i>
+          <span>ติดตามการฝากของ</span>
         </md-list-item>
       </md-list>
     </ion-content>

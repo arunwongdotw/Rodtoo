@@ -1,4 +1,4 @@
-appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $cordovaFileTransfer, $cordovaCamera, $cordovaDevice) {
+appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $cordovaFileTransfer, $cordovaCamera, $cordovaDevice, $ionicPlatform, $mdSidenav) {
   $scope.signup = {};
   $scope.memberTypeValue = "selectType";
   $scope.addressValue = "select";
@@ -554,4 +554,40 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
       });
     }
   };
+
+  $ionicPlatform.registerBackButtonAction(function() {
+    if ($mdSidenav("left").isOpen()) {
+      $mdSidenav('left').close();
+    } else if (jQuery('md-bottom-sheet').length > 0) {
+      $mdBottomSheet.cancel();
+    } else if (jQuery('[id^=dialog]').length > 0) {
+      $mdDialog.cancel();
+    } else if (jQuery('md-menu-content').length > 0) {
+      $mdMenu.hide();
+    } else if (jQuery('md-select-menu').length > 0) {
+      $mdSelect.hide();
+    } else {
+      if ($state.current.name == 'notlogin.signup') {
+        if (jQuery('[id^=dialog]').length == 0) {
+          $mdDialog.show({
+            controller: 'DialogController',
+            templateUrl: 'confirm-dialog.html',
+            targetEvent: null,
+            locals: {
+              displayOption: {
+                title: "การยืนยัน",
+                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน ?",
+                ok: "ยืนยัน",
+                cancel: "ยกเลิก"
+              }
+            }
+          }).then(function(response) {
+            ionic.Platform.exitApp();
+          });
+        }
+      } else {
+        $ionicHistory.goBack();
+      }
+    }
+  }, 100);
 });

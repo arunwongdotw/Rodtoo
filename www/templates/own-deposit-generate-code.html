@@ -1,0 +1,13 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>สร้างโค้ดติดตามฝากของ</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content id="online-course-content">
+    <h1 style="margin-top: 20px; text-align: center;">{{code}}</h1>
+    <center><a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnCodeGenerate()">สร้างโค้ด</a></center>
+    <div style="text-align: center; margin: 20px 20px 0 20px; font-weight: bold; font-size: 16px; color: red;">* ระบบจะคิดค่าบริการจากจำนวนการสร้างโค้ด หากกดผิดกรุณาติดต่อผู้ดูแลระบบ <br>Line: xxxxx หรือโทร. xxx-xxxxxxx</div>
+  </ion-content>
+</ion-view>
