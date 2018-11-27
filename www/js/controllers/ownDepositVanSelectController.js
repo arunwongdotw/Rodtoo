@@ -1,11 +1,8 @@
   appControllers.controller('ownDepositVanSelectCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate, $ionicPlatform) {
-  // myService.memberDetailFromLogin.member_id = "5";
-  // console.log(myService.memberDetailFromLogin.member_id);
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnVanList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
       $scope.ownVanArrayList = response.data.results;
-      console.log($scope.ownVanArrayList);
     }, function(error) {
       $mdDialog.show({
         controller: 'DialogController',

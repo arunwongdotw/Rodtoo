@@ -1,4 +1,4 @@
-appControllers.controller('notLoginMenuCtrl', function($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect, $http, myService) {
+appControllers.controller('notLoginMenuCtrl', function($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect, $http, myService, $cordovaDevice) {
   $scope.toggleLeft = buildToggler('left');
 
   function buildToggler(navID) {
@@ -54,6 +54,7 @@ appControllers.controller('notLoginMenuCtrl', function($scope, $timeout, $mdUtil
           }
         }
       }).then(function(response) {
+        var uuid = $cordovaDevice.getUUID();
         $http({
           url: myService.configAPI.webserviceURL + 'webservices/checkCode.php',
           method: 'POST',
@@ -103,10 +104,26 @@ appControllers.controller('notLoginMenuCtrl', function($scope, $timeout, $mdUtil
               url: myService.configAPI.webserviceURL + 'webservices/insertCodeUsed.php',
               method: 'POST',
               data: {
-                var_code: myService.inputDialog.code
+                var_code: myService.inputDialog.code,
+                var_uuid: uuid
               }
             }).then(function(response) {
-              callback();
+              console.log(response);
+              if (response.data.results == "insertCodeUsed_notEqual") {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "โค้ดไม่ถูกต้อง !",
+                      content: "โค้ดนี้ถูกใช้งานโดยโทรศัพท์เครื่องอื่นแล้ว",
+                      ok: "ตกลง"
+                    }
+                  }
+                });
+              } else {
+                callback();
+              }
             }, function(response) {
               $mdDialog.show({
                 controller: 'DialogController',

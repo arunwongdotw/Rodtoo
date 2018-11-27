@@ -51,7 +51,7 @@ appControllers.controller('ownDepositGenerateCodeCtrl', function($scope, $timeou
 
   function makeid(callback) {
     var code = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    var possible = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
     for (var i = 0; i < 6; i++) {
       code += possible.charAt(Math.floor(Math.random() * possible.length));
     }
@@ -87,44 +87,41 @@ appControllers.controller('ownDepositGenerateCodeCtrl', function($scope, $timeou
       }
     }).then(function(response) {
       makeid(function(status) {
-        var code = status;
-        concatCodeWithPlate(code, function(status) {
-          var fullCode = status;
-          $http({
-            url: myService.configAPI.webserviceURL + 'webservices/insertCode.php',
-            method: 'POST',
-            data: {
-              var_code: fullCode,
-              var_memberid: myService.memberDetailFromLogin.member_id,
-              var_vanid: myService.vanDetail.van_id
+        var fullCode = status;
+        $http({
+          url: myService.configAPI.webserviceURL + 'webservices/insertCode.php',
+          method: 'POST',
+          data: {
+            var_code: fullCode,
+            var_memberid: myService.memberDetailFromLogin.member_id,
+            var_vanid: myService.vanDetail.van_id
+          }
+        }).then(function(response) {
+          $scope.code = fullCode;
+          $mdDialog.show({
+            controller: 'DialogController',
+            templateUrl: 'confirm-dialog.html',
+            locals: {
+              displayOption: {
+                title: "สร้างโค้ดฝากของสำเร็จ !",
+                content: "คุณสามารถสร้างโค้ดฝากของสำเร็จ",
+                ok: "ตกลง"
+              }
+            }
+          });
+        }, function(error) {
+          $mdDialog.show({
+            controller: 'DialogController',
+            templateUrl: 'confirm-dialog.html',
+            locals: {
+              displayOption: {
+                title: "เกิดข้อผิดพลาด !",
+                content: "เกิดข้อผิดพลาด btnCodeGenerate ใน ownDepositGenerateCodeController ระบบจะปิดอัตโนมัติ",
+                ok: "ตกลง"
+              }
             }
           }).then(function(response) {
-            $scope.code = fullCode;
-            $mdDialog.show({
-              controller: 'DialogController',
-              templateUrl: 'confirm-dialog.html',
-              locals: {
-                displayOption: {
-                  title: "สร้างโค้ดฝากของสำเร็จ !",
-                  content: "คุณสามารถสร้างโค้ดฝากของสำเร็จ",
-                  ok: "ตกลง"
-                }
-              }
-            });
-          }, function(error) {
-            $mdDialog.show({
-              controller: 'DialogController',
-              templateUrl: 'confirm-dialog.html',
-              locals: {
-                displayOption: {
-                  title: "เกิดข้อผิดพลาด !",
-                  content: "เกิดข้อผิดพลาด btnCodeGenerate ใน ownDepositGenerateCodeController ระบบจะปิดอัตโนมัติ",
-                  ok: "ตกลง"
-                }
-              }
-            }).then(function(response) {
-              ionic.Platform.exitApp();
-            });
+            ionic.Platform.exitApp();
           });
         });
       });
