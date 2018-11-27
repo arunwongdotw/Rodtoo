@@ -42,7 +42,7 @@ appControllers.controller('ownVanSelectCtrl', function($scope, $timeout, $state,
       templateUrl: 'confirm-dialog.html',
       locals: {
         displayOption: {
-          title: "เลือกรถตู้คันนี้ให้กับการจองรายการนี้ ?",
+          title: "เลือกรถตู้ ?",
           content: "คุณแน่ใจที่จะเลือกรถตู้คันนี้ให้กับการจองรายการนี้",
           ok: "ตกลง",
           cancel: "ยกเลิก"
