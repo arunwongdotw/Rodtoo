@@ -47,6 +47,57 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
     $scope.navigateTo('logincus.cusbookinglist');
   };
 
+  $scope.btnConfirm = function(booking_id) {
+    $mdDialog.show({
+      controller: 'DialogController',
+      templateUrl: 'confirm-dialog.html',
+      locals: {
+        displayOption: {
+          title: "ยืนยันการขึ้นรถ ?",
+          content: "คุณแน่ใจที่จะยืนยันการขึ้นรถ",
+          ok: "ตกลง",
+          cancel: "ยกเลิก"
+        }
+      }
+    }).then(function(response) {
+      $http({
+        url: myService.configAPI.webserviceURL + 'webservices/confirmGetOn.php',
+        method: 'POST',
+        data: {
+          var_bookingid: booking_id
+        }
+      }).then(function(response) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "ยืนยันการขึ้นรถสำเร็จ !",
+              content: "คุณยืนยันการขึ้นรถสำเร็จก",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          $state.go('logincus.cusbookinglist');
+        });
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด btnConfirm ใน cusBookingDetailController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+    });
+  };
+
   function getOriginProvince(origin_province_id) {
     $http.get(myService.configAPI.webserviceURL + 'webservices/getOriginProvinceDetail.php?provinceid=' + origin_province_id)
       .then(function(response) {
