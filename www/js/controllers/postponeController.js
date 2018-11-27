@@ -1,4 +1,4 @@
-appControllers.controller('postponeCtrl', function($scope, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, ionicDatePicker, ionicTimePicker) {
+appControllers.controller('postponeCtrl', function($scope, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, ionicDatePicker, ionicTimePicker, $timeout, $mdSidenav) {
   $scope.booking = {};
   var selectHour;
   var fullDate = new Date();
@@ -90,17 +90,17 @@ appControllers.controller('postponeCtrl', function($scope, $state, $stateParams,
   };
 
   function checkDateTime(callback) {
-    if (selectHour > curHour) {
+    var selectDatetime = $scope.booking.date + " " + $scope.booking.time;
+    var fullSelectDate = new Date(selectDatetime);
+    var fullCurDate = new Date();
+    var timeDiff = Math.abs(fullSelectDate.getTime() - fullCurDate.getTime());
+    var hoursDiff = timeDiff / 3600000;
+    if (hoursDiff >= 2) {
       $scope.checkDateTime = true;
       callback();
     } else {
-      if ($scope.booking.date > fullDateWithoutTime) {
-        $scope.checkDateTime = true;
-        callback();
-      } else {
-        $scope.checkDateTime = false;
-        callback();
-      }
+      $scope.checkDateTime = false;
+      callback();
     }
   }
 
@@ -109,30 +109,54 @@ appControllers.controller('postponeCtrl', function($scope, $state, $stateParams,
       if (typeof $scope.booking.time != 'undefined') {
         checkDateTime(function(status) {
           if ($scope.checkDateTime == true) {
-            console.log('test');
-            $http({
-              url: myService.configAPI.webserviceURL + 'webservices/postpone.php',
-              method: 'POST',
-              data: {
-                var_bookingid: myService.bookingIDInList.booking_id,
-                var_date: $scope.booking.date,
-                var_time: $scope.booking.time
+            $mdDialog.show({
+              controller: 'DialogController',
+              templateUrl: 'confirm-dialog.html',
+              locals: {
+                displayOption: {
+                  title: "เลื่อนเที่ยวรถตู้ ?",
+                  content: "คุณแน่ใจที่จะเลื่อนเที่ยวรถตู้",
+                  ok: "ตกลง",
+                  cancel: "ยกเลิก"
+                }
               }
             }).then(function(response) {
-              console.log(response);
-            }, function(error) {
-              $mdDialog.show({
-                controller: 'DialogController',
-                templateUrl: 'confirm-dialog.html',
-                locals: {
-                  displayOption: {
-                    title: "เกิดข้อผิดพลาด !",
-                    content: "เกิดข้อผิดพลาด btnPostpone ใน postponeController ระบบจะปิดอัตโนมัติ",
-                    ok: "ตกลง"
-                  }
+              $http({
+                url: myService.configAPI.webserviceURL + 'webservices/postpone.php',
+                method: 'POST',
+                data: {
+                  var_bookingid: myService.bookingIDInList.booking_id,
+                  var_date: $scope.booking.date,
+                  var_time: $scope.booking.time
                 }
               }).then(function(response) {
-                ionic.Platform.exitApp();
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "เลื่อนเที่ยวรถตู้สำเร็จ !",
+                      content: "คุณเลื่อนเที่ยวรถตู้สำเร็จ",
+                      ok: "ตกลง"
+                    }
+                  }
+                }).then(function(response) {
+                  $state.go('logincus.cusbookinglist');
+                });
+              }, function(error) {
+                $mdDialog.show({
+                  controller: 'DialogController',
+                  templateUrl: 'confirm-dialog.html',
+                  locals: {
+                    displayOption: {
+                      title: "เกิดข้อผิดพลาด !",
+                      content: "เกิดข้อผิดพลาด btnPostpone ใน postponeController ระบบจะปิดอัตโนมัติ",
+                      ok: "ตกลง"
+                    }
+                  }
+                }).then(function(response) {
+                  ionic.Platform.exitApp();
+                });
               });
             });
           } else {
@@ -142,7 +166,7 @@ appControllers.controller('postponeCtrl', function($scope, $state, $stateParams,
               locals: {
                 displayOption: {
                   title: "เวลาขึ้นรถตู้ไม่ถูกต้อง !",
-                  content: "กรุณาเลือกเวลาขึ้นรถตู้ให้มากกว่าเวลาในปัจจุบัน",
+                  content: "กรุณาจองรถตู้ก่อนเวลาเดินทางอย่างน้อย 2 ชั่วโมง",
                   ok: "ตกลง"
                 }
               }
