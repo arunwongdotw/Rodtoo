@@ -6,7 +6,7 @@
     </a>
   </ion-nav-buttons>
   <ion-content id="online-course-content">
-    <div style="text-align: center; margin-top: 20px; font-weight: bold; font-size: 16px; color: #666;">* กรณีขึ้นรถตู้ที่คิวรถตู้ กรุณามาก่อนเวลาอย่างน้อย 20 นาที</div>
+    <div style="text-align: center; margin-top: 20px; font-weight: bold; font-size: 16px; color: #666;">* กรณีขึ้นที่คิวรถตู้ กรุณามาก่อนเวลาอย่างน้อย 20 นาที</div>
     <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
       <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">สถานะการจองรถตู้</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="bookingDetail.booking_status == 1">สถานะการจองรถตู้ : <text style="color: red;">ยังไม่แจ้งชำระเงิน</text></p>
@@ -17,7 +17,8 @@
     </div>
     <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
       <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">ข้อมูลการจองรถตู้</p>
-      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ค่าบริการ : {{bookingDetail.point_price}} บาท</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ค่าบริการรถตู้ : {{bookingDetail.point_price}} บาท</p>
+      <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">จำนวนที่นั่ง : {{bookingDetail.booking_seats}}</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ค่าธรรมเนียม : {{bookingDetail.booking_fee}} บาท</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ยอดชำระทั้งหมด : {{bookingDetail.booking_price}} บาท</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">วันเวลาการจองรถตู้ : {{bookingDetail.booking_datetime}}</p>
@@ -36,12 +37,15 @@
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ผู้จัดการคิวรถตู้ : {{ownerDetail.member_firstname}} {{ownerDetail.member_lastname}}</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เบอร์โทรศัพท์ : {{ownerDetail.member_phone}}</p>
     </div>
-    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; margin-bottom: 20px; border: 3px solid #3F51B5; border-radius: 5px;" ng-if="bookingDetail.booking_van_id != 0">
+    <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;" ng-if="bookingDetail.booking_van_id != 0">
       <p style="margin-top: 15px; margin-left: 15px; font-weight: bold; font-size: 18px; color: #666; text-decoration: underline;">ข้อมูลการเดินทาง</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เดินทางกับรถตู้หมายเลข : {{vanDetail.van_queue_no}}</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">รถตู้หมายเลขทะเบียน : {{vanDetail.van_plate_no}}</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">ผู้ขับรถตู้ : {{vanDetail.member_firstname}} {{vanDetail.member_lastname}}</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">เบอร์โทรศัพท์ : {{vanDetail.member_phone}}</p>
+    </div>
+    <div>
+      <center><a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnConfirm(bookingDetail.booking_id)" style="margin-top: 20px; width: 90%;" ng-if="bookingDetail.booking_status == 3 && bookingDetail.booking_van_id != 0">ยืนยันการขึ้นรถ</a></center>
     </div>
   </ion-content>
 </ion-view>

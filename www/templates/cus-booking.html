@@ -74,8 +74,52 @@
       <md-option value="selectStop" ng-click="setStopValue('selectStop')">
         เลือกจุดลงรถตู้ *
       </md-option>
-      <md-option value="{{point.point_id}}" ng-repeat="point in pointArrayList" ng-click="getPrice(point.point_id)">
+      <md-option value="{{point.point_id}}" ng-repeat="point in pointArrayList" ng-click="setStop(point.point_id)">
         {{point.point_name}}
+      </md-option>
+    </md-select>
+    <md-select ng-model="seatValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;" ng-if="queueValue != 'selectQueue'">
+      <md-option value="selectSeat" ng-click="setSeatValue('selectSeat')">
+        เลือกจำนวนที่นั่ง *
+      </md-option>
+      <md-option value="1" ng-click="getPrice(1)">
+        1
+      </md-option>
+      <md-option value="2" ng-click="getPrice(2)">
+        2
+      </md-option>
+      <md-option value="3" ng-click="getPrice(3)">
+        3
+      </md-option>
+      <md-option value="4" ng-click="getPrice(4)">
+        4
+      </md-option>
+      <md-option value="5" ng-click="getPrice(5)">
+        5
+      </md-option>
+      <md-option value="6" ng-click="getPrice(6)">
+        6
+      </md-option>
+      <md-option value="7" ng-click="getPrice(7)">
+        7
+      </md-option>
+      <md-option value="8" ng-click="getPrice(8)">
+        8
+      </md-option>
+      <md-option value="9" ng-click="getPrice(9)">
+        9
+      </md-option>
+      <md-option value="10" ng-click="getPrice(10)">
+        10
+      </md-option>
+      <md-option value="11" ng-click="getPrice(11)">
+        11
+      </md-option>
+      <md-option value="12" ng-click="getPrice(12)">
+        12
+      </md-option>
+      <md-option value="13" ng-click="getPrice(13)">
+        13
       </md-option>
     </md-select>
     <md-input-container md-no-float="" ng-if="queueValue != 'selectQueue'">
@@ -88,14 +132,14 @@
         <input class="user-name" placeholder="เวลาขึ้นรถตู้ *" style="width: 300px;" ng-model="booking.time" ng-click="openTimePickerStart()">
       </div>
     </md-input-container>
-    <div style="text-align: center; margin-top: 20px; margin-left: 20px; margin-right: 20px; border: 3px solid #3F51B5;" ng-if="stopValue != 'selectStop'">
+    <div style="text-align: center; margin-top: 20px; margin-left: 20px; margin-right: 20px; border: 3px solid #3F51B5;" ng-if="seatValue != 'selectSeat'">
       <p style="margin-top: 15px; font-weight: bold; font-size: 16px; color: #666;">ค่าบริการรถตู้ : {{bookingDetail.point_price}} บาท</p>
       <p style="font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.fee == 0">ค่าธรรมเนียมการจอง : ฟรี</p>
       <p style="font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.fee != 0">ค่าธรรมเนียมการจอง : {{bookingDetail.fee}} บาท</p>
       <p style="font-weight: bold; font-size: 16px; color: #666;">ยอดชำระทั้งหมด : {{bookingDetail.total_price}} บาท</p>
     </div>
     <div>
-      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnBooking()" ng-if="stopValue != 'selectStop'" style="margin-top: 20px; margin-bottom: 20px;">ยืนยันการจองรถตู้</a>
+      <a class="md-raised social-button md-button md-default-theme material-background" ng-click="btnBooking()" ng-if="seatValue != 'selectSeat'" style="margin-top: 20px; margin-bottom: 20px;">ยืนยันการจองรถตู้</a>
     </div>
   </ion-content>
 </ion-view>

@@ -8,6 +8,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
   $scope.stopValue = "selectStop";
   $scope.getInValue = "selectGetIn";
   $scope.getInPlaceValue = "selectGetInPlace";
+  $scope.seatValue = "selectSeat";
 
   var selectHour;
   var fullDate = new Date();
@@ -41,6 +42,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
     $scope.originDistrictValue = "selectOriginDistrict";
     $scope.queueValue = "selectQueue";
     $scope.getInValue = "selectGetIn";
+    $scope.seatValue = "selectSeat";
     $scope.queueArrayList = "";
     $scope.pointArrayList = "";
     $scope.bookingDetail = null;
@@ -71,6 +73,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
     $scope.destinationDistrictValue = "selectDestinationDistrict";
     $scope.queueValue = "selectQueue";
     $scope.getInValue = "selectGetIn";
+    $scope.seatValue = "selectSeat";
     $scope.queueArrayList = "";
     $scope.pointArrayList = "";
     $scope.bookingDetail = null;
@@ -101,6 +104,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
     $scope.queueValue = "selectQueue";
     $scope.getInValue = "selectGetIn";
     $scope.stopValue = "selectStop";
+    $scope.seatValue = "selectSeat";
     delete $scope.booking.date;
     delete $scope.booking.time;
     if ($scope.originProvinceValue != "selectOriginProvince") {
@@ -164,6 +168,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
     $scope.queueValue = value;
     $scope.getInValue = "selectGetIn";
     $scope.stopValue = "selectStop";
+    $scope.seatValue = "selectSeat";
     $scope.pointArrayList = "";
     delete $scope.booking.date;
     delete $scope.booking.time;
@@ -171,6 +176,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
 
   $scope.setGetIn = function(getin_value) {
     $scope.getInValue = getin_value;
+    $scope.getInPlaceValue = 'selectGetInPlace';
   };
 
   $scope.setGetInValue = function(value) {
@@ -184,10 +190,24 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
 
   $scope.setStopValue = function(value) {
     $scope.stopValue = value;
+    $scope.seatValue = 'selectSeat';
+  };
+
+  $scope.setStop = function(point_id) {
+    $scope.stopValue = point_id;
+    $scope.seatValue = 'selectSeat';
   };
 
   $scope.setGetInPlaceValue = function(value) {
     $scope.getInPlaceValue = value;
+  };
+
+  $scope.setSeatValue = function(value) {
+    $scope.seatValue = value;
+  };
+
+  $scope.setSeat = function(value) {
+    $scope.seatValue = value;
   };
 
   $scope.getQueueList = function(district_id) {
@@ -276,8 +296,8 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
       });
   };
 
-  $scope.getPrice = function(point_id) {
-    $scope.stopValue = point_id;
+  $scope.getPrice = function(seat) {
+    $scope.seatValue = seat;
     $http({
       url: myService.configAPI.webserviceURL + 'webservices/getPrice.php',
       method: 'POST',
@@ -288,16 +308,23 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
     }).then(function(response) {
       if (response.data.response == "getPrice_isFree") {
         $scope.bookingDetail = response.data.results[0];
+        $scope.bookingDetail.point_price = $scope.bookingDetail.point_price * $scope.seatValue;
         $scope.bookingDetail.fee = 0;
         $scope.bookingDetail.total_price = parseInt($scope.bookingDetail.point_price) + 0;
       } else if (response.data.response == "getPrice_notFree") {
         $scope.bookingDetail = response.data.results[0];
-        if ($scope.bookingDetail.point_price < 100) {
-          $scope.bookingDetail.fee = $scope.bookingDetail.queue_fee_lessthan_hundred;
-          $scope.bookingDetail.total_price = parseInt($scope.bookingDetail.point_price) + parseInt($scope.bookingDetail.fee);
-        } else if ($scope.bookingDetail.point_price >= 100) {
+        if ($scope.seatValue > 1) {
+          $scope.bookingDetail.point_price = $scope.bookingDetail.point_price * $scope.seatValue;
           $scope.bookingDetail.fee = $scope.bookingDetail.queue_fee_morethan_hundred;
           $scope.bookingDetail.total_price = parseInt($scope.bookingDetail.point_price) + parseInt($scope.bookingDetail.fee);
+        } else {
+          if ($scope.bookingDetail.point_price < 100) {
+            $scope.bookingDetail.fee = $scope.bookingDetail.queue_fee_lessthan_hundred;
+            $scope.bookingDetail.total_price = parseInt($scope.bookingDetail.point_price) + parseInt($scope.bookingDetail.fee);
+          } else if ($scope.bookingDetail.point_price >= 100) {
+            $scope.bookingDetail.fee = $scope.bookingDetail.queue_fee_morethan_hundred;
+            $scope.bookingDetail.total_price = parseInt($scope.bookingDetail.point_price) + parseInt($scope.bookingDetail.fee);
+          }
         }
       }
     }, function(error) {
@@ -401,6 +428,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                     var_status: 1,
                     var_fee: $scope.bookingDetail.fee,
                     var_total: $scope.bookingDetail.total_price,
+                    var_seat: $scope.seatValue,
                     var_originprovince: $scope.originProvinceValue,
                     var_origindistrict: $scope.originDistrictValue,
                     var_destinationprovince: $scope.destinationProvinceValue,
@@ -456,6 +484,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                       var_status: 1,
                       var_fee: $scope.bookingDetail.fee,
                       var_total: $scope.bookingDetail.total_price,
+                      var_seat: $scope.seatValue,
                       var_originprovince: $scope.originProvinceValue,
                       var_origindistrict: $scope.originDistrictValue,
                       var_destinationprovince: $scope.destinationProvinceValue,
@@ -524,6 +553,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
                       var_status: 1,
                       var_fee: $scope.bookingDetail.fee,
                       var_total: $scope.bookingDetail.total_price,
+                      var_seat: $scope.seatValue,
                       var_originprovince: $scope.originProvinceValue,
                       var_origindistrict: $scope.originDistrictValue,
                       var_destinationprovince: $scope.destinationProvinceValue,
