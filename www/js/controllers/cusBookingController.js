@@ -286,7 +286,6 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
         var_pointid: $scope.stopValue
       }
     }).then(function(response) {
-      console.log(response);
       if (response.data.response == "getPrice_isFree") {
         $scope.bookingDetail = response.data.results[0];
         $scope.bookingDetail.fee = 0;
@@ -363,17 +362,17 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
   };
 
   function checkDateTime(callback) {
-    if (selectHour > curHour) {
+    var selectDatetime = $scope.booking.date + " " + $scope.booking.time;
+    var fullSelectDate = new Date(selectDatetime);
+    var fullCurDate = new Date();
+    var timeDiff = Math.abs(fullSelectDate.getTime() - fullCurDate.getTime());
+    var hoursDiff = timeDiff / 3600000;
+    if (hoursDiff >= 2) {
       $scope.checkDateTime = true;
       callback();
     } else {
-      if ($scope.booking.date > fullDateWithoutTime) {
-        $scope.checkDateTime = true;
-        callback();
-      } else {
-        $scope.checkDateTime = false;
-        callback();
-      }
+      $scope.checkDateTime = false;
+      callback();
     }
   }
 
@@ -592,7 +591,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
               locals: {
                 displayOption: {
                   title: "เวลาขึ้นรถตู้ไม่ถูกต้อง !",
-                  content: "กรุณาเลือกเวลาขึ้นรถตู้ให้มากกว่าเวลาในปัจจุบัน",
+                  content: "กรุณาจองรถตู้ก่อนเวลาเดินทางอย่างน้อย 2 ชั่วโมง",
                   ok: "ตกลง"
                 }
               }
