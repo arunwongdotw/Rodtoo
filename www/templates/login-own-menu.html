@@ -23,7 +23,7 @@
       <!--It will disable animation to better performance on android.-->
       <!--list section-->
       <div ng-if="isAndroid" class="menu-list">
-        <!-- <md-subheader class="md-warn">Themes</md-subheader> -->
+        <md-subheader class="md-warn">เมนูผู้ให้บริการรถตู้</md-subheader>
         <div class="row menu-item" ng-click="navigateTo('loginown.ownprofile')">
           <div class="col-33">
             <i class="fas fa-list"></i>
@@ -109,7 +109,7 @@
       <!--If device is not Android application will present below code.-->
       <!--It will show animation when selecting row.-->
       <md-list ng-if="!isAndroid">
-        <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
+        <md-subheader class="md-warn">เมนูผู้ให้บริการรถตู้</md-subheader>
         <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownprofile')">
           <i class="fas fa-list"></i>
           <span>โปรไฟล์</span>
