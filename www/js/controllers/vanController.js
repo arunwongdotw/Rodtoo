@@ -10,18 +10,6 @@ appControllers.controller('vanCtrl', function($scope, $timeout, $state, $statePa
     $ionicNavBarDelegate.showBar(true);
   });
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: false,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAnimated ? 300 : 0));
-  };
-
   $http.get(myService.configAPI.webserviceURL + 'webservices/getVanDetail2.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
       if (response.data.results != null) {

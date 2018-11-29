@@ -1,22 +1,6 @@
 appControllers.controller('addPointCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog) {
   $scope.point = {};
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: false,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAnimated ? 300 : 0));
-  };
-
-  $scope.btnBack = function() {
-    $scope.navigateTo('loginown.ownpointlist');
-  };
-
   $scope.btnAddPoint = function() {
     var checkNumberRegEx = /^[0-9]+$/;
     if (($scope.point.name != null) && ($scope.point.name != "")) {

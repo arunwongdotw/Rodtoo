@@ -3,6 +3,8 @@ appControllers.controller('loginCusMenuCtrl', function($scope, $timeout, $mdUtil
   $scope.memberDetail = {}; // $scope.memberDetail คือ obj ข้อมูลของ member
   $scope.randomNumber = Math.random();
 
+  window.localStorage.memberUsername = "sunny1";
+
   $scope.$on('$ionicView.enter', function() {
     $scope.randomNumber = Math.random();
   });

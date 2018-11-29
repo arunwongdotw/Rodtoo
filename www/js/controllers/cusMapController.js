@@ -2,10 +2,6 @@ appControllers.controller('cusMapCtrl', function($scope, $state, $stateParams, d
   $scope.cLocation = {};
   var map, marker, marker2, myLatLng, desLatLng, directionsService, directionsDisplay, mapOptions;
 
-  $scope.btnBack = function() {
-    $scope.navigateTo('logincus.cusbookinglist');
-  };
-
   function getCurrentLocation(callback) {
     deviceService.checkGPS(function(status) {
       if (status == 'GPS_OFF') {

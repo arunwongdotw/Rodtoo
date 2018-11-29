@@ -28,23 +28,6 @@ appControllers.controller('postponeCtrl', function($scope, $state, $stateParams,
       });
     });
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      $mdSidenav('left').close();
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAndroid == false ? 300 : 0));
-  };
-
-  $scope.btnBack = function() {
-    $scope.navigateTo('logincus.cusbookinglist');
-  };
-
   var ipObj = {
     callback: function(val) { //Mandatory
       $scope.booking.date = new Date(val + 25200000).toISOString().slice(0, 10).replace('T', ' ');

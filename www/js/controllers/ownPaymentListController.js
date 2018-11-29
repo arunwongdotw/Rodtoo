@@ -19,19 +19,6 @@ appControllers.controller('ownPaymentListCtrl', function($scope, $timeout, $stat
       });
     });
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      $mdSidenav('left').close();
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAndroid == false ? 300 : 0));
-  };
-
   $scope.getInfomation = function(booking_id) {
     myService.bookingIDInList.booking_id = booking_id;
     $state.go('loginown.ownpaymentdetail');

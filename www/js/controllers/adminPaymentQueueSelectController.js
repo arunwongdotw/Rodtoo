@@ -7,19 +7,6 @@ appControllers.controller('adminPaymentQueueSelectCtrl', function($scope, $timeo
       $scope.provinceArrayList = response.data.results;
     });
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      $mdSidenav('left').close();
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAndroid == false ? 300 : 0));
-  };
-
   $scope.setProvince = function(province_value) {
     $scope.provinceValue = province_value;
     $scope.queueArrayList = null;

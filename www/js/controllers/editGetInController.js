@@ -20,22 +20,6 @@ appControllers.controller('editGetInCtrl', function($scope, $timeout, $state, $s
       });
     });
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: false,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAnimated ? 300 : 0));
-  };
-
-  $scope.btnBack = function() {
-    $scope.navigateTo('loginown.owngetinlist');
-  };
-
   $scope.btnEditGetIn = function() {
     if (($scope.getin.name != null) && ($scope.getin.name != "")) {
       $mdDialog.show({

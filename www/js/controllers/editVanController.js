@@ -24,22 +24,6 @@ appControllers.controller('editVanCtrl', function($scope, $timeout, $state, $sta
       });
     });
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: false,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAnimated ? 300 : 0));
-  };
-
-  $scope.btnBack = function() {
-    $scope.navigateTo('loginown.ownvanlist');
-  };
-
   $scope.btnEditVan = function() {
     var checkNumberRegEx = /^[0-9]+$/;
     if (($scope.van.firstname != null) && ($scope.van.firstname != "")) {

@@ -33,19 +33,6 @@ appControllers.controller('cusProfileCtrl', function($scope, $timeout, $state, $
       });
     });
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      $mdSidenav('left').close();
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAndroid == false ? 300 : 0));
-  };
-
   $scope.setAddressValue = function(province_id) {
     $scope.addressValue = province_id;
   };

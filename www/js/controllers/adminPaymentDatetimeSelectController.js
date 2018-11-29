@@ -3,24 +3,6 @@ appControllers.controller('adminPaymentDatetimeSelectCtrl', function($scope, $ti
   $scope.queueSelection.starttime = "00:00";
   $scope.queueSelection.endtime = "00:00";
   $scope.queueDetail = myService.queueDetail;
-  console.log($scope.queueDetail);
-
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      $mdSidenav('left').close();
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAndroid == false ? 300 : 0));
-  };
-
-  $scope.btnBack = function() {
-    $scope.navigateTo('loginadmin.adminpaymentqueueselect');
-  };
 
   var ipObj1 = {
     callback: function(val) { //Mandatory

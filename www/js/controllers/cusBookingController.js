@@ -18,19 +18,6 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
   var curHour = fullDate.getHours();
   var fullDateWithoutTime = new Date().toISOString().slice(0, 10).replace('T', ' ');
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      $mdSidenav('left').close();
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAndroid == false ? 300 : 0));
-  };
-
   $http.get(myService.configAPI.webserviceURL + 'webservices/getProvinceList.php')
     .then(function(response) {
       $scope.originProvinceArrayList = response.data.results;

@@ -1,22 +1,5 @@
 appControllers.controller('ownVanDetailCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicNavBarDelegate, $cordovaInAppBrowser) {
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      $mdSidenav('left').close();
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAndroid == false ? 300 : 0));
-  };
-
-  $scope.btnBack = function() {
-    $scope.navigateTo('loginown.ownvanlist');
-  };
-
   $http.get(myService.configAPI.webserviceURL + 'webservices/getVanDetail.php?vanid=' + myService.vanIDInList.van_id)
     .then(function(response) {
       $scope.vanDetail = response.data.results[0];

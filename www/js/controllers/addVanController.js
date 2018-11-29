@@ -1,22 +1,6 @@
 appControllers.controller('addVanCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog) {
   $scope.van = {};
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: false,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAnimated ? 300 : 0));
-  };
-
-  $scope.btnBack = function() {
-    $scope.navigateTo('loginown.ownvanlist');
-  };
-
   $scope.btnAddVan = function() {
     var checkNumberRegEx = /^[0-9]+$/;
     if (($scope.van.firstname != null) && ($scope.van.firstname != "")) {

@@ -1,22 +1,6 @@
 appControllers.controller('addGetInCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog) {
   $scope.getin = {};
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: false,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAnimated ? 300 : 0));
-  };
-
-  $scope.btnBack = function() {
-    $scope.navigateTo('loginown.owngetinlist');
-  };
-
   $scope.btnAddGetIn = function() {
     if (($scope.getin.name != null) && ($scope.getin.name != "")) {
       $mdDialog.show({

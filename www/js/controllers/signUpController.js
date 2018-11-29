@@ -3,18 +3,6 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
   $scope.memberTypeValue = "selectType";
   $scope.addressValue = "select";
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: false,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAnimated ? 300 : 0));
-  };
-
   $http.get(myService.configAPI.webserviceURL + 'webservices/getProvinceList.php')
     .then(function(response) {
       $scope.provinceArrayList = response.data.results;

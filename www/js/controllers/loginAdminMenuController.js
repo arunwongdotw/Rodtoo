@@ -3,6 +3,8 @@ appControllers.controller('loginAdminMenuCtrl', function($scope, $timeout, $mdUt
   $scope.memberDetail = {}; // $scope.memberDetail คือ obj ข้อมูลของ member
   $scope.randomNumber = Math.random();
 
+  window.localStorage.memberUsername = "admin";
+
   $scope.$on('$ionicView.enter', function() {
     $scope.randomNumber = Math.random();
   });
@@ -80,7 +82,7 @@ appControllers.controller('loginAdminMenuCtrl', function($scope, $timeout, $mdUt
     } else if (jQuery('md-select-menu').length > 0) {
       $mdSelect.hide();
     } else {
-      if ($state.current.name == 'logincus.cusprofile') {
+      if ($state.current.name == 'loginadmin.adminpaymentlist') {
         if (jQuery('[id^=dialog]').length == 0) {
           $mdDialog.show({
             controller: 'DialogController',

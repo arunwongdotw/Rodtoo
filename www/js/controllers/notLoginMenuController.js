@@ -47,7 +47,7 @@ appControllers.controller('notLoginMenuCtrl', function($scope, $timeout, $mdUtil
         locals: {
           displayOption: {
             title: "ติดตามการฝากของ ?",
-            content: "คุณต้องการที่จะติดตามการฝากของ",
+            content: "คุณต้องการที่จะติดตามการฝากของ (เมื่อกดใช้โค้ดแล้ว จะสามารถใช้โค้ดได้แค่ในโทรศัพท์เครื่องที่กดใช้ครั้งแรกเท่านั้น)",
             inputplaceholder: "กรุณากรอกโค้ด",
             ok: "ยืนยัน",
             cancel: "ยกเลิก"

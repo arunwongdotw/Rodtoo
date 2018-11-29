@@ -3,7 +3,7 @@ appControllers.controller('mapCtrl', function($scope, $state, $stateParams, devi
 
   $scope.btnBack = function() {
     clearSetInterval();
-    $scope.navigateTo('notlogin.login');
+    $state.go('notlogin.login');
   };
 
   function clearSetInterval() {

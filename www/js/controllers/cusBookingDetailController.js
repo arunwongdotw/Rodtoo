@@ -30,23 +30,6 @@ appControllers.controller('cusBookingDetailCtrl', function($scope, $timeout, $st
       });
     });
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      $mdSidenav('left').close();
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAndroid == false ? 300 : 0));
-  };
-
-  $scope.btnBack = function() {
-    $scope.navigateTo('logincus.cusbookinglist');
-  };
-
   $scope.btnConfirm = function(booking_id) {
     $mdDialog.show({
       controller: 'DialogController',

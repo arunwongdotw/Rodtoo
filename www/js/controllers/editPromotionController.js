@@ -24,22 +24,6 @@ appControllers.controller('editPromotionCtrl', function($scope, $timeout, $state
       });
     });
 
-  $scope.navigateTo = function(stateName) {
-    $timeout(function() {
-      if ($ionicHistory.currentStateName() != stateName) {
-        $ionicHistory.nextViewOptions({
-          disableAnimate: false,
-          disableBack: true
-        });
-        $state.go(stateName);
-      }
-    }, ($scope.isAnimated ? 300 : 0));
-  };
-
-  $scope.btnBack = function() {
-    $scope.navigateTo('loginown.ownpromotionlist');
-  };
-
   $scope.btnEditPromotion = function() {
     var checkNumberRegEx = /^[0-9]+$/;
     if (($scope.promotion.detail != null) && ($scope.promotion.detail != "")) {
