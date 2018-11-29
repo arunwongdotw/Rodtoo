@@ -1,7 +1,7 @@
 <ion-view id="online-course" hide-nav-bar="false">
   <ion-nav-title>หมายเลขการจองรถตู้ : {{paymentDetail.booking_id}}</ion-nav-title>
   <ion-nav-buttons side="left">
-    <a ng-click="btnBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+    <a ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item nav-back-btn">
       <i class="ion-android-arrow-back"></i>
     </a>
   </ion-nav-buttons>
@@ -12,7 +12,7 @@
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;">วันเวลาแจ้งชำระเงิน : {{paymentDetail.payment_date}} {{paymentDetail.payment_time}}</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="paymentDetail.payment_img == '-'">หลักฐานการโอน : ไม่มี</p>
       <p style="margin-left: 15px; font-weight: bold; font-size: 14px; color: #666;" ng-if="paymentDetail.payment_img != '-'">หลักฐานการโอน :
-        <br><img src="http://1did.net/rodtoo/img/img_slip/{{paymentDetail.payment_img}}" style="width: 85%; margin-top: 20px; margin-left: 20px;" ng-click="openLink(paymentDetail.payment_img)"></img>
+        <br><img src="http://1did.net/rodtoo/img/img_slip/{{paymentDetail.payment_img}}" style="width: 85%; margin-top: 20px; margin-left: 5%;" ng-click="openLink(paymentDetail.payment_img)"></img>
       </p>
     </div>
     <div style="margin-top: 20px; margin-left: 10px; margin-right: 10px; border: 3px solid #3F51B5; border-radius: 5px;">
