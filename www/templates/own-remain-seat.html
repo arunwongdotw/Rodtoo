@@ -1,0 +1,17 @@
+<ion-view id="online-course" hide-nav-bar="false">
+  <ion-nav-title>รายการจำนวนที่นั่งจากการจอง</ion-nav-title>
+  <ion-content id="online-course-content">
+    <div style="text-align: center; margin-top: 20px; font-weight: bold; font-size: 16px; color: #666;" ng-if="remainArrayList == null">ไม่พบรายการจองรถตู้ในวันนี้</div>
+    <div class="course-list" style="margin-top: 0px;">
+      <div class="course-item" ng-repeat="remain in remainArrayList">
+        <div class="title ionic-course-background" style="background-color: #3F51B5 !important">
+          เที่ยวรถตู้รอบเวลา : {{remain.booking_boarding_date}} {{remain.booking_boarding_time}}
+        </div>
+        <div class="content">
+          <p style="margin-top: 10px; padding: 0px 10px 0px 10px;">จำนวนที่นั่งที่จอง : {{remain.countRow}}</p>
+          <p style="padding: 0px 10px 0px 10px;">จำนวนที่นั่งคงเหลือ : {{remain.remain}}</p>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

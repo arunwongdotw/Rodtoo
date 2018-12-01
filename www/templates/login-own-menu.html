@@ -48,6 +48,14 @@
             <span>รายการจองรถตู้ที่ชำระเงินแล้ว</span>
           </div>
         </div>
+        <div class="row menu-item" ng-click="checkQueue('loginown.ownremainseat')">
+          <div class="col-33">
+            <i class="fas fa-list"></i>
+          </div>
+          <div class="col-66">
+            <span>รายการจำนวนที่นั่งจากการจอง</span>
+          </div>
+        </div>
         <div class="row menu-item" ng-click="navigateTo('loginown.ownpaymentlist')">
           <div class="col-33">
             <i class="fas fa-list"></i>
@@ -121,6 +129,10 @@
         <md-list-item class="menu-list-item" ng-click="checkQueue('loginown.ownbookinglist')">
           <i class="fas fa-list"></i>
           <span>รายการจองรถตู้ที่ชำระเงินแล้ว</span>
+        </md-list-item>
+        <md-list-item class="menu-list-item" ng-click="checkQueue('loginown.ownremainseat')">
+          <i class="fas fa-list"></i>
+          <span>รายการจำนวนที่นั่งจากการจอง</span>
         </md-list-item>
         <md-list-item class="menu-list-item" ng-click="navigateTo('loginown.ownpaymentlist')">
           <i class="fas fa-list"></i>

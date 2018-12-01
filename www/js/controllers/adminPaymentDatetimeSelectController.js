@@ -146,6 +146,8 @@ appControllers.controller('adminPaymentDatetimeSelectCtrl', function($scope, $ti
   };
 
   function getPaymentDetailInQueue() {
+    $scope.queueSelection.startdatetime = $scope.queueSelection.startdatetime + ':00';
+    $scope.queueSelection.enddatetime = $scope.queueSelection.enddatetime + ':00';
     $http({
       url: myService.configAPI.webserviceURL + 'webservices/getPaymentDetailInQueue.php',
       method: 'POST',

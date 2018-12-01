@@ -78,7 +78,18 @@
         {{point.point_name}}
       </md-option>
     </md-select>
-    <md-select ng-model="seatValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;" ng-if="queueValue != 'selectQueue'">
+    <md-input-container md-no-float="" ng-if="queueValue != 'selectQueue'">
+      <div>
+        <input class="user-name" placeholder="วันขึ้นรถตู้ *" style="width: 300px;" ng-model="booking.date" ng-click="openDatePickerStart()">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="" ng-if="queueValue != 'selectQueue'">
+      <div>
+        <input class="user-name" placeholder="เวลาขึ้นรถตู้ ({{queueFirstLast.queue_first_time}} - {{queueFirstLast.queue_last_time}} น.) *" style="width: 300px;" ng-model="booking.time" ng-click="openTimePickerStart()">
+      </div>
+    </md-input-container>
+    <div style="margin-left: 10px; padding: 10px 2px 0px; color: #666;" ng-if="booking.date != null && booking.time != null">ที่นั่งคงเหลือ : {{remainSeat}} ที่นั่ง</div>
+    <md-select ng-model="seatValue" aria-label="md-option" style="margin-left: 10px; padding: 10px 2px 26px;" ng-if="booking.date != null && booking.time != null">
       <md-option value="selectSeat" ng-click="setSeatValue('selectSeat')">
         เลือกจำนวนที่นั่ง *
       </md-option>
@@ -122,16 +133,6 @@
         13
       </md-option>
     </md-select>
-    <md-input-container md-no-float="" ng-if="queueValue != 'selectQueue'">
-      <div>
-        <input class="user-name" placeholder="วันขึ้นรถตู้ *" style="width: 300px;" ng-model="booking.date" ng-click="openDatePickerStart()">
-      </div>
-    </md-input-container>
-    <md-input-container md-no-float="" ng-if="queueValue != 'selectQueue'">
-      <div>
-        <input class="user-name" placeholder="เวลาขึ้นรถตู้ *" style="width: 300px;" ng-model="booking.time" ng-click="openTimePickerStart()">
-      </div>
-    </md-input-container>
     <div style="text-align: center; margin-top: 20px; margin-left: 20px; margin-right: 20px; border: 3px solid #3F51B5;" ng-if="seatValue != 'selectSeat'">
       <p style="margin-top: 15px; font-weight: bold; font-size: 16px; color: #666;">ค่าบริการรถตู้ : {{bookingDetail.point_price}} บาท</p>
       <p style="font-weight: bold; font-size: 16px; color: #666;" ng-if="bookingDetail.fee == 0">ค่าธรรมเนียมการจอง : ฟรี</p>

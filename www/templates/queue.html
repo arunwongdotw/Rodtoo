@@ -40,6 +40,16 @@
     </md-select>
     <md-input-container md-no-float="">
       <div>
+        <input class="user-name" placeholder="รถตู้เที่ยวแรกเวลา *" style="width: 300px;" ng-model="queue.first" ng-click="openTimePickerFirst()">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
+        <input class="user-name" placeholder="รถตู้เที่ยวสุดท้ายเวลา *" style="width: 300px;" ng-model="queue.last" ng-click="openTimePickerLast()">
+      </div>
+    </md-input-container>
+    <md-input-container md-no-float="">
+      <div>
         <input class="user-name" ng-model="queue.bankname" placeholder="ชื่อธนาคาร *" style="width: 284px;">
       </div>
     </md-input-container>

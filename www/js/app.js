@@ -1017,6 +1017,17 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                         controller: 'ownDepositCodeListCtrl'
                     }
                 }
+            })
+            .state('loginown.ownremainseat', {
+                url: "/ownremainseat",
+                cache: false,
+                reload: true,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/own-remain-seat.html",
+                        controller: 'ownRemainSeatCtrl'
+                    }
+                }
             });
             // .state('menu1.map', {
             //     url: "/map",

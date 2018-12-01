@@ -39,7 +39,7 @@ appControllers.controller('cusBookingListCtrl', function($scope, $timeout, $stat
       callback();
     }
   }
-  
+
   $scope.getInfomation = function(booking_id) {
     myService.bookingIDInList.booking_id = booking_id;
     $state.go('logincus.cusbookingdetail');

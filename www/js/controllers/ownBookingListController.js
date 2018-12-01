@@ -1,4 +1,8 @@
-appControllers.controller('ownBookingListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicPlatform) {
+appControllers.controller('ownBookingListCtrl', function($scope, $timeout, $state, $ionicHistory, $mdDialog, $http, myService, $mdSidenav, $ionicPlatform, $ionicNavBarDelegate) {
+
+  $scope.$on('$ionicView.enter', function(e) {
+    $ionicNavBarDelegate.showBar(true);
+  });
 
   $http.get(myService.configAPI.webserviceURL + 'webservices/getOwnBookingList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
@@ -13,6 +17,57 @@ appControllers.controller('ownBookingListCtrl', function($scope, $timeout, $stat
   $scope.assignVan = function(booking_id) {
     myService.bookingIDInList.booking_id = booking_id;
     $state.go('loginown.ownvanselect');
+  };
+
+  $scope.cancel = function(booking_id) {
+    $mdDialog.show({
+      controller: 'DialogController',
+      templateUrl: 'confirm-dialog.html',
+      locals: {
+        displayOption: {
+          title: "ยกเลิกการจองรถตู้ ?",
+          content: "คุณแน่ใจที่จะยกเลิกการจองรถตู้ครั้งนี้",
+          ok: "ตกลง",
+          cancel: "ยกเลิก"
+        }
+      }
+    }).then(function(response) {
+      $http({
+        url: myService.configAPI.webserviceURL + 'webservices/cancelBooking.php',
+        method: 'POST',
+        data: {
+          var_bookingid: booking_id,
+        }
+      }).then(function(response) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "ยกเลิกการจองรถตู้สำเร็จ !",
+              content: "คุณยกเลิกการจองรถตู้สำเร็จ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          $state.reload();
+        });
+      }, function(error) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "เกิดข้อผิดพลาด !",
+              content: "เกิดข้อผิดพลาด cancel ใน ownBookingListController ระบบจะปิดอัตโนมัติ",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          ionic.Platform.exitApp();
+        });
+      });
+    });
   };
 
   $ionicPlatform.registerBackButtonAction(function() {

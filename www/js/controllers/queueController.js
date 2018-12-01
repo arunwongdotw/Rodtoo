@@ -1,4 +1,4 @@
-appControllers.controller('queueCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $ionicPlatform, $mdSidenav) {
+appControllers.controller('queueCtrl', function($scope, $timeout, $state, $stateParams, $ionicHistory, $http, myService, $mdDialog, $ionicPlatform, $mdSidenav, ionicTimePicker) {
   $scope.queue = {};
   $scope.originProvinceValue = "selectOriginProvince";
   $scope.originDistrictValue = "selectOriginDistrict";
@@ -20,6 +20,8 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
         $scope.originDistrictValue = response.data.results[0].queue_origin_district_id;
         $scope.destinationProvinceValue = response.data.results[0].queue_destination_province_id;
         $scope.destinationDistrictValue = response.data.results[0].queue_destination_district_id;
+        $scope.queue.first = response.data.results[0].queue_first_time;
+        $scope.queue.last = response.data.results[0].queue_last_time;
         $scope.queue.bankname = response.data.results[0].queue_bank;
         $scope.queue.bankno = response.data.results[0].queue_bank_no;
         $scope.queue.bankowner = response.data.results[0].queue_bank_owner;
@@ -146,125 +148,214 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
     $scope.destinationDistrictValue = value;
   };
 
+  var ipObj = {
+    callback: function(val) { //Mandatory
+      var selectedTime = new Date(val * 1000);
+      selectHour = selectedTime.getUTCHours();
+      if (selectedTime.getUTCHours() < 10) {
+        if (selectedTime.getUTCMinutes() < 10) {
+          $scope.queue.first = '0' + selectedTime.getUTCHours() + ':0' + selectedTime.getUTCMinutes();
+        } else {
+          $scope.queue.first = '0' + selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes();
+        }
+      } else {
+        if (selectedTime.getUTCMinutes() < 10) {
+          $scope.queue.first = selectedTime.getUTCHours() + ':0' + selectedTime.getUTCMinutes();
+        } else {
+          $scope.queue.first = selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes();
+        }
+      }
+    },
+    // inputTime: (curHour * 3600) + 3600, //Optional
+    inputTime: 21600, //Optional
+    format: 24, //Optional
+    step: 60, //Optional
+    setLabel: 'Set' //Optional
+  };
+
+  $scope.openTimePickerFirst = function() {
+    ionicTimePicker.openTimePicker(ipObj);
+  };
+
+  var ipObj2 = {
+    callback: function(val) { //Mandatory
+      var selectedTime = new Date(val * 1000);
+      selectHour = selectedTime.getUTCHours();
+      if (selectedTime.getUTCHours() < 10) {
+        if (selectedTime.getUTCMinutes() < 10) {
+          $scope.queue.last = '0' + selectedTime.getUTCHours() + ':0' + selectedTime.getUTCMinutes();
+        } else {
+          $scope.queue.last = '0' + selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes();
+        }
+      } else {
+        if (selectedTime.getUTCMinutes() < 10) {
+          $scope.queue.last = selectedTime.getUTCHours() + ':0' + selectedTime.getUTCMinutes();
+        } else {
+          $scope.queue.last = selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes();
+        }
+      }
+    },
+    inputTime: 64800, //Optional
+    format: 24, //Optional
+    step: 60, //Optional
+    setLabel: 'Set' //Optional
+  };
+
+  $scope.openTimePickerLast = function() {
+    ionicTimePicker.openTimePicker(ipObj2);
+  };
+
   $scope.btnQueue = function() {
     if (($scope.queue.name != null) && ($scope.queue.name != "")) {
       if ($scope.originProvinceValue != "selectOriginProvince") {
         if ($scope.originDistrictValue != "selectOriginDistrict") {
           if ($scope.destinationProvinceValue != "selectDestinationProvince") {
             if ($scope.destinationDistrictValue != "selectDestinationDistrict") {
-              if (($scope.queue.bankname != null) && ($scope.queue.bankname != "")) {
-                if (($scope.queue.bankno != null) && ($scope.queue.bankno != "")) {
-                  if (($scope.queue.bankowner != null) && ($scope.queue.bankowner != "")) {
-                    $mdDialog.show({
-                      controller: 'DialogController',
-                      templateUrl: 'confirm-dialog.html',
-                      locals: {
-                        displayOption: {
-                          title: "บันทึกข้อมูลรถตู้ ?",
-                          content: "คุณแน่ใจที่จะบันทึกข้อมูลรถตู้",
-                          ok: "ตกลง",
-                          cancel: "ยกเลิก"
-                        }
-                      }
-                    }).then(function(response) {
-                      if ($scope.nullResponse == true) {
-                        $http({
-                          url: myService.configAPI.webserviceURL + 'webservices/insertQueue.php',
-                          method: 'POST',
-                          data: {
-                            var_memberid: myService.memberDetailFromLogin.member_id,
-                            var_name: $scope.queue.name,
-                            var_originprovince: $scope.originProvinceValue,
-                            var_origindistrict: $scope.originDistrictValue,
-                            var_destinationprovince: $scope.destinationProvinceValue,
-                            var_destinationdistrict: $scope.destinationDistrictValue,
-                            var_bankname: $scope.queue.bankname,
-                            var_bankno: $scope.queue.bankno,
-                            var_bankowner: $scope.queue.bankowner
+              if (typeof $scope.queue.first != 'undefined') {
+                if (typeof $scope.queue.last != 'undefined') {
+                  if (($scope.queue.bankname != null) && ($scope.queue.bankname != "")) {
+                    if (($scope.queue.bankno != null) && ($scope.queue.bankno != "")) {
+                      if (($scope.queue.bankowner != null) && ($scope.queue.bankowner != "")) {
+                        $mdDialog.show({
+                          controller: 'DialogController',
+                          templateUrl: 'confirm-dialog.html',
+                          locals: {
+                            displayOption: {
+                              title: "บันทึกข้อมูลรถตู้ ?",
+                              content: "คุณแน่ใจที่จะบันทึกข้อมูลรถตู้",
+                              ok: "ตกลง",
+                              cancel: "ยกเลิก"
+                            }
                           }
                         }).then(function(response) {
-                          $mdDialog.show({
-                            controller: 'DialogController',
-                            templateUrl: 'confirm-dialog.html',
-                            locals: {
-                              displayOption: {
-                                title: "บันทึกข้อมูลรถตู้สำเร็จ !",
-                                content: "คุณบันทึกข้อมูลรถตู้สำเร็จ",
-                                ok: "ตกลง"
+                          if ($scope.nullResponse == true) {
+                            $http({
+                              url: myService.configAPI.webserviceURL + 'webservices/insertQueue.php',
+                              method: 'POST',
+                              data: {
+                                var_memberid: myService.memberDetailFromLogin.member_id,
+                                var_name: $scope.queue.name,
+                                var_originprovince: $scope.originProvinceValue,
+                                var_origindistrict: $scope.originDistrictValue,
+                                var_destinationprovince: $scope.destinationProvinceValue,
+                                var_destinationdistrict: $scope.destinationDistrictValue,
+                                var_first: $scope.queue.first,
+                                var_last: $scope.queue.last,
+                                var_bankname: $scope.queue.bankname,
+                                var_bankno: $scope.queue.bankno,
+                                var_bankowner: $scope.queue.bankowner
                               }
-                            }
-                          }).then(function(response) {
-                            $state.go('loginown.ownbookinglist');
-                          });
-                        }, function(error) {
-                          $mdDialog.show({
-                            controller: 'DialogController',
-                            templateUrl: 'confirm-dialog.html',
-                            locals: {
-                              displayOption: {
-                                title: "เกิดข้อผิดพลาด !",
-                                content: "เกิดข้อผิดพลาด btnQueue ใน queueController ระบบจะปิดอัตโนมัติ",
-                                ok: "ตกลง"
+                            }).then(function(response) {
+                              $mdDialog.show({
+                                controller: 'DialogController',
+                                templateUrl: 'confirm-dialog.html',
+                                locals: {
+                                  displayOption: {
+                                    title: "บันทึกข้อมูลรถตู้สำเร็จ !",
+                                    content: "คุณบันทึกข้อมูลรถตู้สำเร็จ",
+                                    ok: "ตกลง"
+                                  }
+                                }
+                              }).then(function(response) {
+                                $state.go('loginown.ownbookinglist');
+                              });
+                            }, function(error) {
+                              $mdDialog.show({
+                                controller: 'DialogController',
+                                templateUrl: 'confirm-dialog.html',
+                                locals: {
+                                  displayOption: {
+                                    title: "เกิดข้อผิดพลาด !",
+                                    content: "เกิดข้อผิดพลาด btnQueue ใน queueController ระบบจะปิดอัตโนมัติ",
+                                    ok: "ตกลง"
+                                  }
+                                }
+                              }).then(function(response) {
+                                ionic.Platform.exitApp();
+                              });
+                            });
+                          } else {
+                            $http({
+                              url: myService.configAPI.webserviceURL + 'webservices/updateQueue.php',
+                              method: 'POST',
+                              data: {
+                                var_memberid: myService.memberDetailFromLogin.member_id,
+                                var_name: $scope.queue.name,
+                                var_originprovince: $scope.originProvinceValue,
+                                var_origindistrict: $scope.originDistrictValue,
+                                var_destinationprovince: $scope.destinationProvinceValue,
+                                var_destinationdistrict: $scope.destinationDistrictValue,
+                                var_first: $scope.queue.first,
+                                var_last: $scope.queue.last,
+                                var_bankname: $scope.queue.bankname,
+                                var_bankno: $scope.queue.bankno,
+                                var_bankowner: $scope.queue.bankowner
                               }
-                            }
-                          }).then(function(response) {
-                            ionic.Platform.exitApp();
-                          });
+                            }).then(function(response) {
+                              $mdDialog.show({
+                                controller: 'DialogController',
+                                templateUrl: 'confirm-dialog.html',
+                                locals: {
+                                  displayOption: {
+                                    title: "บันทึกข้อมูลรถตู้สำเร็จ !",
+                                    content: "คุณบันทึกข้อมูลรถตู้สำเร็จ",
+                                    ok: "ตกลง"
+                                  }
+                                }
+                              }).then(function(response) {
+                                $state.go('loginown.ownbookinglist');
+                              });
+                            }, function(error) {
+                              $mdDialog.show({
+                                controller: 'DialogController',
+                                templateUrl: 'confirm-dialog.html',
+                                locals: {
+                                  displayOption: {
+                                    title: "เกิดข้อผิดพลาด !",
+                                    content: "เกิดข้อผิดพลาด btnQueue ใน queueController ระบบจะปิดอัตโนมัติ",
+                                    ok: "ตกลง"
+                                  }
+                                }
+                              }).then(function(response) {
+                                ionic.Platform.exitApp();
+                              });
+                            });
+                          }
                         });
                       } else {
-                        $http({
-                          url: myService.configAPI.webserviceURL + 'webservices/updateQueue.php',
-                          method: 'POST',
-                          data: {
-                            var_memberid: myService.memberDetailFromLogin.member_id,
-                            var_name: $scope.queue.name,
-                            var_originprovince: $scope.originProvinceValue,
-                            var_origindistrict: $scope.originDistrictValue,
-                            var_destinationprovince: $scope.destinationProvinceValue,
-                            var_destinationdistrict: $scope.destinationDistrictValue,
-                            var_bankname: $scope.queue.bankname,
-                            var_bankno: $scope.queue.bankno,
-                            var_bankowner: $scope.queue.bankowner
+                        $mdDialog.show({
+                          controller: 'DialogController',
+                          templateUrl: 'confirm-dialog.html',
+                          locals: {
+                            displayOption: {
+                              title: "ชื่อเจ้าของบัญชีไม่ถูกต้อง !",
+                              content: "กรุณากรอกชื่อเจ้าของบัญชี",
+                              ok: "ตกลง"
+                            }
                           }
-                        }).then(function(response) {
-                          $mdDialog.show({
-                            controller: 'DialogController',
-                            templateUrl: 'confirm-dialog.html',
-                            locals: {
-                              displayOption: {
-                                title: "บันทึกข้อมูลรถตู้สำเร็จ !",
-                                content: "คุณบันทึกข้อมูลรถตู้สำเร็จ",
-                                ok: "ตกลง"
-                              }
-                            }
-                          }).then(function(response) {
-                            $state.go('loginown.ownbookinglist');
-                          });
-                        }, function(error) {
-                          $mdDialog.show({
-                            controller: 'DialogController',
-                            templateUrl: 'confirm-dialog.html',
-                            locals: {
-                              displayOption: {
-                                title: "เกิดข้อผิดพลาด !",
-                                content: "เกิดข้อผิดพลาด btnQueue ใน queueController ระบบจะปิดอัตโนมัติ",
-                                ok: "ตกลง"
-                              }
-                            }
-                          }).then(function(response) {
-                            ionic.Platform.exitApp();
-                          });
                         });
                       }
-                    });
+                    } else {
+                      $mdDialog.show({
+                        controller: 'DialogController',
+                        templateUrl: 'confirm-dialog.html',
+                        locals: {
+                          displayOption: {
+                            title: "หมายเลขบัญชีไม่ถูกต้อง !",
+                            content: "กรุณากรอกหมายเลขบัญชี",
+                            ok: "ตกลง"
+                          }
+                        }
+                      });
+                    }
                   } else {
                     $mdDialog.show({
                       controller: 'DialogController',
                       templateUrl: 'confirm-dialog.html',
                       locals: {
                         displayOption: {
-                          title: "ชื่อเจ้าของบัญชีไม่ถูกต้อง !",
-                          content: "กรุณากรอกชื่อเจ้าของบัญชี",
+                          title: "ชื่อธนาคารไม่ถูกต้อง !",
+                          content: "กรุณากรอกชื่อธนาคาร",
                           ok: "ตกลง"
                         }
                       }
@@ -276,8 +367,8 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
                     templateUrl: 'confirm-dialog.html',
                     locals: {
                       displayOption: {
-                        title: "หมายเลขบัญชีไม่ถูกต้อง !",
-                        content: "กรุณากรอกหมายเลขบัญชี",
+                        title: "เวลาเดินทางรถตู้เที่ยวสุดท้ายไม่ถูกต้อง !",
+                        content: "กรุณาเลือกเวลาเดินทางรถตู้เที่ยวสุดท้าย",
                         ok: "ตกลง"
                       }
                     }
@@ -289,8 +380,8 @@ appControllers.controller('queueCtrl', function($scope, $timeout, $state, $state
                   templateUrl: 'confirm-dialog.html',
                   locals: {
                     displayOption: {
-                      title: "ชื่อธนาคารไม่ถูกต้อง !",
-                      content: "กรุณากรอกชื่อธนาคาร",
+                      title: "เวลาเดินทางรถตู้เที่ยวแรกไม่ถูกต้อง !",
+                      content: "กรุณาเลือกเวลาเดินทางรถตู้เที่ยวแรก",
                       ok: "ตกลง"
                     }
                   }
