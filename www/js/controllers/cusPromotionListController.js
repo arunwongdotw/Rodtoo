@@ -7,6 +7,7 @@ appControllers.controller('cusPromotionListCtrl', function($scope, $timeout, $st
   $http.get(myService.configAPI.webserviceURL + 'webservices/getCusPromotionList.php?memberid=' + myService.memberDetailFromLogin.member_id)
     .then(function(response) {
       $scope.promotionArrayList = response.data.results;
+      console.log($scope.promotionArrayList);
     }, function(error) {
       $mdDialog.show({
         controller: 'DialogController',

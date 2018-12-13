@@ -391,6 +391,7 @@ appControllers.controller('cusBookingCtrl', function($scope, $state, $stateParam
   };
 
   $scope.openTimePickerStart = function() {
+    delete $scope.booking.time;
     ionicTimePicker.openTimePicker(ipObj2);
   };
 

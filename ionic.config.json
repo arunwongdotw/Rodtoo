@@ -1,6 +1,8 @@
 {
   "name": "IonicMaterialDesign",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "gulpStartupTasks": [
     "sass",
     "watch"

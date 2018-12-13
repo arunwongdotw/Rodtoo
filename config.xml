@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.smartonline.rodtoo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Rodtoo</name>
+<widget id="com.smartonline.rodtoo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>จองรถตู้</name>
     <description>
-    Rodtoo booking application.
-  </description>
-    <author email="ionicmaterialdesign@gmail.com" href="http://ionicframework.com/">
-    Smart Online
-  </author>
+    แอปพลิเคชันจองรถตู้
+    </description>
+    <author email="roj2007@gmail.com" href="http://www.smartonline.info">
+    Smart Online Co., Ltd.
+    </author>
     <content src="index.html" />
     <allow-navigation href="tel:*" />
     <access origin="*" />
@@ -90,5 +90,6 @@
         <variable name="FCM_VERSION" value="11.6.2" />
     </plugin>
     <plugin name="cordova-android-support-gradle-release" spec="^1.4.5" />
-    <engine name="android" spec="~7.1.0" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <engine name="android" spec="^7.1.0" />
 </widget>
