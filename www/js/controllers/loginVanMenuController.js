@@ -21,8 +21,21 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
   }
 
   $scope.navigateTo = function(stateName) {
-    if (stateName != "loginvan.vanmap") {
-      checkVanStatus(function(status) {
+    if ((stateName == "loginvan.van") || (stateName == "loginvan.vanprofile")) {
+      if (stateName != "loginvan.vanmap") {
+        checkVanStatus(function(status) {
+          $timeout(function() {
+            $mdSidenav('left').close();
+            if ($ionicHistory.currentStateName() != stateName) {
+              $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+              });
+              $state.go(stateName);
+            }
+          }, ($scope.isAndroid == false ? 300 : 0));
+        });
+      } else {
         $timeout(function() {
           $mdSidenav('left').close();
           if ($ionicHistory.currentStateName() != stateName) {
@@ -33,20 +46,111 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
             $state.go(stateName);
           }
         }, ($scope.isAndroid == false ? 300 : 0));
-      });
+      }
+      // $timeout(function() {
+      //   $mdSidenav('left').close();
+      //   if ($ionicHistory.currentStateName() != stateName) {
+      //     $ionicHistory.nextViewOptions({
+      //       disableAnimate: true,
+      //       disableBack: true
+      //     });
+      //     $state.go(stateName);
+      //   }
+      // }, ($scope.isAndroid == false ? 300 : 0));
     } else {
-      $timeout(function() {
-        $mdSidenav('left').close();
-        if ($ionicHistory.currentStateName() != stateName) {
-          $ionicHistory.nextViewOptions({
-            disableAnimate: true,
-            disableBack: true
+      checkVanConfirm(stateName, function(status) {
+        if (stateName != "loginvan.vanmap") {
+          checkVanStatus(function(status) {
+            $timeout(function() {
+              $mdSidenav('left').close();
+              if ($ionicHistory.currentStateName() != stateName) {
+                $ionicHistory.nextViewOptions({
+                  disableAnimate: true,
+                  disableBack: true
+                });
+                $state.go(stateName);
+              }
+            }, ($scope.isAndroid == false ? 300 : 0));
           });
-          $state.go(stateName);
+        } else {
+          $timeout(function() {
+            $mdSidenav('left').close();
+            if ($ionicHistory.currentStateName() != stateName) {
+              $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+              });
+              $state.go(stateName);
+            }
+          }, ($scope.isAndroid == false ? 300 : 0));
         }
-      }, ($scope.isAndroid == false ? 300 : 0));
+      });
     }
   };
+
+  function checkVanConfirm(stateName, callback) {
+    $http({
+      url: myService.configAPI.webserviceURL + 'webservices/checkVanConfirm.php',
+      method: 'POST',
+      data: {
+        var_memberid: $scope.memberDetail.member_id
+      }
+    }).then(function(response) {
+      console.log(response);
+      if (response.data.results == "checkVanConfirm_isTwo") {
+        callback();
+      } else if (response.data.results == "checkVanConfirm_isOne") {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "สถานะรถตู้ไม่ถูกต้อง !",
+              content: "สถานะรถตู้ของคุณยังไม่ได้รับการยืนยัน กรุณารอการยืนยันจากคิวรถตู้",
+              ok: "ตกลง"
+            }
+          }
+        });
+      } else if (response.data.results == "checkVanConfirm_isZero") {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "สถานะรถตู้ไม่ถูกต้อง !",
+              content: "คุณยังไม่ได้กรอกข้อมูลรถตู้ กรุณากรอกข้อมูลรถตู้และรอการยืนยันจากคิวรถตู้",
+              ok: "ตกลง"
+            }
+          }
+        }).then(function(response) {
+          $timeout(function() {
+            $mdSidenav('left').close();
+            if ($ionicHistory.currentStateName() != "loginvan.van") {
+              $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+              });
+              $state.go("loginvan.van");
+            }
+          }, ($scope.isAndroid == false ? 300 : 0));
+        });
+      }
+    }, function(error) {
+      $mdDialog.show({
+        controller: 'DialogController',
+        templateUrl: 'confirm-dialog.html',
+        locals: {
+          displayOption: {
+            title: "เกิดข้อผิดพลาด !",
+            content: "เกิดข้อผิดพลาด checkVanConfirm ใน loginVanMenuController ระบบจะปิดอัตโนมัติ",
+            ok: "ตกลง"
+          }
+        }
+      }).then(function(response) {
+        ionic.Platform.exitApp();
+      });
+    });
+  }
 
   function checkVanStatus(callback) {
     $http({
@@ -56,7 +160,8 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
         var_memberid: $scope.memberDetail.member_id
       }
     }).then(function(response) {
-      if (response.data.results == "checkVanStatus_isOne") {
+      console.log(response);
+      if ((response.data.results == "checkVanStatus_isOne") || (response.data.results == "checkVanStatus_isZero")) {
         callback();
       } else if (response.data.results == "checkVanStatus_isTwo") {
         $mdDialog.show({
@@ -78,7 +183,7 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
         locals: {
           displayOption: {
             title: "เกิดข้อผิดพลาด !",
-            content: "เกิดข้อผิดพลาด checkVanStatus ใน vanMapController ระบบจะปิดอัตโนมัติ",
+            content: "เกิดข้อผิดพลาด checkVanStatus ใน loginVanMenuController ระบบจะปิดอัตโนมัติ",
             ok: "ตกลง"
           }
         }
@@ -93,36 +198,36 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
   };
 
   $scope.btnLogout = function() {
-    checkVanStatus(function(status) {
-      $mdDialog.show({
-        controller: 'DialogController',
-        templateUrl: 'confirm-dialog.html',
-        locals: {
-          displayOption: {
-            title: "ออกจากระบบ ?",
-            content: "คุณต้องการที่จะออกจากระบบ",
-            ok: "ตกลง",
-            cancel: "ยกเลิก"
-          }
+    // checkVanStatus(function(status) {
+    $mdDialog.show({
+      controller: 'DialogController',
+      templateUrl: 'confirm-dialog.html',
+      locals: {
+        displayOption: {
+          title: "ออกจากระบบ ?",
+          content: "คุณต้องการที่จะออกจากระบบ",
+          ok: "ตกลง",
+          cancel: "ยกเลิก"
+        }
+      }
+    }).then(function(response) {
+      var uuid = $cordovaDevice.getUUID();
+      window.localStorage.memberUsername = "";
+      window.localStorage.memberType = "";
+      $http({
+        url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
+        method: 'POST',
+        data: {
+          var_uuid: uuid,
+          var_token: window.localStorage.token,
+          var_memberid: myService.memberDetailFromLogin.member_id
         }
       }).then(function(response) {
-        var uuid = $cordovaDevice.getUUID();
-        window.localStorage.memberUsername = "";
-        window.localStorage.memberType = "";
-        $http({
-          url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
-          method: 'POST',
-          data: {
-            var_uuid: uuid,
-            var_token: window.localStorage.token,
-            var_memberid: myService.memberDetailFromLogin.member_id
-          }
-        }).then(function(response) {
-          // window.localStorage.clear();
-          $state.go('notlogin.login');
-        });
+        // window.localStorage.clear();
+        $state.go('notlogin.login');
       });
     });
+    // });
   };
 
   $ionicPlatform.registerBackButtonAction(function() {
