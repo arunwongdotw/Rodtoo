@@ -275,7 +275,8 @@ appControllers.controller('vanCtrl', function($scope, $timeout, $state, $statePa
               url: myService.configAPI.webserviceURL + 'webservices/checkQueueNo.php',
               method: 'POST',
               data: {
-                var_queueno: $scope.van.queueno
+                var_queueno: $scope.van.queueno,
+                var_queueid: $scope.queueValue
               }
             }).then(function(response) {
               $scope.response = response.data.results;
