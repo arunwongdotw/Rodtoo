@@ -69,24 +69,24 @@ appControllers.controller('ownGetInListCtrl', function($scope, $timeout, $state,
     $state.go('loginown.editgetin');
   };
 
-  $scope.delPoint = function(point_id) {
+  $scope.delGetIn = function(getin_id) {
     $mdDialog.show({
       controller: 'DialogController',
       templateUrl: 'confirm-dialog.html',
       locals: {
         displayOption: {
-          title: "ลบจุดลงรถตู้ ?",
-          content: "คุณแน่ใจที่จะลบจุดลงรถตู้",
+          title: "ลบจุดขึ้นรถตู้ ?",
+          content: "คุณแน่ใจที่จะลบจุดขึ้นรถตู้",
           ok: "ตกลง",
           cancel: "ยกเลิก"
         }
       }
     }).then(function(response) {
       $http({
-        url: myService.configAPI.webserviceURL + 'webservices/delPoint.php',
+        url: myService.configAPI.webserviceURL + 'webservices/delGetIn.php',
         method: 'POST',
         data: {
-          var_pointid: point_id,
+          var_getinid: getin_id,
         }
       }).then(function(response) {
         $mdDialog.show({
@@ -94,8 +94,8 @@ appControllers.controller('ownGetInListCtrl', function($scope, $timeout, $state,
           templateUrl: 'confirm-dialog.html',
           locals: {
             displayOption: {
-              title: "ลบจุดลงรถตู้สำเร็จ !",
-              content: "คุณลบจุดลงรถตู้สำเร็จ",
+              title: "ลบจุดขึ้นรถตู้สำเร็จ !",
+              content: "คุณลบจุดขึ้นรถตู้สำเร็จ",
               ok: "ตกลง"
             }
           }
@@ -109,7 +109,7 @@ appControllers.controller('ownGetInListCtrl', function($scope, $timeout, $state,
           locals: {
             displayOption: {
               title: "เกิดข้อผิดพลาด !",
-              content: "เกิดข้อผิดพลาด delPoint ใน ownPointListController ระบบจะปิดอัตโนมัติ",
+              content: "เกิดข้อผิดพลาด delGetIn ใน ownGetInListController ระบบจะปิดอัตโนมัติ",
               ok: "ตกลง"
             }
           }
