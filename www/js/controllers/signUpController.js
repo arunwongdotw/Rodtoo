@@ -60,10 +60,10 @@ appControllers.controller('signUpCtrl', function($scope, $timeout, $state, $stat
       quality: 100,
       destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      allowEdit: true,
+      allowEdit: false,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 800,
-      targetHeight: 800,
+      targetWidth: 1000,
+      targetHeight: 1000,
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false,
       correctOrientation: true
