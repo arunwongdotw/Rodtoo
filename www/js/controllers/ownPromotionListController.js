@@ -22,7 +22,7 @@ appControllers.controller('ownPromotionListCtrl', function($scope, $timeout, $st
         ionic.Platform.exitApp();
       });
     });
-    
+
   $scope.btnAddPromotion = function() {
     $http({
       url: myService.configAPI.webserviceURL + 'webservices/checkPromotion.php',
@@ -75,7 +75,7 @@ appControllers.controller('ownPromotionListCtrl', function($scope, $timeout, $st
       locals: {
         displayOption: {
           title: "ลบโปรโมชัน ?",
-          content: "คุณแน่ใจที่จะลบโปรโมชันนี้",
+          content: "คุณแน่ใจที่จะลบโปรโมชันนี้ (* ระบบจะลบข้อมูลโปรโมชันของลูกค้าด้วย)",
           ok: "ตกลง",
           cancel: "ยกเลิก"
         }
