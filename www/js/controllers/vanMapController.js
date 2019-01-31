@@ -205,6 +205,47 @@ appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, d
     });
   };
 
+  function checkVanStatus(callback) {
+    $http({
+      url: myService.configAPI.webserviceURL + 'webservices/checkVanStatusByID.php',
+      method: 'POST',
+      data: {
+        var_memberid: $scope.memberDetail.member_id
+      }
+    }).then(function(response) {
+      console.log(response);
+      if ((response.data.results == "checkVanStatus_isOne") || (response.data.results == "checkVanStatus_isZero")) {
+        callback();
+      } else if (response.data.results == "checkVanStatus_isTwo") {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "สถานะการเดินทางของรถตู้ไม่ถูกต้อง !",
+              content: "กรุณากดหยุดเดินทางก่อนเปลี่ยนเมนู",
+              ok: "ตกลง"
+            }
+          }
+        });
+      }
+    }, function(error) {
+      $mdDialog.show({
+        controller: 'DialogController',
+        templateUrl: 'confirm-dialog.html',
+        locals: {
+          displayOption: {
+            title: "เกิดข้อผิดพลาด !",
+            content: "เกิดข้อผิดพลาด checkVanStatus ใน loginVanMenuController ระบบจะปิดอัตโนมัติ",
+            ok: "ตกลง"
+          }
+        }
+      }).then(function(response) {
+        ionic.Platform.exitApp();
+      });
+    });
+  }
+
   $ionicPlatform.registerBackButtonAction(function() {
     if ($mdSidenav("left").isOpen()) {
       $mdSidenav('left').close();
@@ -218,23 +259,25 @@ appControllers.controller('vanMapCtrl', function($scope, $state, $stateParams, d
       $mdSelect.hide();
     } else {
       if ($state.current.name == 'loginvan.vanmap') {
-        if (jQuery('[id^=dialog]').length == 0) {
-          $mdDialog.show({
-            controller: 'DialogController',
-            templateUrl: 'confirm-dialog.html',
-            targetEvent: null,
-            locals: {
-              displayOption: {
-                title: "ออกจากแอปพลิเคชัน ?",
-                content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน",
-                ok: "ยืนยัน",
-                cancel: "ยกเลิก"
+        checkVanStatus(function(status) {
+          if (jQuery('[id^=dialog]').length == 0) {
+            $mdDialog.show({
+              controller: 'DialogController',
+              templateUrl: 'confirm-dialog.html',
+              targetEvent: null,
+              locals: {
+                displayOption: {
+                  title: "ออกจากแอปพลิเคชัน ?",
+                  content: "คุณแน่ใจที่จะออกจากแอปพลิเคชัน",
+                  ok: "ยืนยัน",
+                  cancel: "ยกเลิก"
+                }
               }
-            }
-          }).then(function(response) {
-            ionic.Platform.exitApp();
-          });
-        }
+            }).then(function(response) {
+              ionic.Platform.exitApp();
+            });
+          }
+        });
       } else {
         $ionicHistory.goBack();
       }

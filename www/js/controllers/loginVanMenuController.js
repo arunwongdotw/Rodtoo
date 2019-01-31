@@ -96,7 +96,6 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
         var_memberid: $scope.memberDetail.member_id
       }
     }).then(function(response) {
-      console.log(response);
       if (response.data.results == "checkVanConfirm_isTwo") {
         callback();
       } else if (response.data.results == "checkVanConfirm_isOne") {
@@ -160,7 +159,6 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
         var_memberid: $scope.memberDetail.member_id
       }
     }).then(function(response) {
-      console.log(response);
       if ((response.data.results == "checkVanStatus_isOne") || (response.data.results == "checkVanStatus_isZero")) {
         callback();
       } else if (response.data.results == "checkVanStatus_isTwo") {
@@ -199,34 +197,95 @@ appControllers.controller('loginVanMenuCtrl', function($scope, $timeout, $mdUtil
 
   $scope.btnLogout = function() {
     // checkVanStatus(function(status) {
-    $mdDialog.show({
-      controller: 'DialogController',
-      templateUrl: 'confirm-dialog.html',
-      locals: {
-        displayOption: {
-          title: "ออกจากระบบ ?",
-          content: "คุณต้องการที่จะออกจากระบบ",
-          ok: "ตกลง",
-          cancel: "ยกเลิก"
-        }
-      }
-    }).then(function(response) {
-      var uuid = $cordovaDevice.getUUID();
-      window.localStorage.memberUsername = "";
-      window.localStorage.memberType = "";
-      $http({
-        url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
-        method: 'POST',
-        data: {
-          var_uuid: uuid,
-          var_token: window.localStorage.token,
-          var_memberid: myService.memberDetailFromLogin.member_id
-        }
-      }).then(function(response) {
-        // window.localStorage.clear();
-        $state.go('notlogin.login');
+    // if ($state.current.name == 'loginvan.vanmap') {
+      checkVanStatus(function(status) {
+        $mdDialog.show({
+          controller: 'DialogController',
+          templateUrl: 'confirm-dialog.html',
+          locals: {
+            displayOption: {
+              title: "ออกจากระบบ ?",
+              content: "คุณต้องการที่จะออกจากระบบ",
+              ok: "ตกลง",
+              cancel: "ยกเลิก"
+            }
+          }
+        }).then(function(response) {
+          var uuid = $cordovaDevice.getUUID();
+          window.localStorage.memberUsername = "";
+          window.localStorage.memberType = "";
+          $http({
+            url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
+            method: 'POST',
+            data: {
+              var_uuid: uuid,
+              var_token: window.localStorage.token,
+              var_memberid: myService.memberDetailFromLogin.member_id
+            }
+          }).then(function(response) {
+            // window.localStorage.clear();
+            $state.go('notlogin.login');
+          });
+        });
       });
-    });
+    // } else {
+    //   $mdDialog.show({
+    //     controller: 'DialogController',
+    //     templateUrl: 'confirm-dialog.html',
+    //     locals: {
+    //       displayOption: {
+    //         title: "ออกจากระบบ ?",
+    //         content: "คุณต้องการที่จะออกจากระบบ",
+    //         ok: "ตกลง",
+    //         cancel: "ยกเลิก"
+    //       }
+    //     }
+    //   }).then(function(response) {
+    //     var uuid = $cordovaDevice.getUUID();
+    //     window.localStorage.memberUsername = "";
+    //     window.localStorage.memberType = "";
+    //     $http({
+    //       url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
+    //       method: 'POST',
+    //       data: {
+    //         var_uuid: uuid,
+    //         var_token: window.localStorage.token,
+    //         var_memberid: myService.memberDetailFromLogin.member_id
+    //       }
+    //     }).then(function(response) {
+    //       // window.localStorage.clear();
+    //       $state.go('notlogin.login');
+    //     });
+    //   });
+    // }
+    // $mdDialog.show({
+    //   controller: 'DialogController',
+    //   templateUrl: 'confirm-dialog.html',
+    //   locals: {
+    //     displayOption: {
+    //       title: "ออกจากระบบ ?",
+    //       content: "คุณต้องการที่จะออกจากระบบ",
+    //       ok: "ตกลง",
+    //       cancel: "ยกเลิก"
+    //     }
+    //   }
+    // }).then(function(response) {
+    //   var uuid = $cordovaDevice.getUUID();
+    //   window.localStorage.memberUsername = "";
+    //   window.localStorage.memberType = "";
+    //   $http({
+    //     url: myService.configAPI.webserviceURL + 'webservices/deleteNotification.php',
+    //     method: 'POST',
+    //     data: {
+    //       var_uuid: uuid,
+    //       var_token: window.localStorage.token,
+    //       var_memberid: myService.memberDetailFromLogin.member_id
+    //     }
+    //   }).then(function(response) {
+    //     // window.localStorage.clear();
+    //     $state.go('notlogin.login');
+    //   });
+    // });
     // });
   };
 
